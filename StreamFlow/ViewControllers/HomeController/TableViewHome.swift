@@ -1,0 +1,35 @@
+//
+//  TableViewHome.swift
+//  StreamFlow
+//
+//  Created by ilomidze on 09.05.21.
+//
+
+import Foundation
+import UIKit
+
+
+extension HomeController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        moviesData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // For First Row
+        if indexPath.row == 0 {
+            guard let titleCell = tableView.dequeueReusableCell(withIdentifier: "TitleCell", for: IndexPath(row: 0, section: 0)) as? TitleCell else {
+                fatalError("Cant Generate Title Cell")
+            }
+            titleCell.initCell(movieData: moviesData[0])
+            return titleCell
+        }        
+        // For Every Row Except 0
+        guard let commonCell = tableView.dequeueReusableCell(withIdentifier: "CommonCell", for: indexPath) as? CommonCell else {
+            fatalError("Cant Generate Common Cell")
+        }
+
+        return commonCell
+    }
+    
+    
+}
