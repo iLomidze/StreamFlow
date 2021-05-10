@@ -9,15 +9,16 @@ import UIKit
 
 class TitleCell: UITableViewCell {
 
-    @IBOutlet weak var titleBtn: UIButton!
+    @IBOutlet weak var coverBtn: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var coverImageView: UIImageView!
+    
     
     var movieData: MovieData?
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         
     }
 
@@ -29,7 +30,8 @@ class TitleCell: UITableViewCell {
     
     
     
-    @IBAction func titleBtnAction(_ sender: Any) {
+    @IBAction func coverBtnAction(_ sender: Any) {
+        print("cover button pushed")
     }
     
     
@@ -38,7 +40,7 @@ class TitleCell: UITableViewCell {
     //-
     func initCell(movieData: MovieData) {
         self.movieData = movieData
-        titleLabel.text = movieData.secondaryName
+        titleLabel.text = movieData.primaryName
         setImage(urlString: (movieData.cover?.large)!)
     }
     
@@ -47,9 +49,30 @@ class TitleCell: UITableViewCell {
         
         dataRequestManager.getImage(urlString: urlString) { [weak self] data in
             DispatchQueue.main.async {
-                self?.titleBtn.setImage(UIImage(data: data), for: .normal)
+                self?.coverImageView.image = UIImage(data: data)
+                self?.addGradientView()
             }
         }
+    }
+    
+    func addGradientView() {
+        let gradientView = UIView(frame: coverImageView.frame)
+        
+        let gradient = CAGradientLayer()
+        
+        gradient.frame = gradientView.frame
+
+        gradient.colors = [UIColor.clear.cgColor, UIColor.init(red: CGFloat(10/255), green: CGFloat(5/255), blue: CGFloat(10/255), alpha: 1).cgColor]
+//        gradient.colors = [UIColor.clear.cgColor, UIColor.init(white: 3, alpha: 100) .cgColor]
+
+        
+        gradient.locations = [0.0, 1.0, 2.0]
+
+        gradientView.layer.insertSublayer(gradient, at: 0)
+
+        coverImageView.addSubview(gradientView)
+
+        coverImageView.bringSubviewToFront(gradientView)
     }
     
 }
