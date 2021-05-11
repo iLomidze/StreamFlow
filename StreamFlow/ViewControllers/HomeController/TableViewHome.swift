@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 
-extension HomeController: UITableViewDelegate, UITableViewDataSource {
+extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         moviesData.count
     }
@@ -20,6 +21,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             guard let titleCell = tableView.dequeueReusableCell(withIdentifier: "TitleCell", for: IndexPath(row: 0, section: 0)) as? TitleCell else {
                 fatalError("Cant Generate Title Cell")
             }
+            titleCell.delegate = self
             titleCell.initCell(movieData: moviesData[0])
             return titleCell
         }        
@@ -31,5 +33,12 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         return commonCell
     }
     
-    
+    // TitleCell Delegate function - used when movie of the day is clicked
+    func movieOfTheDayClicked() {
+        guard let vc = storyboard?.instantiateViewController(identifier: "PlayerController") as? PlayerController else {
+            print("Cant Instantiate PlayerController")
+            return
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

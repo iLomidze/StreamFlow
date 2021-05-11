@@ -15,7 +15,7 @@ class PlayerController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
 
     
-    let videoStringURL = "https://www.imovies.cc/ka/movies/40261/Attack-on-Titan/S04/E11/RUS/MEDIUM"
+    let videoStringURL = "https://api.imovies.cc/api/v1/trailers/12778/files"
     var avPlayerViewController = AVPlayerViewController()
     var avPlayerView = AVPlayer()
     
