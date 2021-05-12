@@ -12,16 +12,22 @@ class HomeController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let dataRequestManager = DataRequestManager()
-    var moviesData = [MovieData]() {
+    
+    var movieOfTheDayData = MovieData() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-            
         }
     }
-    var apiLinksDict: [String: String] = [:]
+    var popularMoviesData = [MovieData]() {
+        didSet {
+            print(popularMoviesData.capacity)
+        }
+    }
     
+    var apiLinksDict: [String: String] = [:]
+
     
     
     override func viewDidLoad() {
@@ -34,14 +40,21 @@ class HomeController: UIViewController {
         
         apiLinksDict = dataRequestManager.getApiLinksDict()
         
-//        let urlString = "https://api.imovies.cc/api/v1/movies/movie-day?page=1&per_page=1"
         getMovieOfTheDayData(urlString: apiLinksDict["movieOfTheDay"]!)
+        getPopularMoviesData(urlString: apiLinksDict["popularMovies"]!)
     }
     
     
+    //-
     func getMovieOfTheDayData(urlString: String) {
         dataRequestManager.getApiData(urlString: urlString) { [weak self] movieDataArr in
-            self?.moviesData.append(movieDataArr.data[0])
+            self?.movieOfTheDayData = (movieDataArr.data?[0]) ?? MovieData()
+        }
+    }
+    
+    func getPopularMoviesData(urlString: String) {
+        dataRequestManager.getApiData(urlString: urlString) { [weak self] movieDataArr in
+            self?.popularMoviesData = movieDataArr.data ?? [MovieData()]
         }
     }
 }

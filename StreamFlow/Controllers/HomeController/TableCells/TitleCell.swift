@@ -20,7 +20,7 @@ class TitleCell: UITableViewCell {
     @IBOutlet weak var coverImageView: UIImageView!
     
     
-    var movieData: MovieData?
+    var movieOfTheDayData: MovieData?
     
     
     override func awakeFromNib() {
@@ -44,10 +44,12 @@ class TitleCell: UITableViewCell {
     // ------
     
     //-
-    func initCell(movieData: MovieData) {
-        self.movieData = movieData
-        titleLabel.text = movieData.primaryName
-        setImage(urlString: (movieData.cover?.large)!)
+    func initCell(movieOfTheDayData: MovieData) {
+        if movieOfTheDayData.id == nil { return }
+        
+        self.movieOfTheDayData = movieOfTheDayData
+        titleLabel.text = movieOfTheDayData.primaryName
+        setImage(urlString: (movieOfTheDayData.cover?.large)!)
     }
     
     //-

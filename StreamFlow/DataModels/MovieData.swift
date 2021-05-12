@@ -9,7 +9,7 @@ import Foundation
 
 
 struct MovieDataArr: Codable {
-    var data: [MovieData]
+    var data: [MovieData]?
 }
 
 struct MovieData: Codable {
