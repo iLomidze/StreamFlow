@@ -39,6 +39,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
             print("Cant Instantiate PlayerController")
             return
         }
+        vc.videoID = moviesData[0].id
         navigationController?.pushViewController(vc, animated: true)
     }
 }

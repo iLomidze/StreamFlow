@@ -55,6 +55,39 @@ class DataRequestManager {
         }
     }
     
+    // -
+    func getApiVideoUrl(dataUrlString: String, completiton: @escaping (videoURL) -> Void) {
+        DispatchQueue.global().async {
+            let url = URL(string: dataUrlString)
+            var request = URLRequest(url: url!)
+            request.setValue("User-Agent", forHTTPHeaderField: "imovies")
+            
+            let task = URLSession.shared.dataTask(with: request) { data, responce, error in
+                guard let data = data, error == nil else {
+                    print("Something went wrong")
+                    return
+                }
+                
+                // Now we have data
+                var jsonDataOpt: videoURL?
+                do {
+                    jsonDataOpt = try JSONDecoder().decode(videoURL.self, from: data)
+                }
+                catch {
+                    print("failed to convert \(error.localizedDescription)")
+                }
+                
+                guard let jsonData = jsonDataOpt else {
+                    return
+                }
+                
+                completiton(jsonData)
+            }
+            
+            task.resume()
+        }
+    }
+    
     //-
     func getImage(urlString: String, completiton: @escaping (Data) -> Void) {
         DispatchQueue.global().async {

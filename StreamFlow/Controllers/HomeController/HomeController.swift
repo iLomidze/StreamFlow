@@ -22,11 +22,13 @@ class HomeController: UIViewController {
     }
     var apiLinksDict: [String: String] = [:]
     
-        
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "HomeController"
+        
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "TitleCell")
         tableView.register(UINib(nibName: "CommonCell", bundle: nil), forCellReuseIdentifier: "CommonCell")
         
@@ -35,7 +37,6 @@ class HomeController: UIViewController {
 //        let urlString = "https://api.imovies.cc/api/v1/movies/movie-day?page=1&per_page=1"
         getMovieOfTheDayData(urlString: apiLinksDict["movieOfTheDay"]!)
     }
-    
     
     
     func getMovieOfTheDayData(urlString: String) {

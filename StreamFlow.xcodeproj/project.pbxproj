@@ -14,6 +14,8 @@
 		E21EA1B8264837DA003A1C5D /* TableViewHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21EA1B7264837DA003A1C5D /* TableViewHome.swift */; };
 		E21EA1BB264839EF003A1C5D /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21EA1BA264839EF003A1C5D /* MovieData.swift */; };
 		E21EA1BE264879AE003A1C5D /* DataRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21EA1BD264879AE003A1C5D /* DataRequestManager.swift */; };
+		E21EA1E0264B23C5003A1C5D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21EA1DF264B23C5003A1C5D /* MainTabBarController.swift */; };
+		E21EA1E2264B3BBE003A1C5D /* videoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21EA1E1264B3BBE003A1C5D /* videoURL.swift */; };
 		E2262C652645FB5A00BAB076 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2262C642645FB5A00BAB076 /* AppDelegate.swift */; };
 		E2262C672645FB5A00BAB076 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2262C662645FB5A00BAB076 /* SceneDelegate.swift */; };
 		E2262C6C2645FB5A00BAB076 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2262C6A2645FB5A00BAB076 /* Main.storyboard */; };
@@ -33,6 +35,8 @@
 		E21EA1B7264837DA003A1C5D /* TableViewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHome.swift; sourceTree = "<group>"; };
 		E21EA1BA264839EF003A1C5D /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
 		E21EA1BD264879AE003A1C5D /* DataRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequestManager.swift; sourceTree = "<group>"; };
+		E21EA1DF264B23C5003A1C5D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = StreamFlow/MainTabBarController.swift; sourceTree = SOURCE_ROOT; };
+		E21EA1E1264B3BBE003A1C5D /* videoURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videoURL.swift; sourceTree = "<group>"; };
 		E2262C612645FB5A00BAB076 /* StreamFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2262C642645FB5A00BAB076 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2262C662645FB5A00BAB076 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				E21EA1BA264839EF003A1C5D /* MovieData.swift */,
+				E21EA1E1264B3BBE003A1C5D /* videoURL.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -114,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				E2262C6A2645FB5A00BAB076 /* Main.storyboard */,
-				E2262C7A264602E300BAB076 /* ViewControllers */,
+				E2262C7A264602E300BAB076 /* Controllers */,
 				E21EA1B926483968003A1C5D /* DataModels */,
 				E21EA1BC2648798E003A1C5D /* Data */,
 				E2262C642645FB5A00BAB076 /* AppDelegate.swift */,
@@ -126,15 +131,16 @@
 			path = StreamFlow;
 			sourceTree = "<group>";
 		};
-		E2262C7A264602E300BAB076 /* ViewControllers */ = {
+		E2262C7A264602E300BAB076 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E21EA1DF264B23C5003A1C5D /* MainTabBarController.swift */,
 				E21EA1AD26481650003A1C5D /* HomeController */,
 				E2262C7C2646034100BAB076 /* CatalogController.swift */,
 				E2262C7F2646036100BAB076 /* SearchController.swift */,
 				E2262C8626460D1100BAB076 /* PlayerController.swift */,
 			);
-			path = ViewControllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,10 +217,12 @@
 			files = (
 				E2262C802646036100BAB076 /* SearchController.swift in Sources */,
 				E2262C7D2646034100BAB076 /* CatalogController.swift in Sources */,
+				E21EA1E0264B23C5003A1C5D /* MainTabBarController.swift in Sources */,
 				E21EA1BE264879AE003A1C5D /* DataRequestManager.swift in Sources */,
 				E21EA1B126481747003A1C5D /* CommonCell.swift in Sources */,
 				E2262C8726460D1100BAB076 /* PlayerController.swift in Sources */,
 				E21EA1B526481780003A1C5D /* TitleCell.swift in Sources */,
+				E21EA1E2264B3BBE003A1C5D /* videoURL.swift in Sources */,
 				E21EA1B8264837DA003A1C5D /* TableViewHome.swift in Sources */,
 				E2262C652645FB5A00BAB076 /* AppDelegate.swift in Sources */,
 				E2262C672645FB5A00BAB076 /* SceneDelegate.swift in Sources */,
