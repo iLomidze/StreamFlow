@@ -31,6 +31,16 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
             fatalError("Cant Generate Common Cell")
         }
 
+        if indexPath.row == 1 {
+            commonCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
+        }
+        if indexPath.row == 2 {
+            commonCell.initCell(sectionNum: .populadMovies, moviesData: popularMoviesData)
+        }
+        if indexPath.row == 3 {
+            commonCell.initCell(sectionNum: .popularSeries, moviesData: popularSeriesData)
+        }
+        
         return commonCell
     }
     

@@ -11,12 +11,11 @@ import Foundation
 class DataRequestManager {
     //-
     func getApiLinksDict() -> [String: String]{
-        #warning("linkebi shesavsebia")
         let apiLinksDict = [
             "movieOfTheDay": "https://api.imovies.cc/api/v1/movies/movie-day?page=1&per_page=1",
-            "newAddedMovies": "",
+            "newAddedMovies": "https://api.imovies.cc/api/v1/movies?filters%5Bwith_files%5D=yes&filters%5Btype%5D=movie&sort=-upload_date&per_page=55",
             "popularMovies": "https://api.imovies.cc/api/v1/movies/top?type=movie&period=day&page=1&per_page=20",
-            "popularSeries": ""
+            "popularSeries": "https://api.imovies.cc/api/v1/movies/top?type=series&period=day&per_page=55"
         ]
         
         return apiLinksDict
@@ -91,7 +90,6 @@ class DataRequestManager {
     //-
     func getImage(urlString: String, completiton: @escaping (Data) -> Void) {
         DispatchQueue.global().async {
-            print(urlString)
             let url = URL(string: urlString)
             let request = URLRequest(url: url!)
             

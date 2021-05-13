@@ -11,6 +11,14 @@ class HomeController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    
+    enum ESectionName: Int {
+        case newAdded = 1
+        case populadMovies = 2
+        case popularSeries = 3
+    }
+    
+    
     let dataRequestManager = DataRequestManager()
     
     var movieOfTheDayData = MovieData() {
@@ -20,9 +28,25 @@ class HomeController: UIViewController {
             }
         }
     }
+    var newAddedMoviesData = [MovieData]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     var popularMoviesData = [MovieData]() {
         didSet {
-            print(popularMoviesData.capacity)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    var popularSeriesData = [MovieData]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -34,6 +58,8 @@ class HomeController: UIViewController {
         super.viewDidLoad()
 
         title = "HomeController"
+        navigationController?.navigationBar.barTintColor = UIColor.init(red: CGFloat(10/255), green: CGFloat(5/255), blue: CGFloat(10/255), alpha: 1)
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "TitleCell")
         tableView.register(UINib(nibName: "CommonCell", bundle: nil), forCellReuseIdentifier: "CommonCell")
@@ -41,7 +67,9 @@ class HomeController: UIViewController {
         apiLinksDict = dataRequestManager.getApiLinksDict()
         
         getMovieOfTheDayData(urlString: apiLinksDict["movieOfTheDay"]!)
+        getNewAddedMoviesData(urlString: apiLinksDict["newAddedMovies"]!)
         getPopularMoviesData(urlString: apiLinksDict["popularMovies"]!)
+        getPopularSeriesData(urlString: apiLinksDict["popularSeries"]!)
     }
     
     
@@ -52,9 +80,24 @@ class HomeController: UIViewController {
         }
     }
     
+    //-
+    func getNewAddedMoviesData(urlString: String) {
+        dataRequestManager.getApiData(urlString: urlString) { [weak self] movieDataArr in
+            self?.newAddedMoviesData = movieDataArr.data ?? [MovieData()]
+        }
+    }
+    
+    //-
     func getPopularMoviesData(urlString: String) {
         dataRequestManager.getApiData(urlString: urlString) { [weak self] movieDataArr in
             self?.popularMoviesData = movieDataArr.data ?? [MovieData()]
+        }
+    }
+    
+    //-
+    func getPopularSeriesData(urlString: String) {
+        dataRequestManager.getApiData(urlString: urlString) { [weak self] movieDataArr in
+            self?.popularSeriesData = movieDataArr.data ?? [MovieData()]
         }
     }
 }

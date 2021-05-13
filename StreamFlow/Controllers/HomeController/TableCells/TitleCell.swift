@@ -74,7 +74,7 @@ class TitleCell: UITableViewCell {
 
         gradient.colors = [UIColor.clear.cgColor, UIColor.init(red: CGFloat(10/255), green: CGFloat(5/255), blue: CGFloat(10/255), alpha: 1).cgColor]
 
-        gradient.locations = [0.0, 1.0, 2.0]
+        gradient.locations = [0.0, 0.8]
 
         gradientView.layer.insertSublayer(gradient, at: 0)
 
