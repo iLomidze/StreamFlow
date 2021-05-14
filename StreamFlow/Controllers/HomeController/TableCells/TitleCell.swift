@@ -20,7 +20,7 @@ class TitleCell: UITableViewCell {
     @IBOutlet weak var coverImageView: UIImageView!
     
     
-    var movieData: MovieData?
+    var movieOfTheDayData: MovieData?
     
     
     override func awakeFromNib() {
@@ -44,10 +44,12 @@ class TitleCell: UITableViewCell {
     // ------
     
     //-
-    func initCell(movieData: MovieData) {
-        self.movieData = movieData
-        titleLabel.text = movieData.primaryName
-        setImage(urlString: (movieData.cover?.large)!)
+    func initCell(movieOfTheDayData: MovieData) {
+        if movieOfTheDayData.id == nil { return }
+        
+        self.movieOfTheDayData = movieOfTheDayData
+        titleLabel.text = movieOfTheDayData.primaryName
+        setImage(urlString: (movieOfTheDayData.cover?.large)!)
     }
     
     //-
@@ -72,7 +74,7 @@ class TitleCell: UITableViewCell {
 
         gradient.colors = [UIColor.clear.cgColor, UIColor.init(red: CGFloat(10/255), green: CGFloat(5/255), blue: CGFloat(10/255), alpha: 1).cgColor]
 
-        gradient.locations = [0.0, 1.0, 2.0]
+        gradient.locations = [0.0, 0.8]
 
         gradientView.layer.insertSublayer(gradient, at: 0)
 
