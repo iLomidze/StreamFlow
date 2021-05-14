@@ -3,4 +3,86 @@
    uuid = "10CAC615-D3F5-4B72-B088-6618CE0A2CE1"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "97E54D8C-2D88-4677-8455-8D0FE5DC69C6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StreamFlow/Controllers/HomeController/TableCells/CollectionCells/MovieListCollectionCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "initCell(movieData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "771A923F-257F-4664-A983-0D6073A5D0BA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StreamFlow/Controllers/HomeController/HomeController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "newAddedMoviesData"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "771A923F-257F-4664-A983-0D6073A5D0BA - 69f76acc6960acb8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "StreamFlow.HomeController.newAddedMoviesData.didset : Swift.Array&lt;StreamFlow.MovieData&gt;"
+                  moduleName = "StreamFlow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/testfolder/Documents/WorkSpace/StreamFlow/StreamFlow/Controllers/HomeController/HomeController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "135">
+               </Location>
+               <Location
+                  uuid = "771A923F-257F-4664-A983-0D6073A5D0BA - 14f2b1d0b2434f1f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in StreamFlow.HomeController.newAddedMoviesData.didset : Swift.Array&lt;StreamFlow.MovieData&gt;"
+                  moduleName = "StreamFlow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/testfolder/Documents/WorkSpace/StreamFlow/StreamFlow/Controllers/HomeController/HomeController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7D08E503-96E0-4AFC-8E8A-A58E3067C20F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StreamFlow/Controllers/HomeController/TableCells/CommonCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

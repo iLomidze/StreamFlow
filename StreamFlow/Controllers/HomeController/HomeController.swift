@@ -32,6 +32,10 @@ class HomeController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+//                for i in 0...50 {
+//                    print(self.newAddedMoviesData[i].cover?.small)
+//                }
+                
             }
         }
     }
