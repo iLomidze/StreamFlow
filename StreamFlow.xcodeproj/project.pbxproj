@@ -80,11 +80,8 @@
 		E21EA1AE26481706003A1C5D /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
-				E21EA1B326481780003A1C5D /* TitleCell.swift */,
-				E21EA1B426481780003A1C5D /* TitleCell.xib */,
-				E21EA1AF26481747003A1C5D /* CommonCell.swift */,
-				E21EA1B026481747003A1C5D /* CommonCell.xib */,
-				E21EA1E7264C390D003A1C5D /* CollectionCells */,
+				E21EA213264EF54D003A1C5D /* CommonCell */,
+				E21EA212264EF533003A1C5D /* TitleCell */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -114,6 +111,25 @@
 				E21EA1E4264C3907003A1C5D /* MovieListCollectionCell.xib */,
 			);
 			path = CollectionCells;
+			sourceTree = "<group>";
+		};
+		E21EA212264EF533003A1C5D /* TitleCell */ = {
+			isa = PBXGroup;
+			children = (
+				E21EA1B326481780003A1C5D /* TitleCell.swift */,
+				E21EA1B426481780003A1C5D /* TitleCell.xib */,
+			);
+			path = TitleCell;
+			sourceTree = "<group>";
+		};
+		E21EA213264EF54D003A1C5D /* CommonCell */ = {
+			isa = PBXGroup;
+			children = (
+				E21EA1AF26481747003A1C5D /* CommonCell.swift */,
+				E21EA1B026481747003A1C5D /* CommonCell.xib */,
+				E21EA1E7264C390D003A1C5D /* CollectionCells */,
+			);
+			path = CommonCell;
 			sourceTree = "<group>";
 		};
 		E2262C582645FB5A00BAB076 = {

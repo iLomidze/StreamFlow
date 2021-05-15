@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class MovieListCollectionCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
@@ -24,14 +25,14 @@ class MovieListCollectionCell: UICollectionViewCell {
     func initCell(movieData: MovieData) {
         self.movieData = movieData
         titleLabel.text = movieData.primaryName
-
-        if movieData.cover?.large != "" {
-            setImage(urlString: (movieData.cover?.large)!)
-        }
-        
-//        if movieData.covers?.data.m != "" {
-//            setImage(urlString: (movieData.covers?.data.m)!)
+//
+//        if movieData.cover?.large != "" {
+//            setImage(urlString: (movieData.cover?.large)!)
 //        }
+        
+        if movieData.covers?.data?.m != "" {
+            setImage(urlString: (movieData.covers?.data?.m)!)
+        }
     }
     
 
