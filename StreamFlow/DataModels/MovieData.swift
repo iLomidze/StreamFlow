@@ -20,6 +20,8 @@ struct MovieData: Codable {
     var cover: Cover?
     var covers: CoversData?
     
+    var imageData: Data?
+    
     init() {
         
     }
@@ -34,7 +36,7 @@ struct MovieData: Codable {
         covers = try? values.decode(CoversData.self, forKey: .covers)
     }
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id
         case primaryName
         case secondaryName
@@ -58,7 +60,7 @@ struct CoversData: Codable {
         data = try? values.decode(CoversDataSizes.self, forKey: .data)
     }
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case data
     }
     
@@ -81,7 +83,7 @@ struct CoversDataSizes: Codable {
         xs = try? values.decode(String.self, forKey: .xs)
     }
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case xl = "1920"
         case l = "1050"
         case m = "510"

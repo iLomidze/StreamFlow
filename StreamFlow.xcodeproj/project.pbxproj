@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E21EA1B126481747003A1C5D /* CommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21EA1AF26481747003A1C5D /* CommonCell.swift */; };
-		E21EA1B226481747003A1C5D /* CommonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21EA1B026481747003A1C5D /* CommonCell.xib */; };
+		E21EA1B126481747003A1C5D /* SectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21EA1AF26481747003A1C5D /* SectionCell.swift */; };
+		E21EA1B226481747003A1C5D /* SectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21EA1B026481747003A1C5D /* SectionCell.xib */; };
 		E21EA1B526481780003A1C5D /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21EA1B326481780003A1C5D /* TitleCell.swift */; };
 		E21EA1B626481780003A1C5D /* TitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21EA1B426481780003A1C5D /* TitleCell.xib */; };
 		E21EA1B8264837DA003A1C5D /* TableViewHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21EA1B7264837DA003A1C5D /* TableViewHome.swift */; };
@@ -31,8 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E21EA1AF26481747003A1C5D /* CommonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCell.swift; sourceTree = "<group>"; };
-		E21EA1B026481747003A1C5D /* CommonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonCell.xib; sourceTree = "<group>"; };
+		E21EA1AF26481747003A1C5D /* SectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCell.swift; sourceTree = "<group>"; };
+		E21EA1B026481747003A1C5D /* SectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionCell.xib; sourceTree = "<group>"; };
 		E21EA1B326481780003A1C5D /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		E21EA1B426481780003A1C5D /* TitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCell.xib; sourceTree = "<group>"; };
 		E21EA1B7264837DA003A1C5D /* TableViewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHome.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 		E21EA1AE26481706003A1C5D /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
-				E21EA213264EF54D003A1C5D /* CommonCell */,
+				E21EA213264EF54D003A1C5D /* SectionCell */,
 				E21EA212264EF533003A1C5D /* TitleCell */,
 			);
 			path = TableCells;
@@ -122,14 +122,14 @@
 			path = TitleCell;
 			sourceTree = "<group>";
 		};
-		E21EA213264EF54D003A1C5D /* CommonCell */ = {
+		E21EA213264EF54D003A1C5D /* SectionCell */ = {
 			isa = PBXGroup;
 			children = (
-				E21EA1AF26481747003A1C5D /* CommonCell.swift */,
-				E21EA1B026481747003A1C5D /* CommonCell.xib */,
+				E21EA1AF26481747003A1C5D /* SectionCell.swift */,
+				E21EA1B026481747003A1C5D /* SectionCell.xib */,
 				E21EA1E7264C390D003A1C5D /* CollectionCells */,
 			);
-			path = CommonCell;
+			path = SectionCell;
 			sourceTree = "<group>";
 		};
 		E2262C582645FB5A00BAB076 = {
@@ -233,7 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E21EA1B226481747003A1C5D /* CommonCell.xib in Resources */,
+				E21EA1B226481747003A1C5D /* SectionCell.xib in Resources */,
 				E2262C712645FB5D00BAB076 /* LaunchScreen.storyboard in Resources */,
 				E2262C6E2645FB5D00BAB076 /* Assets.xcassets in Resources */,
 				E2262C6C2645FB5A00BAB076 /* Main.storyboard in Resources */,
@@ -254,7 +254,7 @@
 				E2262C7D2646034100BAB076 /* CatalogController.swift in Sources */,
 				E21EA1E0264B23C5003A1C5D /* MainTabBarController.swift in Sources */,
 				E21EA1BE264879AE003A1C5D /* DataRequestManager.swift in Sources */,
-				E21EA1B126481747003A1C5D /* CommonCell.swift in Sources */,
+				E21EA1B126481747003A1C5D /* SectionCell.swift in Sources */,
 				E2262C8726460D1100BAB076 /* PlayerController.swift in Sources */,
 				E21EA1B526481780003A1C5D /* TitleCell.swift in Sources */,
 				E21EA1E2264B3BBE003A1C5D /* videoURL.swift in Sources */,

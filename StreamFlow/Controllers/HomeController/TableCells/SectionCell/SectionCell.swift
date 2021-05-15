@@ -1,5 +1,5 @@
 //
-//  CommonCell.swift
+//  SectionCell.swift
 //  StreamFlow
 //
 //  Created by ilomidze on 09.05.21.
@@ -7,10 +7,14 @@
 
 import UIKit
 
-class CommonCell: UITableViewCell {
+class SectionCell: UITableViewCell {
 
+    
     @IBOutlet weak var sectionNameLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+//    @IBOutlet weak var sectionNameLabel: UILabel!
+//    @IBOutlet weak var collectionView: UICollectionView!
     
     
     var moviesData = [MovieData]() {
@@ -50,7 +54,7 @@ class CommonCell: UITableViewCell {
 }
 
 
-extension CommonCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SectionCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         moviesData.count
     }

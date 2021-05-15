@@ -27,21 +27,21 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
             return titleCell
         }        
         // For Every Row Except 0
-        guard let commonCell = tableView.dequeueReusableCell(withIdentifier: "CommonCell", for: indexPath) as? CommonCell else {
-            fatalError("Cant Generate Common Cell")
+        guard let sectionCell = tableView.dequeueReusableCell(withIdentifier: "SectionCell", for: indexPath) as? SectionCell else {
+            fatalError("Cant Generate SectionCell")
         }
 
         if indexPath.row == 1 {
-            commonCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
+            sectionCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
         }
         if indexPath.row == 2 {
-            commonCell.initCell(sectionNum: .populadMovies, moviesData: popularMoviesData)
+            sectionCell.initCell(sectionNum: .populadMovies, moviesData: popularMoviesData)
         }
         if indexPath.row == 3 {
-            commonCell.initCell(sectionNum: .popularSeries, moviesData: popularSeriesData)
+            sectionCell.initCell(sectionNum: .popularSeries, moviesData: popularSeriesData)
         }
         
-        return commonCell
+        return sectionCell
     }
     
     // TitleCell Delegate function - used when movie of the day is clicked
