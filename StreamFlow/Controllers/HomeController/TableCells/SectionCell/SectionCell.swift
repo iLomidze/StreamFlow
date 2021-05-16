@@ -64,6 +64,8 @@ extension SectionCell: UICollectionViewDelegate, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        cell.imageView?.image = nil
+        
         let movieData = moviesData[indexPath.row]
         cell.initCell(movieData: movieData)
 

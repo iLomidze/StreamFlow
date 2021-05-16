@@ -18,6 +18,7 @@ class HomeController: UIViewController {
         case popularSeries = 3
     }
     
+//    var indicator: Indicator!
     
     let dataRequestManager = DataRequestManager()
     
@@ -28,28 +29,55 @@ class HomeController: UIViewController {
             }
         }
     }
+    
+    //-
     var newAddedMoviesData = [MovieData]() {
         didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-//                for i in 0...50 {
-//                    print(self.newAddedMoviesData[i].cover?.small)
-//                }
-                
+            DispatchQueue.main.async { [weak self] in
+                for i in 0..<(self?.newAddedMoviesData.count ?? 1) {
+                    guard let minSizeImageURL = self?.newAddedMoviesData[i].covers?.data?.minSize else {
+                        print("New added movies: No cover url in \(i)th element")
+                        return
+                    }
+                    self?.dataRequestManager.getImage(urlString: minSizeImageURL) { [weak self] data in
+                        self?.newAddedMoviesData[i].imageData = data
+                    }
+                }
+                self?.tableView.reloadData()
             }
         }
     }
+    
     var popularMoviesData = [MovieData]() {
         didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                for i in 0..<(self?.popularMoviesData.count ?? 1) {
+                    guard let minSizeImageURL = self?.popularMoviesData[i].covers?.data?.minSize else {
+                        print("Popular Movies: No cover url in \(i)th element")
+                        return
+                    }
+                    self?.dataRequestManager.getImage(urlString: minSizeImageURL) { [weak self] data in
+                        self?.popularMoviesData[i].imageData = data
+                    }
+                }
+                self?.tableView.reloadData()
             }
         }
     }
+    
     var popularSeriesData = [MovieData]() {
         didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+//                for i in 0..<(self?.popularSeriesData.count ?? 1) {
+//                    guard let minSizeImageURL = self?.popularSeriesData[i].covers?.data?.minSize else {
+//                        print("Popular Series: No cover url in \(i)th element")
+//                        return
+//                    }
+//                    self?.dataRequestManager.getImage(urlString: minSizeImageURL) { [weak self] data in
+//                        self?.popularSeriesData[i].imageData = data
+//                    }
+//                }
+                self?.tableView.reloadData()
             }
         }
     }
@@ -60,7 +88,7 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = "HomeController"
         navigationController?.navigationBar.barTintColor = UIColor.init(red: CGFloat(10/255), green: CGFloat(5/255), blue: CGFloat(10/255), alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]

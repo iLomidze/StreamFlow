@@ -30,6 +30,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
         guard let sectionCell = tableView.dequeueReusableCell(withIdentifier: "SectionCell", for: indexPath) as? SectionCell else {
             fatalError("Cant Generate SectionCell")
         }
+        
 
         if indexPath.row == 1 {
             sectionCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
@@ -40,6 +41,8 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
         if indexPath.row == 3 {
             sectionCell.initCell(sectionNum: .popularSeries, moviesData: popularSeriesData)
         }
+        
+        sectionCell.selectionStyle = .none
         
         return sectionCell
     }

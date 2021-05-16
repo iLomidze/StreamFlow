@@ -95,7 +95,7 @@ class DataRequestManager {
             
             let task = URLSession.shared.dataTask(with: request) { data, responce, error in
                 guard let data = data, error == nil else {
-                    print("Something went wrong")
+                    print("Something went wrong during image data download")
                     return
                 }
                 
