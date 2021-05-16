@@ -50,18 +50,18 @@ class HomeController: UIViewController {
     
     var popularMoviesData = [MovieData]() {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                for i in 0..<(self?.popularMoviesData.count ?? 1) {
-                    guard let minSizeImageURL = self?.popularMoviesData[i].covers?.data?.minSize else {
-                        print("Popular Movies: No cover url in \(i)th element")
-                        return
-                    }
-                    self?.dataRequestManager.getImage(urlString: minSizeImageURL) { [weak self] data in
-                        self?.popularMoviesData[i].imageData = data
-                    }
-                }
-                self?.tableView.reloadData()
-            }
+//            DispatchQueue.main.async { [weak self] in
+//                for i in 0..<(self?.popularMoviesData.count ?? 1) {
+//                    guard let minSizeImageURL = self?.popularMoviesData[i].covers?.data?.minSize else {
+//                        print("Popular Movies: No cover url in \(i)th element")
+//                        return
+//                    }
+//                    self?.dataRequestManager.getImage(urlString: minSizeImageURL) { [weak self] data in
+//                        self?.popularMoviesData[i].imageData = data
+//                    }
+//                }
+//                self?.tableView.reloadData()
+//            }
         }
     }
     

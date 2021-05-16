@@ -12,12 +12,12 @@ class MovieListCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
+            if indicator == nil { return }
+           
             if imageView.image == nil {
                 indicator.startAnimating()
             } else {
-                if indicator != nil {
-                    indicator.stopAnimating()
-                }
+                indicator.stopAnimating()
             }
         }
     }
@@ -32,9 +32,8 @@ class MovieListCollectionCell: UICollectionViewCell {
         super.awakeFromNib()
         
         indicator = UIActivityIndicatorView(style: .large)
-        
         indicator.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.addSubview(indicator)
+        indicator.color = .green
         self.addSubview(indicator)
         
         indicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
@@ -59,26 +58,6 @@ class MovieListCollectionCell: UICollectionViewCell {
         
         guard let imageData = movieData.imageData else { return }
         imageView.image = UIImage(data: imageData)
-        
-//        if movieData.covers?.data?.m != "" {
-//            setImage(urlString: (movieData.covers?.data?.m)!)
-//        }
     }
-    
-
-////-
-//func setImage(urlString: String) {
-//    let dataRequestManager = DataRequestManager()
-//
-//    if movieData.id == nil {
-//        return
-//    }
-//
-//    dataRequestManager.getImage(urlString: urlString) { [weak self] data in
-//        DispatchQueue.main.async {
-//            self?.imageView.image = UIImage(data: data)
-//        }
-//    }
-//}
 
 }
