@@ -67,6 +67,7 @@ extension SectionCell: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.imageView?.image = nil
         
         let movieData = moviesData[indexPath.row]
+        cell.awakeFromNib()
         cell.initCell(movieData: movieData)
 
         return cell

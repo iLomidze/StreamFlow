@@ -12,7 +12,6 @@ import AVFoundation
 class PlayerController: UIViewController {
 
     var videoID: Int?
-
     var videoStringURL: String?
     
     var avPlayerViewController = AVPlayerViewController()
@@ -40,10 +39,8 @@ class PlayerController: UIViewController {
         
         let jsonURL = jsonURLStart + String(videoID) + jsonURLFinish
         
-        let dataRequestManager = DataRequestManager()
-        
-        dataRequestManager.getApiVideoUrl(dataUrlString: jsonURL) { [weak self] data in
-            self?.videoStringURL = data.url
+        DataRequestManager.instance.getData(urlString: jsonURL) { [weak self] (videoData: VideoUrlData?) in
+            self?.videoStringURL = videoData?.url
             self?.playVideo()
         }
     }

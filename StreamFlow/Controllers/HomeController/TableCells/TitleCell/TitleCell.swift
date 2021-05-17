@@ -54,9 +54,9 @@ class TitleCell: UITableViewCell {
     
     //-
     func setImage(urlString: String) {
-        let dataRequestManager = DataRequestManager()
+//        let dataRequestManager = DataRequestManager()
         
-        dataRequestManager.getImage(urlString: urlString) { [weak self] data in
+        DataRequestManager.instance.getImage(urlString: urlString) { [weak self] data in
             DispatchQueue.main.async {
                 self?.coverImageView.image = UIImage(data: data)
                 self?.addGradientView()
@@ -74,7 +74,7 @@ class TitleCell: UITableViewCell {
 
         gradient.colors = [UIColor.clear.cgColor, UIColor.init(red: CGFloat(10/255), green: CGFloat(5/255), blue: CGFloat(10/255), alpha: 1).cgColor]
 
-        gradient.locations = [0.0, 0.8]
+        gradient.locations = [0.0, 0.83]
 
         gradientView.layer.insertSublayer(gradient, at: 0)
 
