@@ -8,6 +8,10 @@
 import Foundation
 
 
+protocol NetworkRequestType {
+    
+}
+
 class DataRequestManager {
     
     public static let instance = DataRequestManager()
@@ -60,73 +64,6 @@ class DataRequestManager {
             task.resume()
         }
     }
-    
-    
-//    // -
-//    func getApiData(urlString: String, completiton: @escaping (MovieDataArr) -> Void) {
-//        DispatchQueue.global().async {
-//            let url = URL(string: urlString)
-//            var request = URLRequest(url: url!)
-//            request.setValue("User-Agent", forHTTPHeaderField: "imovies")
-//
-//            let task = URLSession.shared.dataTask(with: request) { data, responce, error in
-//                guard let data = data, error == nil else {
-//                    print("Something went wrong")
-//                    return
-//                }
-//
-//                // Now we have data
-//                var jsonDataOpt: MovieDataArr?
-//                do {
-//                    jsonDataOpt = try JSONDecoder().decode(MovieDataArr.self, from: data)
-//                }
-//                catch {
-//                    print("failed to convert \(error.localizedDescription)")
-//                }
-//
-//                guard let jsonData = jsonDataOpt else {
-//                    return
-//                }
-//
-//                completiton(jsonData)
-//            }
-//
-//            task.resume()
-//        }
-//    }
-//
-//    // -
-//    func getApiVideoUrl(dataUrlString: String, completiton: @escaping (VideoUrlData) -> Void) {
-//        DispatchQueue.global().async {
-//            let url = URL(string: dataUrlString)
-//            var request = URLRequest(url: url!)
-//            request.setValue("User-Agent", forHTTPHeaderField: "imovies")
-//
-//            let task = URLSession.shared.dataTask(with: request) { data, responce, error in
-//                guard let data = data, error == nil else {
-//                    print("Something went wrong")
-//                    return
-//                }
-//
-//                // Now we have data
-//                var jsonDataOpt: VideoUrlData?
-//                do {
-//                    jsonDataOpt = try JSONDecoder().decode(VideoUrlData.self, from: data)
-//                }
-//                catch {
-//                    print("failed to convert \(error.localizedDescription)")
-//                }
-//
-//                guard let jsonData = jsonDataOpt else {
-//                    return
-//                }
-//
-//                completiton(jsonData)
-//            }
-//
-//            task.resume()
-//        }
-//    }
     
     //-
     func getImage(urlString: String, completiton: @escaping (Data) -> Void) {

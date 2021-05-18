@@ -10,17 +10,7 @@ import UIKit
 
 class MovieListCollectionCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView! {
-        didSet {
-            if indicator == nil { return }
-           
-            if imageView.image == nil {
-                indicator.startAnimating()
-            } else {
-                indicator.stopAnimating()
-            }
-        }
-    }
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     
@@ -58,14 +48,15 @@ class MovieListCollectionCell: UICollectionViewCell {
             titleLabel.text = movieData.originalName
         }
         
-        
         guard let imageData = movieData.imageData else { return }
         imageView.image = UIImage(data: imageData)
+        indicator.stopAnimating()
     }
 
     // esec sheitane mere shignit initCell shi
     func updateImage() {
         guard let imageData = movieData.imageData else { return }
         imageView.image = UIImage(data: imageData)
+        
     }
 }

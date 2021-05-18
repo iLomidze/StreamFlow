@@ -8,11 +8,11 @@
 import Foundation
 
 
-struct MovieDataArr: Codable {
+class MovieDataArr: Codable {
     var data: [MovieData]?
 }
 
-struct MovieData: Codable {
+class MovieData: Codable {
     var id: Int?
     var primaryName: String?
     var secondaryName: String?
@@ -27,7 +27,7 @@ struct MovieData: Codable {
         
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try? values.decode(Int.self, forKey: .id)
         primaryName = try? values.decode(String.self, forKey: .primaryName)

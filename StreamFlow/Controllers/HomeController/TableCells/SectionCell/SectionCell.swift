@@ -10,13 +10,12 @@ import UIKit
 class SectionCell: UITableViewCell {
 
     
+    // MARK: - Outlets
     @IBOutlet weak var sectionNameLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
-//    @IBOutlet weak var sectionNameLabel: UILabel!
-//    @IBOutlet weak var collectionView: UICollectionView!
     
-    
+    // MARK: - Properties
     var moviesData = [MovieData]() {
         didSet {
             DispatchQueue.main.async {
@@ -40,6 +39,8 @@ class SectionCell: UITableViewCell {
         // Configure the view for the selected state
     }
  
+    
+    //-
     func initCell(sectionNum: ESectionName, moviesData: [MovieData]) {
         switch sectionNum.rawValue {
         case 1:
