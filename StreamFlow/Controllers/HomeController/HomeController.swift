@@ -12,13 +12,6 @@ class HomeController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     
-    enum ESectionName: Int {
-        case newAdded = 1
-        case populadMovies = 2
-        case popularSeries = 3
-    }
-    
-    
     var newAddedMoviesDataIsDownloaded = false
     var popularMoviesDataIsDownloaded = false
     var popularSeriesDataIsDownloaded = false
@@ -50,23 +43,29 @@ class HomeController: UIViewController {
                         print("New added movies: No cover url in \(i)th element")
                         return
                     }
-                    DataRequestManager.instance.getImage(urlString: minSizeImageURL) { [weak self] data in
-                        self?.newAddedMoviesData[i].imageData = data
+                    DataRequestManager.instance.getImage(urlString: minSizeImageURL) { [weak self] resultData in
                         
-                        DispatchQueue.main.async {
-                            // aq optionalad gadakaste as?
-                            let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SectionCell
+                        switch resultData {
+                        case .failure(let error):
+                            print("Error: \(String(describing: self?.newAddedMoviesData[i].originalName)) - \(error)")
+                            self?.newAddedMoviesData[i].imageData = UIImage(named: "NoMovieCover")!.pngData()
+                        case .success(let data):
+                            self?.newAddedMoviesData[i].imageData = data
                             
-                            if let movieListCollectionCell = sectionCell.collectionView.cellForItem(at: IndexPath(item: i, section: 0)) as? MovieListCollectionCell {
-                            
-                                movieListCollectionCell.updateImage()
-                                sectionCell.collectionView.reloadItems(at: [IndexPath(item: i, section: 0)])
+                            DispatchQueue.main.async {
+                                // aq optionalad gadakaste as?
+                                let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SectionCell
+                                
+                                if let movieListCollectionCell = sectionCell.collectionView.cellForItem(at: IndexPath(item: i, section: 0)) as? MovieListCollectionCell {
+                                
+                                    movieListCollectionCell.updateImage()
+                                    sectionCell.collectionView.reloadItems(at: [IndexPath(item: i, section: 0)])
+                                }
                             }
-//                            sectionCell.collectionView.reloadItems(at: [IndexPath(item: i, section: 0)])
                         }
+                       
                     }
                 }
-//                self?.tableView.reloadRows(at: [IndexPath(row: ESectionName.newAdded.rawValue, section: 0)], with: .automatic)
             }
         }
     }
@@ -104,8 +103,6 @@ class HomeController: UIViewController {
             }
         }
     }
-    
-    var apiLinksDict: [String: String] = [:]
 
     
     
@@ -119,39 +116,37 @@ class HomeController: UIViewController {
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "TitleCell")
         tableView.register(UINib(nibName: "SectionCell", bundle: nil), forCellReuseIdentifier: "SectionCell")
         
-        apiLinksDict = DataRequestManager.instance.getApiLinksDict()
-        
-        getMovieOfTheDayData(urlString: apiLinksDict["movieOfTheDay"]!)
-        getNewAddedMoviesData(urlString: apiLinksDict["newAddedMovies"]!)
-//        getPopularMoviesData(urlString: apiLinksDict["popularMovies"]!)
-//        getPopularSeriesData(urlString: apiLinksDict["popularSeries"]!)
+        getMovieOfTheDayData()
+        getNewAddedMoviesData()
+//        getPopularMoviesData()
+//        getPopularSeriesData()
     }
     
     
     //-
-    func getMovieOfTheDayData(urlString: String) {
-        DataRequestManager.instance.getData(urlString: urlString) { [weak self] (movieDataArr: MovieDataArr?) in
+    func getMovieOfTheDayData() {
+        DataRequestManager.instance.getData(request: HomeNetworkRequest.movieOfTheDay) { [weak self] (movieDataArr: MovieDataArr?) in
             self?.movieOfTheDayData = (movieDataArr?.data?[0]) ?? MovieData()
         }
     }
     
     //-
-    func getNewAddedMoviesData(urlString: String) {
-        DataRequestManager.instance.getData(urlString: urlString) { [weak self] (movieDataArr: MovieDataArr?) in
+    func getNewAddedMoviesData() {
+        DataRequestManager.instance.getData(request: HomeNetworkRequest.newAddedMovies) { [weak self] (movieDataArr: MovieDataArr?) in
             self?.newAddedMoviesData = movieDataArr?.data ?? [MovieData()]
         }
     }
     
     //-
-    func getPopularMoviesData(urlString: String) {
-        DataRequestManager.instance.getData(urlString: urlString) { [weak self] (movieDataArr: MovieDataArr?) in
+    func getPopularMoviesData() {
+        DataRequestManager.instance.getData(request: HomeNetworkRequest.popularMovies) { [weak self] (movieDataArr: MovieDataArr?) in
             self?.popularMoviesData = movieDataArr?.data ?? [MovieData()]
         }
     }
     
     //-
-    func getPopularSeriesData(urlString: String) {
-        DataRequestManager.instance.getData(urlString: urlString) { [weak self] (movieDataArr: MovieDataArr?) in
+    func getPopularSeriesData() {
+        DataRequestManager.instance.getData(request: HomeNetworkRequest.popularSeries) { [weak self] (movieDataArr: MovieDataArr?) in
             self?.popularSeriesData = movieDataArr?.data ?? [MovieData()]
         }
     }

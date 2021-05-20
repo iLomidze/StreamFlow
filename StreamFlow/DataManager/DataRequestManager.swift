@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol NetworkRequestType {
-    
+    var endPoint: String { get }
 }
 
 class DataRequestManager {
@@ -19,23 +19,12 @@ class DataRequestManager {
     private init(){
     }
     
-    //-
-    func getApiLinksDict() -> [String: String]{
-        let apiLinksDict = [
-            "movieOfTheDay": "https://api.imovies.cc/api/v1/movies/movie-day?page=1&per_page=1",
-            "newAddedMovies": "https://api.imovies.cc/api/v1/movies?filters%5Bwith_files%5D=yes&filters%5Btype%5D=movie&sort=-upload_date&per_page=55",
-            "popularMovies": "https://api.imovies.cc/api/v1/movies/top?type=movie&period=day&page=1&per_page=20",
-            "popularSeries": "https://api.imovies.cc/api/v1/movies/top?type=series&period=day&per_page=55"
-        ]
-        
-        return apiLinksDict
-    }
     
     
     // Generic funcion for getting data
-    func getData<DataType: Codable>(urlString: String, completiton: @escaping (DataType) -> Void) {
+    func getData<DataType: Codable>(request: NetworkRequestType, completiton: @escaping (DataType) -> Void) {
         DispatchQueue.global().async {
-            let url = URL(string: urlString)
+            let url = URL(string: request.endPoint)
             var request = URLRequest(url: url!)
             request.setValue("User-Agent", forHTTPHeaderField: "imovies")
             
@@ -66,7 +55,12 @@ class DataRequestManager {
     }
     
     //-
-    func getImage(urlString: String, completiton: @escaping (Data) -> Void) {
+    func getImage(urlString: String, completiton: @escaping (Result<Data, ErrorRequests>) -> Void) {
+        if urlString == "" {
+            completiton(.failure(.noURL))
+            return
+        }
+        
         DispatchQueue.global().async {
             let url = URL(string: urlString)
             let request = URLRequest(url: url!)
@@ -76,8 +70,7 @@ class DataRequestManager {
                     print("Something went wrong during image data download")
                     return
                 }
-                
-                completiton(data)
+                completiton(.success(data))
             }
             
             task.resume()

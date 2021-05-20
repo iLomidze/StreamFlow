@@ -43,7 +43,9 @@ class TitleCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         #warning("srul ekranze ar gadadis - chatvirtuli araa subview")
-        addGradientView()
+        if !gradientIsSet {
+            addGradientView()
+        }
     }
     
     
@@ -69,20 +71,24 @@ class TitleCell: UITableViewCell {
     //-
     func setImage(urlString: String) {
         
-        //es garet gaitane
-        DataRequestManager.instance.getImage(urlString: urlString) { [weak self] data in
-            DispatchQueue.main.async {
-                self?.coverImageView.image = UIImage(data: data)
+        #warning("Title cell: garet gaitane")
+        DataRequestManager.instance.getImage(urlString: urlString) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                print("Title Cell - \(error)")
+                DispatchQueue.main.async {
+                    self?.coverImageView.image = UIImage(named: "NoMovieCover")
+                }
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self?.coverImageView.image = UIImage(data: data)
+                }
             }
         }
     }
     
     // adds gradient to cover image
     func addGradientView() {
-        if gradientIsSet {
-            return
-        }
-        
         let gradientView = UIView(frame: coverImageView.frame)
         
         let gradient = CAGradientLayer()

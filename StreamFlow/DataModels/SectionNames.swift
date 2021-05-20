@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum ESectionName: Int {
+enum SectionNames: Int {
     case newAdded = 1
     case populadMovies = 2
     case popularSeries = 3

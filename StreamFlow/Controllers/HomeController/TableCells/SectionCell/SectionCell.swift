@@ -41,7 +41,7 @@ class SectionCell: UITableViewCell {
  
     
     //-
-    func initCell(sectionNum: ESectionName, moviesData: [MovieData]) {
+    func initCell(sectionNum: SectionNames, moviesData: [MovieData]) {
         switch sectionNum.rawValue {
         case 1:
             sectionNameLabel.text = "ახალი დამატებული"
