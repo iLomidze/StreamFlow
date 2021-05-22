@@ -8,6 +8,8 @@
 import Foundation
 
 
+// MARK: - Upper JSON Key-Values
+
 class MovieDataArr: Codable {
     var data: [MovieData]?
 }
@@ -18,13 +20,11 @@ class MovieData: Codable {
     var secondaryName: String?
     var originalName: String?
     var isTvShow: Bool?
-    var cover: Cover?
     var covers: CoversData?
     
     var imageData: Data?
     
     init() {
-        
     }
     
     required init(from decoder: Decoder) throws {
@@ -34,7 +34,6 @@ class MovieData: Codable {
         secondaryName = try? values.decode(String.self, forKey: .secondaryName)
         originalName = try? values.decode(String.self, forKey: .originalName)
         isTvShow = try? values.decode(Bool.self, forKey: .isTvShow)
-        cover = try? values.decode(Cover.self, forKey: .cover)
         covers = try? values.decode(CoversData.self, forKey: .covers)
     }
     
@@ -44,16 +43,12 @@ class MovieData: Codable {
         case secondaryName
         case originalName
         case isTvShow
-        case cover
         case covers
     }
-    
 }
 
-struct Cover: Codable {
-    var small: String?
-    var large: String?
-}
+
+// MARK: - Covers Data Substructure
 
 struct CoversData: Codable {
     var data: CoversDataSizes?
@@ -95,6 +90,9 @@ struct CoversDataSizes: Codable {
     }
 }
 
+
+// MARK: - Getters
+
 extension CoversDataSizes {
     var maxSize: String? {
         // may add another sizes if needed
@@ -104,6 +102,19 @@ extension CoversDataSizes {
     var minSize: String? {
         // may add another sizes if needed
         return xs ?? s
+    }
+}
+
+
+extension MovieData {
+    var anyName: String? {
+        if primaryName != "" {
+            return primaryName
+        } else if secondaryName != "" {
+            return secondaryName
+        } else {
+            return originalName
+        }
     }
 }
 

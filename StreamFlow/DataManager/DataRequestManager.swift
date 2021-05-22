@@ -7,26 +7,40 @@
 
 import Foundation
 
-
+///
 protocol NetworkRequestType {
     var endPoint: String { get }
+    var params: [String: String] { get }
+    var header: [String: String] { get }
 }
 
 class DataRequestManager {
     
+    /// For singelton patters
     public static let instance = DataRequestManager()
     
+    /// private - not to be created from outside
     private init(){
     }
     
     
     /// Generic function for getting data
-    func getData<DataType: Codable>(request: NetworkRequestType, completion: @escaping (Result<DataType, ErrorRequests>) -> Void) {
+    func getData<DataType: Codable>(requestType: NetworkRequestType, completion: @escaping (Result<DataType, ErrorRequests>) -> Void) {
         DispatchQueue.global().async {
-            let url = URL(string: request.endPoint)
-            var request = URLRequest(url: url!)
-            request.setValue("User-Agent", forHTTPHeaderField: "imovies")
+            // setting up url request with components
+            var components = URLComponents(string: requestType.endPoint)
+            components?.queryItems = requestType.params.map({ (key, value) in
+                URLQueryItem(name: key, value: value)
+            })
+            var request = URLRequest(url: (components?.url)!)
             
+            if !Array(requestType.header.keys).isEmpty {
+                let headerKey = Array(requestType.header.keys)[0]
+                let headerVal = requestType.header[headerKey]
+                request.setValue(headerKey, forHTTPHeaderField: headerVal ?? "")
+            }
+                
+            // start url session
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
                     print("URL session went wrong")
@@ -50,7 +64,6 @@ class DataRequestManager {
                 
                 completion(.success(jsonData))
             }
-            
             task.resume()
         }
     }

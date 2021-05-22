@@ -40,7 +40,7 @@ class PlayerController: UIViewController {
         let jsonURL = jsonURLStart + String(videoID) + jsonURLFinish
         
         #warning("Player-is data request ar mushaobs")
-//        DataRequestManager.instance.getData(request: HomeNetworkRequest.custom(url: jsonURL)) { [weak self] (videoData: VideoUrlData?) in
+//        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.custom(url: jsonURL)) { [weak self] (videoData: VideoUrlData?) in
 //            self?.videoStringURL = videoData?.url
 //            self?.playVideo()
 //        }

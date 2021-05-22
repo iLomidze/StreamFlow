@@ -10,13 +10,19 @@ import UIKit
 
 class MovieListCollectionCell: UICollectionViewCell {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     
+    // MARK: - Properties
+    
     var movieData: MovieData!
     var indicator: UIActivityIndicatorView!
     
+    
+    // MARK: - Executive
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,26 +43,22 @@ class MovieListCollectionCell: UICollectionViewCell {
         }
     }
     
+    
+    // MARK: - Functions
+    
+    ///
     func initCell(movieData: MovieData) {
         self.movieData = movieData
         
-        if movieData.primaryName != "" {
-            titleLabel.text = movieData.primaryName
-        } else if movieData.secondaryName != "" {
-            titleLabel.text = movieData.secondaryName
-        } else {
-            titleLabel.text = movieData.originalName
-        }
+        titleLabel.text = movieData.anyName
         
-        guard let imageData = movieData.imageData else { return }
-        imageView.image = UIImage(data: imageData)
-        indicator.stopAnimating()
+        updateImage()
     }
 
-    // esec sheitane mere shignit initCell shi
+    /// Updates|Sets image in ImageView
     func updateImage() {
         guard let imageData = movieData.imageData else { return }
         imageView.image = UIImage(data: imageData)
-        
+        indicator.stopAnimating()
     }
 }

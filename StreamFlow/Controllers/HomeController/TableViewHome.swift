@@ -47,6 +47,9 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
         return sectionCell
     }
     
+    
+    // MARK: - Functions
+    
     // TitleCell Delegate function - used when movie of the day is clicked
     func movieOfTheDayClicked() {
         guard let vc = storyboard?.instantiateViewController(identifier: "PlayerController") as? PlayerController else {

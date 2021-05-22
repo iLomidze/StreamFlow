@@ -9,37 +9,40 @@ import UIKit
 
 class HomeController: UIViewController {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var tableView: UITableView!
     
     
     // MARK: - Properties
     
+    // MARK: General Properties
+    
+    var movieOfTheDayDataIsDownloaded = false
     var newAddedMoviesDataIsDownloaded = false
     var popularMoviesDataIsDownloaded = false
     var popularSeriesDataIsDownloaded = false
+
+    
+    // MARK: Data for each Section
     
     var movieOfTheDayData = MovieData() {
         didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            downloadSectionMovieImages(on: .movieOfTheDay)
         }
     }
-    
     ///
     var newAddedMoviesData = [MovieData]() {
         didSet {
             downloadSectionMovieImages(on: .newAdded)
         }
     }
-    
     ///
     var popularMoviesData = [MovieData]() {
         didSet {
             downloadSectionMovieImages(on: .popularMovies)
         }
     }
-    
     ///
     var popularSeriesData = [MovieData]() {
         didSet {
@@ -47,6 +50,8 @@ class HomeController: UIViewController {
         }
     }
 
+    
+    // MARK: - Execution
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,10 +72,11 @@ class HomeController: UIViewController {
     
     // MARK: - Functions
     
-    ///
+    //MARK: Fetching Data
+    
+    /// Gets Movie of the day Data from iMovies API
     func getMovieOfTheDayData() {
-        
-        DataRequestManager.instance.getData(request: HomeNetworkRequest.movieOfTheDay) { [weak self] (result: Result<MovieDataArr, ErrorRequests>)  in
+        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.movieOfTheDay) { [weak self] (result: Result<MovieDataArr, ErrorRequests>)  in
             switch result {
             case .failure(let error):
                 print(error)
@@ -80,9 +86,9 @@ class HomeController: UIViewController {
         }
     }
     
-    ///
+    /// Gets New added movies Data from iMovies API
     func getNewAddedMoviesData() {
-        DataRequestManager.instance.getData(request: HomeNetworkRequest.newAddedMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
+        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.newAddedMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
             switch result {
             case .failure(let error):
                 print(error)
@@ -92,9 +98,9 @@ class HomeController: UIViewController {
         }
     }
     
-    ///
+    /// Gets Popular  movies Data from iMovies API
     func getPopularMoviesData() {
-        DataRequestManager.instance.getData(request: HomeNetworkRequest.popularMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
+        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.popularMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
             switch result {
             case .failure(let error):
                 print(error)
@@ -104,9 +110,9 @@ class HomeController: UIViewController {
         }
     }
     
-    ///
+    /// Gets Popular  series Data from iMovies API
     func getPopularSeriesData() {
-        DataRequestManager.instance.getData(request: HomeNetworkRequest.popularSeries) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
+        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.popularSeries) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
             switch result {
             case .failure(let error):
                 print(error)
@@ -116,12 +122,20 @@ class HomeController: UIViewController {
         }
     }
     
+    // MARK: Fetching Images
+    
     /// Downloads all the images for the corresponding section class and saves them in that class data
     func downloadSectionMovieImages(on sectionName: SectionNames) {
-        // choose which section class should be changed: newly added, popular movies or popular series
+        // choose which section class should be changed
         var editableSectionClass: [MovieData]
         
         switch sectionName {
+        case .movieOfTheDay:
+            if movieOfTheDayDataIsDownloaded {
+                return
+            }
+            movieOfTheDayDataIsDownloaded = true
+            editableSectionClass = [movieOfTheDayData]
         case .newAdded:
             if newAddedMoviesDataIsDownloaded {
                 return
@@ -142,23 +156,33 @@ class HomeController: UIViewController {
             editableSectionClass = popularSeriesData
         }
         
-        //To add number of cells according to the fetched data
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
+        if sectionName != .movieOfTheDay {
+            //To add number of cells according to the fetched data
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
         }
         
         //Download image for each cell
         for itemIndex in 0..<(editableSectionClass.count) {
-            guard let minSizeImageURL = editableSectionClass[itemIndex].covers?.data?.minSize else {
-                print("\(sectionName): No cover url in \(itemIndex)th element")
-                return
+            if sectionName == .movieOfTheDay {
+                guard let maxSizeImageURL = editableSectionClass[itemIndex].covers?.data?.maxSize else {
+                    print("\(sectionName): No cover url in \(itemIndex)th element")
+                    return
+                }
+                downloadImageAndUpdateCell(for: editableSectionClass[itemIndex], from: maxSizeImageURL, sectionName: sectionName, itemInSection: itemIndex)
+            } else {
+                guard let minSizeImageURL = editableSectionClass[itemIndex].covers?.data?.minSize else {
+                    print("\(sectionName): No cover url in \(itemIndex)th element")
+                    return
+                }
+                downloadImageAndUpdateCell(for: editableSectionClass[itemIndex], from: minSizeImageURL, sectionName: sectionName, itemInSection: itemIndex)
             }
-            downloadImageAndUpdateCell(for: editableSectionClass[itemIndex], from: minSizeImageURL, sectionName: sectionName, itemInSection: itemIndex)
         }
     }
     
     
-    /// Downloads image from url, Saves int to specified MovieData class data and Updates appropriate collectionView cell
+    /// Downloads image from url, Saves int to specified MovieData class data and Updates appropriate  [titleCell or collectionView cell]
     func downloadImageAndUpdateCell(for movieData: MovieData, from urlString: String, sectionName: SectionNames, itemInSection: Int) {
         DataRequestManager.instance.getImage(urlString: urlString) { [weak self] resultData in
             switch resultData {
@@ -169,12 +193,20 @@ class HomeController: UIViewController {
                 movieData.imageData = data
                 
                 DispatchQueue.main.async {
-                    let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: sectionName.rawValue, section: 0)) as! SectionCell
-                    
-                    if let movieListCollectionCell = sectionCell.collectionView.cellForItem(at: IndexPath(item: itemInSection, section: 0)) as? MovieListCollectionCell {
+                    if sectionName == .movieOfTheDay {
+                        let titleCell = self?.tableView.cellForRow(at: IndexPath(row: sectionName.rawValue, section: 0)) as! TitleCell
                         
-                        movieListCollectionCell.updateImage()
-                        sectionCell.collectionView.reloadItems(at: [IndexPath(item: itemInSection, section: 0)])
+                        titleCell.updateImage()
+                        self?.tableView.reloadRows(at: [IndexPath(row: sectionName.rawValue, section: 0)], with: .automatic)
+                        
+                    } else {
+                        let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: sectionName.rawValue, section: 0)) as! SectionCell
+                        
+                        if let movieListCollectionCell = sectionCell.collectionView.cellForItem(at: IndexPath(item: itemInSection, section: 0)) as? MovieListCollectionCell {
+                            
+                            movieListCollectionCell.updateImage()
+                            sectionCell.collectionView.reloadItems(at: [IndexPath(item: itemInSection, section: 0)])
+                        }
                     }
                 }
             }

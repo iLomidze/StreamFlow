@@ -24,6 +24,9 @@ class SectionCell: UITableViewCell {
         }
     }
     
+    
+    // MARK: - Executive
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -40,7 +43,7 @@ class SectionCell: UITableViewCell {
     }
  
     
-    //-
+    ///
     func initCell(sectionNum: SectionNames, moviesData: [MovieData]) {
         switch sectionNum.rawValue {
         case 1:

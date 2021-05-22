@@ -9,6 +9,7 @@ import Foundation
 
 
 enum SectionNames: Int {
+    case movieOfTheDay = 0
     case newAdded = 1
     case popularMovies = 2
     case popularSeries = 3
