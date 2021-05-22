@@ -10,4 +10,6 @@ import Foundation
 
 enum ErrorRequests: Error {
     case noURL
+    case urlSessionFailed
+    case dataModelFailedForJSONParsing
 }

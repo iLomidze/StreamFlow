@@ -84,8 +84,8 @@
 		E21EA1AE26481706003A1C5D /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
-				E21EA213264EF54D003A1C5D /* SectionCell */,
 				E21EA212264EF533003A1C5D /* TitleCell */,
+				E21EA213264EF54D003A1C5D /* SectionCell */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";

@@ -36,7 +36,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
             sectionCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
         }
         if indexPath.row == 2 {
-            sectionCell.initCell(sectionNum: .populadMovies, moviesData: popularMoviesData)
+            sectionCell.initCell(sectionNum: .popularMovies, moviesData: popularMoviesData)
         }
         if indexPath.row == 3 {
             sectionCell.initCell(sectionNum: .popularSeries, moviesData: popularSeriesData)

@@ -8,14 +8,15 @@
 import UIKit
 
 class HomeController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
+    
+    // MARK: - Properties
     
     var newAddedMoviesDataIsDownloaded = false
     var popularMoviesDataIsDownloaded = false
     var popularSeriesDataIsDownloaded = false
-    
     
     var movieOfTheDayData = MovieData() {
         didSet {
@@ -25,86 +26,27 @@ class HomeController: UIViewController {
         }
     }
     
-    //-
+    ///
     var newAddedMoviesData = [MovieData]() {
         didSet {
-            if newAddedMoviesDataIsDownloaded {
-                return
-            }
-            
-            newAddedMoviesDataIsDownloaded = true
-            
-            DispatchQueue.main.async { [weak self] in
-                
-                self?.tableView.reloadData()
-                
-                for i in 0..<(self?.newAddedMoviesData.count ?? 1) {
-                    guard let minSizeImageURL = self?.newAddedMoviesData[i].covers?.data?.minSize else {
-                        print("New added movies: No cover url in \(i)th element")
-                        return
-                    }
-                    DataRequestManager.instance.getImage(urlString: minSizeImageURL) { [weak self] resultData in
-                        
-                        switch resultData {
-                        case .failure(let error):
-                            print("Error: \(String(describing: self?.newAddedMoviesData[i].originalName)) - \(error)")
-                            self?.newAddedMoviesData[i].imageData = UIImage(named: "NoMovieCover")!.pngData()
-                        case .success(let data):
-                            self?.newAddedMoviesData[i].imageData = data
-                            
-                            DispatchQueue.main.async {
-                                // aq optionalad gadakaste as?
-                                let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SectionCell
-                                
-                                if let movieListCollectionCell = sectionCell.collectionView.cellForItem(at: IndexPath(item: i, section: 0)) as? MovieListCollectionCell {
-                                
-                                    movieListCollectionCell.updateImage()
-                                    sectionCell.collectionView.reloadItems(at: [IndexPath(item: i, section: 0)])
-                                }
-                            }
-                        }
-                       
-                    }
-                }
-            }
+            downloadSectionMovieImages(on: .newAdded)
         }
     }
     
+    ///
     var popularMoviesData = [MovieData]() {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-//                for i in 0..<(self?.popularMoviesData.count ?? 1) {
-//                    guard let minSizeImageURL = self?.popularMoviesData[i].covers?.data?.minSize else {
-//                        print("Popular Movies: No cover url in \(i)th element")
-//                        return
-//                    }
-//                    self?.dataRequestManager.getImage(urlString: minSizeImageURL) { [weak self] data in
-//                        self?.popularMoviesData[i].imageData = data
-//                    }
-//                }
-                self?.tableView.reloadData()
-            }
+            downloadSectionMovieImages(on: .popularMovies)
         }
     }
     
+    ///
     var popularSeriesData = [MovieData]() {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-//                for i in 0..<(self?.popularSeriesData.count ?? 1) {
-//                    guard let minSizeImageURL = self?.popularSeriesData[i].covers?.data?.minSize else {
-//                        print("Popular Series: No cover url in \(i)th element")
-//                        return
-//                    }
-//                    self?.dataRequestManager.getImage(urlString: minSizeImageURL) { [weak self] data in
-//                        self?.popularSeriesData[i].imageData = data
-//                    }
-//                }
-                self?.tableView.reloadData()
-            }
+            downloadSectionMovieImages(on: .popularSeries)
         }
     }
 
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,42 +60,128 @@ class HomeController: UIViewController {
         
         getMovieOfTheDayData()
         getNewAddedMoviesData()
-//        getPopularMoviesData()
-//        getPopularSeriesData()
+        getPopularMoviesData()
+        getPopularSeriesData()
     }
     
     
-    //-
+    // MARK: - Functions
+    
+    ///
     func getMovieOfTheDayData() {
-        DataRequestManager.instance.getData(request: HomeNetworkRequest.movieOfTheDay) { [weak self] (movieDataArr: MovieDataArr?) in
-            self?.movieOfTheDayData = (movieDataArr?.data?[0]) ?? MovieData()
-        }
-    }
-    
-    //-
-    func getNewAddedMoviesData() {
-        DataRequestManager.instance.getData(request: HomeNetworkRequest.newAddedMovies) { [weak self] (movieDataArr: MovieDataArr?) in
-            self?.newAddedMoviesData = movieDataArr?.data ?? [MovieData()]
-        }
-    }
-    
-    //-
-    func getPopularMoviesData() {
-        DataRequestManager.instance.getData(request: HomeNetworkRequest.popularMovies) { [weak self] (movieDataArr: MovieDataArr?) in
-            self?.popularMoviesData = movieDataArr?.data ?? [MovieData()]
-        }
-    }
-    
-    //-
-    func getPopularSeriesData() {
-        DataRequestManager.instance.getData(request: HomeNetworkRequest.popularSeries) { [weak self] (movieDataArr: MovieDataArr?) in
-            self?.popularSeriesData = movieDataArr?.data ?? [MovieData()]
-        }
-    }
-    
-    func downloadSectionMovieImages() {
         
+        DataRequestManager.instance.getData(request: HomeNetworkRequest.movieOfTheDay) { [weak self] (result: Result<MovieDataArr, ErrorRequests>)  in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let movieDataArr):
+                self?.movieOfTheDayData = (movieDataArr.data?[0]) ?? MovieData()
+            }
+        }
     }
+    
+    ///
+    func getNewAddedMoviesData() {
+        DataRequestManager.instance.getData(request: HomeNetworkRequest.newAddedMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let movieDataArr):
+                self?.newAddedMoviesData = movieDataArr.data ?? [MovieData()]
+            }
+        }
+    }
+    
+    ///
+    func getPopularMoviesData() {
+        DataRequestManager.instance.getData(request: HomeNetworkRequest.popularMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let movieDataArr):
+                self?.popularMoviesData = movieDataArr.data ?? [MovieData()]
+            }
+        }
+    }
+    
+    ///
+    func getPopularSeriesData() {
+        DataRequestManager.instance.getData(request: HomeNetworkRequest.popularSeries) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let movieDataArr):
+                self?.popularSeriesData = movieDataArr.data ?? [MovieData()]
+            }
+        }
+    }
+    
+    /// Downloads all the images for the corresponding section class and saves them in that class data
+    func downloadSectionMovieImages(on sectionName: SectionNames) {
+        // choose which section class should be changed: newly added, popular movies or popular series
+        var editableSectionClass: [MovieData]
+        
+        switch sectionName {
+        case .newAdded:
+            if newAddedMoviesDataIsDownloaded {
+                return
+            }
+            newAddedMoviesDataIsDownloaded = true
+            editableSectionClass = newAddedMoviesData
+        case .popularMovies:
+            if popularMoviesDataIsDownloaded {
+                return
+            }
+            popularMoviesDataIsDownloaded = true
+            editableSectionClass = popularMoviesData
+        case .popularSeries:
+            if popularSeriesDataIsDownloaded {
+                return
+            }
+            popularSeriesDataIsDownloaded = true
+            editableSectionClass = popularSeriesData
+        }
+        
+        //To add number of cells according to the fetched data
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+        
+        //Download image for each cell
+        for itemIndex in 0..<(editableSectionClass.count) {
+            guard let minSizeImageURL = editableSectionClass[itemIndex].covers?.data?.minSize else {
+                print("\(sectionName): No cover url in \(itemIndex)th element")
+                return
+            }
+            downloadImageAndUpdateCell(for: editableSectionClass[itemIndex], from: minSizeImageURL, sectionName: sectionName, itemInSection: itemIndex)
+        }
+    }
+    
+    
+    /// Downloads image from url, Saves int to specified MovieData class data and Updates appropriate collectionView cell
+    func downloadImageAndUpdateCell(for movieData: MovieData, from urlString: String, sectionName: SectionNames, itemInSection: Int) {
+        DataRequestManager.instance.getImage(urlString: urlString) { [weak self] resultData in
+            switch resultData {
+            case .failure(let error):
+                print("Error: Cover image download for \(String(describing: movieData.originalName ?? "No Movie Name"))  - \(error)")
+                movieData.imageData = UIImage(named: "NoMovieCover")!.pngData()
+            case .success(let data):
+                movieData.imageData = data
+                
+                DispatchQueue.main.async {
+                    let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: sectionName.rawValue, section: 0)) as! SectionCell
+                    
+                    if let movieListCollectionCell = sectionCell.collectionView.cellForItem(at: IndexPath(item: itemInSection, section: 0)) as? MovieListCollectionCell {
+                        
+                        movieListCollectionCell.updateImage()
+                        sectionCell.collectionView.reloadItems(at: [IndexPath(item: itemInSection, section: 0)])
+                    }
+                }
+            }
+        }
+    }
+    
+    // ec
 }
 
 

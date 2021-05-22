@@ -20,17 +20,17 @@ class DataRequestManager {
     }
     
     
-    
-    // Generic funcion for getting data
-    func getData<DataType: Codable>(request: NetworkRequestType, completiton: @escaping (DataType) -> Void) {
+    /// Generic function for getting data
+    func getData<DataType: Codable>(request: NetworkRequestType, completion: @escaping (Result<DataType, ErrorRequests>) -> Void) {
         DispatchQueue.global().async {
             let url = URL(string: request.endPoint)
             var request = URLRequest(url: url!)
             request.setValue("User-Agent", forHTTPHeaderField: "imovies")
             
-            let task = URLSession.shared.dataTask(with: request) { data, responce, error in
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
-                    print("Something went wrong")
+                    print("URL session went wrong")
+                    completion(.failure(.urlSessionFailed))
                     return
                 }
                 
@@ -40,24 +40,25 @@ class DataRequestManager {
                     jsonDataOpt = try JSONDecoder().decode(DataType.self, from: data)
                 }
                 catch {
-                    print("failed to convert \(error.localizedDescription)")
+                    completion(.failure(.dataModelFailedForJSONParsing))
+                    print("Failed to convert json - Error: \(error.localizedDescription)")
                 }
                 
                 guard let jsonData = jsonDataOpt else {
                     return
                 }
                 
-                completiton(jsonData)
+                completion(.success(jsonData))
             }
             
             task.resume()
         }
     }
     
-    //-
-    func getImage(urlString: String, completiton: @escaping (Result<Data, ErrorRequests>) -> Void) {
+    ///
+    func getImage(urlString: String, completion: @escaping (Result<Data, ErrorRequests>) -> Void) {
         if urlString == "" {
-            completiton(.failure(.noURL))
+            completion(.failure(.noURL))
             return
         }
         
@@ -65,12 +66,13 @@ class DataRequestManager {
             let url = URL(string: urlString)
             let request = URLRequest(url: url!)
             
-            let task = URLSession.shared.dataTask(with: request) { data, responce, error in
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
                     print("Something went wrong during image data download")
+                    completion(.failure(.urlSessionFailed))
                     return
                 }
-                completiton(.success(data))
+                completion(.success(data))
             }
             
             task.resume()

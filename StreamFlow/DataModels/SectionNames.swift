@@ -10,6 +10,6 @@ import Foundation
 
 enum SectionNames: Int {
     case newAdded = 1
-    case populadMovies = 2
+    case popularMovies = 2
     case popularSeries = 3
 }
