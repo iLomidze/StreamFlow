@@ -8,6 +8,6 @@
 import Foundation
 
 
-struct videoURL: Codable {
+struct VideoUrlData: Codable {
     var url: String
 }

@@ -1,5 +1,5 @@
 //
-//  CommonCell.swift
+//  SectionCell.swift
 //  StreamFlow
 //
 //  Created by ilomidze on 09.05.21.
@@ -7,12 +7,15 @@
 
 import UIKit
 
-class CommonCell: UITableViewCell {
+class SectionCell: UITableViewCell {
 
+    
+    // MARK: - Outlets
     @IBOutlet weak var sectionNameLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     
+    // MARK: - Properties
     var moviesData = [MovieData]() {
         didSet {
             DispatchQueue.main.async {
@@ -20,6 +23,9 @@ class CommonCell: UITableViewCell {
             }
         }
     }
+    
+    
+    // MARK: - Executive
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +42,9 @@ class CommonCell: UITableViewCell {
         // Configure the view for the selected state
     }
  
-    func initCell(sectionNum: ESectionName, moviesData: [MovieData]) {
+    
+    ///
+    func initCell(sectionNum: SectionNames, moviesData: [MovieData]) {
         switch sectionNum.rawValue {
         case 1:
             sectionNameLabel.text = "ახალი დამატებული"
@@ -50,7 +58,7 @@ class CommonCell: UITableViewCell {
 }
 
 
-extension CommonCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SectionCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         moviesData.count
     }
@@ -60,7 +68,10 @@ extension CommonCell: UICollectionViewDelegate, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        cell.imageView?.image = nil
+        
         let movieData = moviesData[indexPath.row]
+        cell.awakeFromNib()
         cell.initCell(movieData: movieData)
 
         return cell

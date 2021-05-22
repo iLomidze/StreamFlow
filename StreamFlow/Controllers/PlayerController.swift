@@ -12,7 +12,6 @@ import AVFoundation
 class PlayerController: UIViewController {
 
     var videoID: Int?
-
     var videoStringURL: String?
     
     var avPlayerViewController = AVPlayerViewController()
@@ -21,7 +20,7 @@ class PlayerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setMovieURL()
     }
     
@@ -40,12 +39,11 @@ class PlayerController: UIViewController {
         
         let jsonURL = jsonURLStart + String(videoID) + jsonURLFinish
         
-        let dataRequestManager = DataRequestManager()
-        
-        dataRequestManager.getApiVideoUrl(dataUrlString: jsonURL) { [weak self] data in
-            self?.videoStringURL = data.url
-            self?.playVideo()
-        }
+        #warning("Player-is data request ar mushaobs")
+//        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.custom(url: jsonURL)) { [weak self] (videoData: VideoUrlData?) in
+//            self?.videoStringURL = videoData?.url
+//            self?.playVideo()
+//        }
     }
     
     //-
