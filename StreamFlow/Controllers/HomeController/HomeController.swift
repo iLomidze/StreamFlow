@@ -67,6 +67,11 @@ class HomeController: UIViewController {
         getNewAddedMoviesData()
         getPopularMoviesData()
         getPopularSeriesData()
+        
+        // To hide Tabbar space when it is hidden and tableview is scrolled in the bottom
+        if #available(iOS 11.0, *) {
+            self.tableView.contentInsetAdjustmentBehavior = .never
+        }
     }
     
     
