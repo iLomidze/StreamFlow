@@ -11,8 +11,8 @@ class SectionCell: UITableViewCell {
 
     
     // MARK: - Outlets
-    @IBOutlet weak var sectionNameLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var sectionNameLabel: UILabel!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     
     // MARK: - Properties
@@ -33,6 +33,7 @@ class SectionCell: UITableViewCell {
         collectionView.register(UINib(nibName: "MovieListCollectionCell", bundle: nil), forCellWithReuseIdentifier: "MovieListCollectionCell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor(named: "backgroundColor")
         
     }
 
@@ -54,6 +55,16 @@ class SectionCell: UITableViewCell {
             sectionNameLabel.text = "ტოპ სერიალები"
         }
         self.moviesData = moviesData
+    }
+    
+    
+    /// Updates image for CollectionList Cell
+    func updateImageForMovieListCollectionCell(at itemInSection: Int) {
+        if let movieListCollectionCell = collectionView.cellForItem(at: IndexPath(item: itemInSection, section: 0)) as? MovieListCollectionCell {
+        
+            movieListCollectionCell.updateImage()
+            collectionView.reloadItems(at: [IndexPath(item: itemInSection, section: 0)])
+        }
     }
 }
 
@@ -77,5 +88,14 @@ extension SectionCell: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let id = moviesData[indexPath.row].id else {
+            print("No Movie ID")
+            return
+        }
+
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: movieCellPicked), object: nil, userInfo: ["movieID": id])
+    }
     
+    //ec
 }

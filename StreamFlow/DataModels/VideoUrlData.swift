@@ -9,5 +9,5 @@ import Foundation
 
 
 struct VideoUrlData: Codable {
-    var url: String
+//    data:
 }

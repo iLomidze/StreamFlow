@@ -49,16 +49,20 @@ class HomeController: UIViewController {
             downloadSectionMovieImages(on: .popularSeries)
         }
     }
-
+    
     
     // MARK: - Execution
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "HomeController"
-        navigationController?.navigationBar.barTintColor = UIColor.init(red: CGFloat(10/255), green: CGFloat(5/255), blue: CGFloat(10/255), alpha: 1)
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        title = "Home"
         
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "TitleCell")
         tableView.register(UINib(nibName: "SectionCell", bundle: nil), forCellReuseIdentifier: "SectionCell")
@@ -68,10 +72,12 @@ class HomeController: UIViewController {
         getPopularMoviesData()
         getPopularSeriesData()
         
-        // To hide Tabbar space when it is hidden and tableview is scrolled in the bottom
+        // To hide !Tabbar Space! when Tabbar is hidden and tableview is scrolled in the bottom
         if #available(iOS 11.0, *) {
             self.tableView.contentInsetAdjustmentBehavior = .never
         }
+        
+        addObserver()
     }
     
     
@@ -193,7 +199,7 @@ class HomeController: UIViewController {
             switch resultData {
             case .failure(let error):
                 print("Error: Cover image download for \(String(describing: movieData.originalName ?? "No Movie Name"))  - \(error)")
-                movieData.imageData = UIImage(named: "NoMovieCover")!.pngData()
+                movieData.imageData = UIImage(named: "noMovieCover")!.pngData()
             case .success(let data):
                 movieData.imageData = data
                 
@@ -205,12 +211,9 @@ class HomeController: UIViewController {
                         self?.tableView.reloadRows(at: [IndexPath(row: sectionName.rawValue, section: 0)], with: .automatic)
                         
                     } else {
-                        let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: sectionName.rawValue, section: 0)) as! SectionCell
-                        
-                        if let movieListCollectionCell = sectionCell.collectionView.cellForItem(at: IndexPath(item: itemInSection, section: 0)) as? MovieListCollectionCell {
+                        if let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: sectionName.rawValue, section: 0)) as? SectionCell {
                             
-                            movieListCollectionCell.updateImage()
-                            sectionCell.collectionView.reloadItems(at: [IndexPath(item: itemInSection, section: 0)])
+                            sectionCell.updateImageForMovieListCollectionCell(at: itemInSection)
                         }
                     }
                 }

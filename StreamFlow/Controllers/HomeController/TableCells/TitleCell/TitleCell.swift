@@ -19,9 +19,9 @@ class TitleCell: UITableViewCell {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var coverBtn: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet private weak var coverBtn: UIButton!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var coverImageView: UIImageView!
     
     
     // MARK: - Properties
@@ -49,9 +49,10 @@ class TitleCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        #warning("srul ekranze ar gadadis - chatvirtuli araa subview")
+        #warning("srul ekranze ar gadadis - chatvirtuli araa subview? + pers ar icvlis night mode-ze")
         if !gradientIsSet {
             addGradientView()
+            gradientIsSet = true
         }
         
         indicator.centerXAnchor.constraint(equalTo: coverImageView.centerXAnchor).isActive = true
@@ -88,23 +89,23 @@ class TitleCell: UITableViewCell {
         indicator.stopAnimating()
     }
     
-    
     /// adds gradient to cover image
     func addGradientView() {
         let gradientView = UIView(frame: coverImageView.frame)
-        
+
         let gradient = CAGradientLayer()
-        
+
         gradient.frame = gradientView.frame
-        gradient.colors = [UIColor.clear.cgColor, UIColor.init(red: CGFloat(10/255), green: CGFloat(5/255), blue: CGFloat(10/255), alpha: 1).cgColor]
-        gradient.locations = [0.0, 0.83]
+        gradient.colors = [UIColor.clear.cgColor, UIColor(named: "backgroundColor")!.cgColor]
+
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.3);
+        gradient.endPoint = CGPoint(x: 0.0, y: 1.0);
+//                gradient.locations = [0.0, 0.83]
         gradientView.layer.insertSublayer(gradient, at: 0)
 
         coverImageView.addSubview(gradientView)
-
         coverImageView.bringSubviewToFront(gradientView)
-        
-        gradientIsSet = true
     }
-    
+ 
+    //ec
 }

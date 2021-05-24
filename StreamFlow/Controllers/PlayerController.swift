@@ -11,42 +11,50 @@ import AVFoundation
 
 class PlayerController: UIViewController {
 
-    var videoID: Int?
-    var videoStringURL: String?
+    // MARK: - Properties
     
-    var avPlayerViewController = AVPlayerViewController()
-    var avPlayerView = AVPlayer()
+    private var videoID: Int?
+    private var videoStringURL: String?
     
+    private var avPlayerViewController = AVPlayerViewController()
+    private var avPlayerView = AVPlayer()
+    
+    
+    // MARK: - Executive
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setMovieURL()
+        fetchData()
     }
     
     
-    //-
-    func setMovieID(videoID: Int) {
+    // MARK: - Functions
+    
+    
+    /// Can be used from outside to get Video (Movie) ID
+    func prepVC(videoID: Int) {
         self.videoID = videoID
     }
     
-    //-
-    func setMovieURL() {
+    ///
+    func fetchData() {
         guard let videoID = videoID else { return }
             
         let jsonURLStart = "https://api.imovies.cc/api/v1/movies/"
-        let jsonURLFinish = "/files/1478845?rd=0"
+        let jsonURLFinish = "/season-files/0"
+        // TODO: last digit must change if it is TV Series - digit represents season
         
         let jsonURL = jsonURLStart + String(videoID) + jsonURLFinish
-        
-        #warning("Player-is data request ar mushaobs")
-//        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.custom(url: jsonURL)) { [weak self] (videoData: VideoUrlData?) in
-//            self?.videoStringURL = videoData?.url
-//            self?.playVideo()
+    
+        //TODO: implement fetching data
+        print(jsonURL)
+//        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.custom(url: jsonURL)) { [weak self] (videoData: Result<VideoUrlData, ErrorRequests>) in
+//
 //        }
     }
     
-    //-
+    ///
     func playVideo() {
         guard let videoStringURL = videoStringURL else { return }
         

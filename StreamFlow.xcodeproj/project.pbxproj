@@ -30,6 +30,8 @@
 		E2262C802646036100BAB076 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2262C7F2646036100BAB076 /* SearchController.swift */; };
 		E2262C84264604B600BAB076 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2262C83264604B600BAB076 /* HomeController.swift */; };
 		E2262C8726460D1100BAB076 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2262C8626460D1100BAB076 /* PlayerController.swift */; };
+		E26695A8265C0AF300F05FE5 /* OpenPlayerFromCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26695A7265C0AF300F05FE5 /* OpenPlayerFromCell.swift */; };
+		E26695AA265C0D3400F05FE5 /* NotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26695A9265C0D3400F05FE5 /* NotificationKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		E2262C7F2646036100BAB076 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		E2262C83264604B600BAB076 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		E2262C8626460D1100BAB076 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
+		E26695A7265C0AF300F05FE5 /* OpenPlayerFromCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenPlayerFromCell.swift; sourceTree = "<group>"; };
+		E26695A9265C0D3400F05FE5 /* NotificationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 			children = (
 				E2262C83264604B600BAB076 /* HomeController.swift */,
 				E21EA1B7264837DA003A1C5D /* TableViewHome.swift */,
+				E26695A7265C0AF300F05FE5 /* OpenPlayerFromCell.swift */,
 				E21EA1AE26481706003A1C5D /* TableCells */,
 			);
 			path = HomeController;
@@ -157,13 +162,11 @@
 		E2262C632645FB5A00BAB076 /* StreamFlow */ = {
 			isa = PBXGroup;
 			children = (
-				E2262C6A2645FB5A00BAB076 /* Main.storyboard */,
-				E2262C6F2645FB5D00BAB076 /* LaunchScreen.storyboard */,
+				E26695AB265C0D4500F05FE5 /* Utilities */,
+				E26695AC265C0D5C00F05FE5 /* Storyboards */,
 				E2262C7A264602E300BAB076 /* Controllers */,
 				E21EA1B926483968003A1C5D /* DataModels */,
 				E21EA1BC2648798E003A1C5D /* DataManager */,
-				E2262C642645FB5A00BAB076 /* AppDelegate.swift */,
-				E2262C662645FB5A00BAB076 /* SceneDelegate.swift */,
 				E2262C6D2645FB5D00BAB076 /* Assets.xcassets */,
 				E2262C722645FB5D00BAB076 /* Info.plist */,
 			);
@@ -180,6 +183,25 @@
 				E2262C8626460D1100BAB076 /* PlayerController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E26695AB265C0D4500F05FE5 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				E2262C642645FB5A00BAB076 /* AppDelegate.swift */,
+				E2262C662645FB5A00BAB076 /* SceneDelegate.swift */,
+				E26695A9265C0D3400F05FE5 /* NotificationKeys.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		E26695AC265C0D5C00F05FE5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E2262C6A2645FB5A00BAB076 /* Main.storyboard */,
+				E2262C6F2645FB5D00BAB076 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2262C802646036100BAB076 /* SearchController.swift in Sources */,
+				E26695AA265C0D3400F05FE5 /* NotificationKeys.swift in Sources */,
 				E21EA1E9264CA1C3003A1C5D /* SectionNames.swift in Sources */,
 				E2262C7D2646034100BAB076 /* CatalogController.swift in Sources */,
 				E21EA1E0264B23C5003A1C5D /* MainTabBarController.swift in Sources */,
@@ -266,6 +289,7 @@
 				E21EA1B526481780003A1C5D /* TitleCell.swift in Sources */,
 				E21EA1E2264B3BBE003A1C5D /* VideoUrlData.swift in Sources */,
 				E21EA1E5264C3907003A1C5D /* MovieListCollectionCell.swift in Sources */,
+				E26695A8265C0AF300F05FE5 /* OpenPlayerFromCell.swift in Sources */,
 				E21EA1B8264837DA003A1C5D /* TableViewHome.swift in Sources */,
 				E2262C652645FB5A00BAB076 /* AppDelegate.swift in Sources */,
 				E2262C672645FB5A00BAB076 /* SceneDelegate.swift in Sources */,

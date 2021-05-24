@@ -67,26 +67,26 @@ struct CoversData: Codable {
 struct CoversDataSizes: Codable {
 //    var xl: String?
 //    var l: String?
-//    var m: String?
+    var m: String?
     var s: String?
-    var xs: String?
+//    var xs: String?
     
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 //        xl = try? values.decode(String.self, forKey: .xl)
 //        l = try? values.decode(String.self, forKey: .l)
-//        m = try? values.decode(String.self, forKey: .m)
+        m = try? values.decode(String.self, forKey: .m)
         s = try? values.decode(String.self, forKey: .s)
-        xs = try? values.decode(String.self, forKey: .xs)
+//        xs = try? values.decode(String.self, forKey: .xs)
     }
     
     private enum CodingKeys: String, CodingKey {
 //        case xl = "1920"
 //        case l = "1050"
-//        case m = "510"
+        case m = "510"
         case s = "367"
-        case xs = "145"
+//        case xs = "145"
     }
 }
 
@@ -96,12 +96,12 @@ struct CoversDataSizes: Codable {
 extension CoversDataSizes {
     var maxSize: String? {
         // may add another sizes if needed
-        return s ?? xs
+        return m ?? s
     }
     
     var minSize: String? {
         // may add another sizes if needed
-        return xs ?? s
+        return s ?? m
     }
 }
 

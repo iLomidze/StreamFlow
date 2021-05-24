@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 ///
 protocol NetworkRequestType {
     var endPoint: String { get }
@@ -14,8 +15,8 @@ protocol NetworkRequestType {
     var header: [String: String] { get }
 }
 
+
 class DataRequestManager {
-    
     /// For singelton patters
     public static let instance = DataRequestManager()
     

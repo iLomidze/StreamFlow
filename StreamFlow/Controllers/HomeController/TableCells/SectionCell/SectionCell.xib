@@ -3,29 +3,29 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SectionCell" id="KGk-i7-Jjw" userLabel="SectionCell" customClass="SectionCell" customModule="StreamFlow" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="245"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="270"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="245"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="QUK-vk-K25" userLabel="SectionNameLabel">
-                        <rect key="frame" x="5" y="5" width="160" height="22"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                        <rect key="frame" x="5" y="5" width="160" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" name="fontColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bN7-7U-Nd8" userLabel="UnderlineLabel">
-                        <rect key="frame" x="5" y="32" width="100" height="3"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <rect key="frame" x="5" y="37" width="100" height="3"/>
+                        <color key="backgroundColor" name="underlineLabelColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="0nr-66-fht"/>
                             <constraint firstAttribute="height" constant="3" id="R3b-s8-5JL"/>
@@ -35,27 +35,28 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="M2M-ya-ijQ">
-                        <rect key="frame" x="0.0" y="40" width="320" height="200"/>
+                        <rect key="frame" x="0.0" y="50" width="320" height="195"/>
                         <color key="backgroundColor" red="0.039215686274509803" green="0.019607843137254902" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="200" id="5B6-ls-hR6"/>
+                            <constraint firstAttribute="height" constant="195" id="5B6-ls-hR6"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pPP-nr-sYX">
-                            <size key="itemSize" width="128" height="128"/>
+                            <size key="itemSize" width="130" height="195"/>
+                            <size key="estimatedItemSize" width="130" height="195"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
                 </subviews>
-                <color key="backgroundColor" red="0.039215686274509803" green="0.019607843137254902" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" name="backgroundColor"/>
                 <constraints>
-                    <constraint firstItem="M2M-ya-ijQ" firstAttribute="top" secondItem="bN7-7U-Nd8" secondAttribute="bottom" constant="5" id="2l2-Op-ELf"/>
+                    <constraint firstItem="M2M-ya-ijQ" firstAttribute="top" secondItem="bN7-7U-Nd8" secondAttribute="bottom" constant="10" id="2l2-Op-ELf"/>
                     <constraint firstItem="M2M-ya-ijQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Cx2-Qv-sa0"/>
                     <constraint firstAttribute="trailing" secondItem="M2M-ya-ijQ" secondAttribute="trailing" id="L0Y-V8-02u"/>
                     <constraint firstItem="bN7-7U-Nd8" firstAttribute="top" secondItem="QUK-vk-K25" secondAttribute="bottom" constant="5" id="Okd-DX-Dwb"/>
                     <constraint firstItem="QUK-vk-K25" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="bU0-Rj-6dW"/>
-                    <constraint firstAttribute="bottom" secondItem="M2M-ya-ijQ" secondAttribute="bottom" constant="5" id="cSH-Jz-ySg"/>
+                    <constraint firstAttribute="bottom" secondItem="M2M-ya-ijQ" secondAttribute="bottom" constant="25" id="cSH-Jz-ySg"/>
                     <constraint firstItem="QUK-vk-K25" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="eK4-Eg-ohw"/>
                     <constraint firstItem="bN7-7U-Nd8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="hBJ-Hr-TKP"/>
                     <constraint firstItem="QUK-vk-K25" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="zZd-WR-qea"/>
@@ -71,11 +72,14 @@
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="backgroundColor">
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="fontColor">
+            <color red="0.039215686274509803" green="0.019607843137254902" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="underlineLabelColor">
+            <color red="0.090194657444953918" green="0.35276055335998535" blue="0.13345137238502502" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

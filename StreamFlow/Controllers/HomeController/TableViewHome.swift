@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellDelegate {
+extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         4
@@ -30,6 +30,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
         guard let sectionCell = tableView.dequeueReusableCell(withIdentifier: "SectionCell", for: indexPath) as? SectionCell else {
             fatalError("Cant Generate SectionCell")
         }
+
         
 
         if indexPath.row == 1 {
@@ -60,15 +61,6 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
     
     // MARK: - Functions
     
-    // TitleCell Delegate function - used when movie of the day is clicked
-    func movieOfTheDayClicked() {
-        guard let vc = storyboard?.instantiateViewController(identifier: "PlayerController") as? PlayerController else {
-            print("Cant Instantiate PlayerController")
-            return
-        }
-        vc.videoID = movieOfTheDayData.id
-        navigationController?.pushViewController(vc, animated: true)
-    }
     
     /// Hides Tab Bar if scrolled down and shows if scrolled up
     func changeTabBar(hidden:Bool, animated: Bool){
@@ -85,6 +77,6 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
             tabBar.isHidden = hidden
         })
     }
-
     //ec
 }
+
