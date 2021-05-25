@@ -83,7 +83,7 @@ class HomeController: UIViewController {
     
     // MARK: - Functions
     
-    //MARK: Fetching Data
+    // MARK: Fetching Data
     
     /// Gets Movie of the day Data from iMovies API
     func getMovieOfTheDayData() {

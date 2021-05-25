@@ -15,6 +15,11 @@ protocol NetworkRequestType {
     var header: [String: String] { get }
 }
 
+#warning("protocol fetching data - not finished")
+protocol FetchDataProt {
+    func fetchDataProt()
+}
+
 
 class DataRequestManager {
     /// For singelton patters
