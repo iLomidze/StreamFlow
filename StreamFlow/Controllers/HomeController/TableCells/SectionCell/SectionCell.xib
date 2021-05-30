@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="M2M-ya-ijQ">
-                        <rect key="frame" x="0.0" y="50" width="320" height="195"/>
+                        <rect key="frame" x="10" y="50" width="300" height="195"/>
                         <color key="backgroundColor" red="0.039215686274509803" green="0.019607843137254902" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="195" id="5B6-ls-hR6"/>
@@ -52,8 +52,8 @@
                 <color key="backgroundColor" name="backgroundColor"/>
                 <constraints>
                     <constraint firstItem="M2M-ya-ijQ" firstAttribute="top" secondItem="bN7-7U-Nd8" secondAttribute="bottom" constant="10" id="2l2-Op-ELf"/>
-                    <constraint firstItem="M2M-ya-ijQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Cx2-Qv-sa0"/>
-                    <constraint firstAttribute="trailing" secondItem="M2M-ya-ijQ" secondAttribute="trailing" id="L0Y-V8-02u"/>
+                    <constraint firstItem="M2M-ya-ijQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Cx2-Qv-sa0"/>
+                    <constraint firstAttribute="trailing" secondItem="M2M-ya-ijQ" secondAttribute="trailing" constant="10" id="L0Y-V8-02u"/>
                     <constraint firstItem="bN7-7U-Nd8" firstAttribute="top" secondItem="QUK-vk-K25" secondAttribute="bottom" constant="5" id="Okd-DX-Dwb"/>
                     <constraint firstItem="QUK-vk-K25" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="bU0-Rj-6dW"/>
                     <constraint firstAttribute="bottom" secondItem="M2M-ya-ijQ" secondAttribute="bottom" constant="25" id="cSH-Jz-ySg"/>
@@ -79,7 +79,7 @@
             <color red="0.039215686274509803" green="0.019607843137254902" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="underlineLabelColor">
-            <color red="0.090194657444953918" green="0.35276055335998535" blue="0.13345137238502502" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.090000003576278687" green="0.3529999852180481" blue="0.13300001621246338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

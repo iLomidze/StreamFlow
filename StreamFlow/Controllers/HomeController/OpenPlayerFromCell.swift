@@ -13,7 +13,7 @@ import UIKit
 extension HomeController: TitleCellDelegate {
     /// TitleCell Delegate function - used when movie of the day is clicked
     func movieOfTheDayClicked() {
-        guard let vc = storyboard?.instantiateViewController(identifier: "PlayerController") as? PlayerController else {
+        guard let vc = storyboard?.instantiateViewController(identifier: "TestPlayerController") as? PlayerController else {
             print("Cant Instantiate PlayerController")
             return
         }

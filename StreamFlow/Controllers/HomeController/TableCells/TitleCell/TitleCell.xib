@@ -81,7 +81,7 @@
             <color red="0.039215686274509803" green="0.019607843137254902" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="underlineLabelColor">
-            <color red="0.090194657444953918" green="0.35276055335998535" blue="0.13345137238502502" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.090000003576278687" green="0.3529999852180481" blue="0.13300001621246338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
