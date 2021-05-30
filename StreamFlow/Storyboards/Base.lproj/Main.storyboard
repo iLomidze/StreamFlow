@@ -521,10 +521,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Vn-cU-sWr">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Mn1-wT-wtI"/>
+                                </constraints>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEY-bG-hNc">
-                                <rect key="frame" x="0.0" y="640" width="414" height="960"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="1556"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXg-2g-xc0" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="926.5"/>
@@ -844,6 +847,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="QXg-2g-xc0" firstAttribute="leading" secondItem="ZEY-bG-hNc" secondAttribute="leading" id="9d3-be-xwg"/>
                                     <constraint firstItem="QXg-2g-xc0" firstAttribute="top" secondItem="ZEY-bG-hNc" secondAttribute="top" id="KIT-HY-8Et"/>
@@ -855,12 +859,11 @@
                         <viewLayoutGuide key="safeArea" id="3kN-rx-AIZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ZEY-bG-hNc" firstAttribute="top" secondItem="6Vn-cU-sWr" secondAttribute="bottom" id="3fp-Ap-XM7"/>
                             <constraint firstItem="QXg-2g-xc0" firstAttribute="width" secondItem="ggW-j4-TFQ" secondAttribute="width" id="9mW-uM-e9S"/>
+                            <constraint firstItem="ZEY-bG-hNc" firstAttribute="top" secondItem="3kN-rx-AIZ" secondAttribute="top" id="I7b-hr-dp0"/>
                             <constraint firstItem="3kN-rx-AIZ" firstAttribute="top" secondItem="6Vn-cU-sWr" secondAttribute="top" constant="44" id="Pft-AC-a32"/>
                             <constraint firstItem="ZEY-bG-hNc" firstAttribute="leading" secondItem="3kN-rx-AIZ" secondAttribute="leading" id="TCh-AS-oEk"/>
                             <constraint firstItem="6Vn-cU-sWr" firstAttribute="leading" secondItem="3kN-rx-AIZ" secondAttribute="leading" id="fpQ-Hb-CQU"/>
-                            <constraint firstItem="6Vn-cU-sWr" firstAttribute="height" secondItem="ggW-j4-TFQ" secondAttribute="height" multiplier="0.4" id="fqr-Iw-2uB"/>
                             <constraint firstItem="3kN-rx-AIZ" firstAttribute="trailing" secondItem="6Vn-cU-sWr" secondAttribute="trailing" id="jkV-PL-Xgh"/>
                             <constraint firstItem="ZEY-bG-hNc" firstAttribute="trailing" secondItem="3kN-rx-AIZ" secondAttribute="trailing" id="qQt-B8-35i"/>
                             <constraint firstAttribute="bottom" secondItem="ZEY-bG-hNc" secondAttribute="bottom" id="sAc-lT-cio"/>
@@ -869,6 +872,7 @@
                     <size key="freeformSize" width="414" height="1600"/>
                     <connections>
                         <outlet property="movieCoverImage" destination="6Vn-cU-sWr" id="dFE-8H-8j0"/>
+                        <outlet property="scrollView" destination="ZEY-bG-hNc" id="ced-pT-S24"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XcP-Oo-ICm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

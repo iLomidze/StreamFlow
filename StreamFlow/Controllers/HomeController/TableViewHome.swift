@@ -31,7 +31,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             fatalError("Cant Generate SectionCell")
         }
 
-        
+        sectionCell.delegate = self
 
         if indexPath.row == 1 {
             sectionCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
@@ -79,4 +79,3 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     }
     //ec
 }
-

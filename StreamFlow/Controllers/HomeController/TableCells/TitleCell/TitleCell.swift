@@ -31,6 +31,8 @@ class TitleCell: UITableViewCell {
     var movieOfTheDayData: MovieData?
     var gradientIsSet = false
     
+    private var gradientLayer: CAGradientLayer?
+    
     
     // MARK: - Executive
     
@@ -40,6 +42,7 @@ class TitleCell: UITableViewCell {
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.color = .green
         addSubview(indicator)
+        addGradientView()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -48,12 +51,11 @@ class TitleCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        #warning("srul ekranze ar gadadis - chatvirtuli araa subview? + pers ar icvlis night mode-ze")
-        if !gradientIsSet {
-            addGradientView()
-            gradientIsSet = true
-        }
+//        if !gradientIsSet {
+//            addGradientView()
+//            gradientIsSet = true
+//        }
+        self.gradientLayer?.frame = coverImageView.frame
         
         indicator.centerXAnchor.constraint(equalTo: coverImageView.centerXAnchor).isActive = true
         indicator.centerYAnchor.constraint(equalTo: coverImageView.centerYAnchor).isActive = true
@@ -91,20 +93,21 @@ class TitleCell: UITableViewCell {
     
     /// adds gradient to cover image
     func addGradientView() {
-        let gradientView = UIView(frame: coverImageView.frame)
+//        let gradientView = UIView(frame: coverImageView.frame)
 
         let gradient = CAGradientLayer()
 
-        gradient.frame = gradientView.frame
+        
         gradient.colors = [UIColor.clear.cgColor, UIColor(named: "backgroundColor")!.cgColor]
 
         gradient.startPoint = CGPoint(x: 0.0, y: 0.3);
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0);
 //                gradient.locations = [0.0, 0.83]
-        gradientView.layer.insertSublayer(gradient, at: 0)
+        
+        self.gradientLayer = gradient
 
-        coverImageView.addSubview(gradientView)
-        coverImageView.bringSubviewToFront(gradientView)
+        coverImageView.layer.insertSublayer(gradient, at: 0)
+//        coverImageView.bringSubviewToFront(gradientView)
     }
  
     //ec

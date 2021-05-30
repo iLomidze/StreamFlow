@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 
 class MovieListCollectionCell: UICollectionViewCell {
     

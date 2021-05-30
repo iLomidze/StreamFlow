@@ -22,6 +22,8 @@ class HomeController: UIViewController {
     var newAddedMoviesDataIsDownloaded = false
     var popularMoviesDataIsDownloaded = false
     var popularSeriesDataIsDownloaded = false
+    
+    var dataFetcher: DataFetcherType?
 
     
     // MARK: Data for each Section
@@ -76,8 +78,6 @@ class HomeController: UIViewController {
         if #available(iOS 11.0, *) {
             self.tableView.contentInsetAdjustmentBehavior = .never
         }
-        
-        addObserver()
     }
     
     
@@ -87,7 +87,7 @@ class HomeController: UIViewController {
     
     /// Gets Movie of the day Data from iMovies API
     func getMovieOfTheDayData() {
-        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.movieOfTheDay) { [weak self] (result: Result<MovieDataArr, ErrorRequests>)  in
+        dataFetcher?.getData(requestType: HomeNetworkRequest.movieOfTheDay) { [weak self] (result: Result<MovieDataArr, ErrorRequests>)  in
             switch result {
             case .failure(let error):
                 print(error)
@@ -99,7 +99,7 @@ class HomeController: UIViewController {
     
     /// Gets New added movies Data from iMovies API
     func getNewAddedMoviesData() {
-        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.newAddedMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
+        dataFetcher?.getData(requestType: HomeNetworkRequest.newAddedMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
             switch result {
             case .failure(let error):
                 print(error)
@@ -111,7 +111,7 @@ class HomeController: UIViewController {
     
     /// Gets Popular  movies Data from iMovies API
     func getPopularMoviesData() {
-        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.popularMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
+        dataFetcher?.getData(requestType: HomeNetworkRequest.popularMovies) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
             switch result {
             case .failure(let error):
                 print(error)
@@ -123,7 +123,7 @@ class HomeController: UIViewController {
     
     /// Gets Popular  series Data from iMovies API
     func getPopularSeriesData() {
-        DataRequestManager.instance.getData(requestType: HomeNetworkRequest.popularSeries) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
+        dataFetcher?.getData(requestType: HomeNetworkRequest.popularSeries) { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
             switch result {
             case .failure(let error):
                 print(error)
@@ -195,7 +195,7 @@ class HomeController: UIViewController {
     
     /// Downloads image from url, Saves int to specified MovieData class data and Updates appropriate  [titleCell or collectionView cell]
     func downloadImageAndUpdateCell(for movieData: MovieData, from urlString: String, sectionName: SectionNames, itemInSection: Int) {
-        DataRequestManager.instance.getImage(urlString: urlString) { [weak self] resultData in
+        dataFetcher?.getImage(urlString: urlString) { [weak self] resultData in
             switch resultData {
             case .failure(let error):
                 print("Error: Cover image download for \(String(describing: movieData.originalName ?? "No Movie Name"))  - \(error)")
@@ -225,3 +225,10 @@ class HomeController: UIViewController {
 }
 
 
+extension HomeController: MovieSectionCellDelegate {
+    func movieSection(_ cell: SectionCell, didChooseWithIndexPath indexPath: IndexPath, withMoviesData data: MovieData) {
+        guard let storyBoard = self.storyboard,
+              let vc = PlayerController.prepare(withData: data, onStoryboard: storyBoard, dataFetcher: self.dataFetcher) else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}

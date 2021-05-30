@@ -25,26 +25,3 @@ extension HomeController: TitleCellDelegate {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-
-/// when movieListCollectionCell button is pushed
-extension HomeController {
-    
-    func addObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(movieSelectedInCell), name: NSNotification.Name(rawValue: movieCellPicked), object: nil)
-    }
-    
-    @objc func movieSelectedInCell(notification: NSNotification){
-        guard let id = notification.userInfo?["movieID"] as? Int else {
-            print("No Movie ID")
-            return
-        }
-        guard let vc = storyboard?.instantiateViewController(identifier: "PlayerController") as? PlayerController else {
-            print("Cant Instantiate PlayerController")
-            return
-        }
-        
-        vc.prepVC(videoID: id)
-        navigationController?.pushViewController(vc, animated: true)
-    }
-}

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 ///
 protocol NetworkRequestType {
     var endPoint: String { get }
@@ -15,21 +14,12 @@ protocol NetworkRequestType {
     var header: [String: String] { get }
 }
 
-#warning("protocol fetching data - not finished")
-protocol FetchDataProt {
-    func fetchDataProt()
+protocol DataFetcherType {
+    func getData<DataType: Codable>(requestType: NetworkRequestType, completion: @escaping (Result<DataType, ErrorRequests>) -> Void)
+    func getImage(urlString: String, completion: @escaping (Result<Data, ErrorRequests>) -> Void)
 }
 
-
-class DataRequestManager {
-    /// For singelton patters
-    public static let instance = DataRequestManager()
-    
-    /// private - not to be created from outside
-    private init(){
-    }
-    
-    
+class DataRequestManager: DataFetcherType {
     /// Generic function for getting data
     func getData<DataType: Codable>(requestType: NetworkRequestType, completion: @escaping (Result<DataType, ErrorRequests>) -> Void) {
         DispatchQueue.global().async {

@@ -7,13 +7,17 @@
 
 import UIKit
 
-class SectionCell: UITableViewCell {
+protocol MovieSectionCellDelegate: AnyObject {
+    func movieSection(_ cell: SectionCell, didChooseWithIndexPath indexPath: IndexPath, withMoviesData data: MovieData)
+}
 
+class SectionCell: UITableViewCell {
     
     // MARK: - Outlets
     @IBOutlet private weak var sectionNameLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    weak var delegate: MovieSectionCellDelegate?
     
     // MARK: - Properties
     var moviesData = [MovieData]() {
@@ -89,13 +93,6 @@ extension SectionCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let id = moviesData[indexPath.row].id else {
-            print("No Movie ID")
-            return
-        }
-
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: movieCellPicked), object: nil, userInfo: ["movieID": id])
+        self.delegate?.movieSection(self, didChooseWithIndexPath: indexPath, withMoviesData: moviesData[indexPath.row])
     }
-    
-    //ec
 }

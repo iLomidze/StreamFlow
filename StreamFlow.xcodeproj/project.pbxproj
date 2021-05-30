@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6D3903451AF631A29212F97 /* Pods_StreamFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1606DC890D75B7D3185AED0F /* Pods_StreamFlow.framework */; };
 		B7EF0993266075A700EBBF04 /* MovieDescrData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0992266075A700EBBF04 /* MovieDescrData.swift */; };
 		B7EF0995266141F100EBBF04 /* PlayerNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0994266141F100EBBF04 /* PlayerNetworkRequest.swift */; };
 		B7EF099726617A4B00EBBF04 /* PersonsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF099626617A4B00EBBF04 /* PersonsData.swift */; };
@@ -40,6 +41,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1606DC890D75B7D3185AED0F /* Pods_StreamFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreamFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4178A452B85151DC8241CB1D /* Pods-StreamFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreamFlow.release.xcconfig"; path = "Target Support Files/Pods-StreamFlow/Pods-StreamFlow.release.xcconfig"; sourceTree = "<group>"; };
+		5C47CDFAE34998AF83701EB3 /* Pods-StreamFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreamFlow.debug.xcconfig"; path = "Target Support Files/Pods-StreamFlow/Pods-StreamFlow.debug.xcconfig"; sourceTree = "<group>"; };
 		B7EF0992266075A700EBBF04 /* MovieDescrData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDescrData.swift; sourceTree = "<group>"; };
 		B7EF0994266141F100EBBF04 /* PlayerNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNetworkRequest.swift; sourceTree = "<group>"; };
 		B7EF099626617A4B00EBBF04 /* PersonsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsData.swift; sourceTree = "<group>"; };
@@ -79,12 +83,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6D3903451AF631A29212F97 /* Pods_StreamFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B0E632360A9E0B70F0A24CE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C47CDFAE34998AF83701EB3 /* Pods-StreamFlow.debug.xcconfig */,
+				4178A452B85151DC8241CB1D /* Pods-StreamFlow.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B7EF09BE26624B1100EBBF04 /* PlayerController */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +123,14 @@
 				E2262C7F2646036100BAB076 /* SearchController.swift */,
 			);
 			path = SearchController;
+			sourceTree = "<group>";
+		};
+		CECDD026973E5F0DE088D92B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1606DC890D75B7D3185AED0F /* Pods_StreamFlow.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E21EA1AD26481650003A1C5D /* HomeController */ = {
@@ -187,6 +210,8 @@
 			children = (
 				E2262C632645FB5A00BAB076 /* StreamFlow */,
 				E2262C622645FB5A00BAB076 /* Products */,
+				0B0E632360A9E0B70F0A24CE /* Pods */,
+				CECDD026973E5F0DE088D92B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,9 +275,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2262C752645FB5D00BAB076 /* Build configuration list for PBXNativeTarget "StreamFlow" */;
 			buildPhases = (
+				FFDAFE22975114EBA2BEB20B /* [CP] Check Pods Manifest.lock */,
 				E2262C5D2645FB5A00BAB076 /* Sources */,
 				E2262C5E2645FB5A00BAB076 /* Frameworks */,
 				E2262C5F2645FB5A00BAB076 /* Resources */,
+				6D56CCB65116D13D66B99687 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -310,6 +337,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6D56CCB65116D13D66B99687 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StreamFlow/Pods-StreamFlow-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StreamFlow/Pods-StreamFlow-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StreamFlow/Pods-StreamFlow-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFDAFE22975114EBA2BEB20B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StreamFlow-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E2262C5D2645FB5A00BAB076 /* Sources */ = {
@@ -483,6 +552,7 @@
 		};
 		E2262C762645FB5D00BAB076 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C47CDFAE34998AF83701EB3 /* Pods-StreamFlow.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -502,6 +572,7 @@
 		};
 		E2262C772645FB5D00BAB076 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4178A452B85151DC8241CB1D /* Pods-StreamFlow.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

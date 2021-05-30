@@ -10,8 +10,17 @@ import AVKit
 import AVFoundation
 
 class PlayerController: UIViewController {
-
     
+    static func prepare(withData data: MovieData, onStoryboard storyBoard: UIStoryboard, dataFetcher: DataFetcherType?) -> Self? {
+        guard let toRet = storyBoard.instantiateViewController(identifier: "TestPlayerController") as? Self else {
+            return nil
+        }
+        toRet.movieData = data
+        toRet.dataFetcher = dataFetcher
+        return toRet
+    }
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var movieCoverImage: UIImageView!
     
     @IBOutlet weak var imdbRatingLabel: UILabel!
@@ -23,6 +32,7 @@ class PlayerController: UIViewController {
     // MARK: - Properties
     
     private var videoID: Int?
+    private var dataFetcher: DataFetcherType?
     
     private var videoStringURL: String? //es wesit wasashlelia
     
@@ -33,6 +43,8 @@ class PlayerController: UIViewController {
     private var movideDescDataArr: MovieDescrData?
     private var personsData: PersonsData?
     private var relatedMoviesData: RelatedMoviesData?
+    
+    var movieData: MovieData?
 
     
     
@@ -41,17 +53,37 @@ class PlayerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let videoID = videoID else { return }
+        guard let videoID = movieData?.id else { return }
         let videoIDStr = String(videoID)
         
-//        fetchData(requestType: PlayerNetworkRequest.videoUrl(credentials: (id: videoIDStr, episode: "0")), saveTo: videoUrlDataArr) // TODO: must change episode numb.
-//        fetchData(requestType: PlayerNetworkRequest.movieDesc(id: videoIDStr), saveTo: movideDescDataArr)
+        self.scrollView.contentInset = .init(top: self.movieCoverImage.frame.height, left: 0, bottom: 0, right: 0)
+        
+        fetchData(requestType: PlayerNetworkRequest.videoUrl(credentials: (id: videoIDStr, episode: "0")), type: VideoUrlDataArr.self) { [weak self] videoArr in
+            self?.videoUrlDataArr = videoArr
+        } // TODO: must change episode numb.
+        
+        fetchData(requestType: PlayerNetworkRequest.movieDesc(id: videoIDStr), type: MovieDescrData.self) { [weak self] desc in
+            self?.movideDescDataArr = desc
+        }
         
 //        fetchData(requestType: PlayerNetworkRequest.persons(id: videoIDStr), saveTo: personsData)
         
-        fetchData(requestType: PlayerNetworkRequest.relatedMovies(id: videoIDStr), saveTo: relatedMoviesData)
+//        fetchData(requestType: PlayerNetworkRequest.relatedMovies(id: videoIDStr), saveTo: relatedMoviesData)
         
         initVisuals() // TODO: After fetching data asyncronically
+        setCoverImage()
+    }
+    
+    private func setCoverImage() {
+        guard let urlString = self.movieData?.covers?.data?.maxSize,
+              let url = URL(string: urlString) else { return }
+              
+        self.movieCoverImage.sd_setImage(with: url) { [weak self] image, err, _, _ in
+            self?.movieCoverImage.image = image
+            if err != nil {
+                print(err.debugDescription)
+            }
+        }
     }
     
     
@@ -69,28 +101,16 @@ class PlayerController: UIViewController {
     }
     
     ///
-    func fetchData<DataType: Codable>(requestType: PlayerNetworkRequest, saveTo: DataType) {
-        DataRequestManager.instance.getData(requestType: requestType) { [weak self] (videoData: Result<DataType, ErrorRequests>) in
+    func fetchData<DataType: Codable>(requestType: PlayerNetworkRequest, type: DataType.Type, completion: @escaping (DataType) -> Void) {
+        dataFetcher?.getData(requestType: requestType) { (videoData: Result<DataType, ErrorRequests>) in
             
             switch videoData {
             case .failure(let error):
                 print("Error on Video Data JSON fetching. Error - \(error)")
             case .success(let data):
-                switch requestType {
-                case .videoUrl(_):
-                    self?.videoUrlDataArr = (data as! VideoUrlDataArr)
-                case .movieDesc(_):
-                    self?.movideDescDataArr = (data as! MovieDescrData)
-                case .persons(_):
-                    self?.personsData = (data as! PersonsData)
-                case .relatedMovies(_):
-                    self?.relatedMoviesData = (data as! RelatedMoviesData)
-                }
-                
+                completion(data)
             }
         }
-        
-        
     }
     
     
