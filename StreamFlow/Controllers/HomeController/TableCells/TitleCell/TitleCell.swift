@@ -19,9 +19,9 @@ class TitleCell: UITableViewCell {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var coverBtn: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet private weak var coverBtn: UIButton!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var coverImageView: UIImageView!
     
     
     // MARK: - Properties
@@ -30,6 +30,8 @@ class TitleCell: UITableViewCell {
     
     var movieOfTheDayData: MovieData?
     var gradientIsSet = false
+    
+    private var gradientLayer: CAGradientLayer?
     
     
     // MARK: - Executive
@@ -40,6 +42,7 @@ class TitleCell: UITableViewCell {
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.color = .green
         addSubview(indicator)
+        addGradientView()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -48,11 +51,11 @@ class TitleCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        #warning("srul ekranze ar gadadis - chatvirtuli araa subview")
-        if !gradientIsSet {
-            addGradientView()
-        }
+//        if !gradientIsSet {
+//            addGradientView()
+//            gradientIsSet = true
+//        }
+        self.gradientLayer?.frame = coverImageView.frame
         
         indicator.centerXAnchor.constraint(equalTo: coverImageView.centerXAnchor).isActive = true
         indicator.centerYAnchor.constraint(equalTo: coverImageView.centerYAnchor).isActive = true
@@ -88,23 +91,24 @@ class TitleCell: UITableViewCell {
         indicator.stopAnimating()
     }
     
-    
     /// adds gradient to cover image
     func addGradientView() {
-        let gradientView = UIView(frame: coverImageView.frame)
-        
+//        let gradientView = UIView(frame: coverImageView.frame)
+
         let gradient = CAGradientLayer()
-        
-        gradient.frame = gradientView.frame
-        gradient.colors = [UIColor.clear.cgColor, UIColor.init(red: CGFloat(10/255), green: CGFloat(5/255), blue: CGFloat(10/255), alpha: 1).cgColor]
-        gradient.locations = [0.0, 0.83]
-        gradientView.layer.insertSublayer(gradient, at: 0)
 
-        coverImageView.addSubview(gradientView)
-
-        coverImageView.bringSubviewToFront(gradientView)
         
-        gradientIsSet = true
+        gradient.colors = [UIColor.clear.cgColor, UIColor(named: "backgroundColor")!.cgColor]
+
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.3);
+        gradient.endPoint = CGPoint(x: 0.0, y: 1.0);
+//                gradient.locations = [0.0, 0.83]
+        
+        self.gradientLayer = gradient
+
+        coverImageView.layer.insertSublayer(gradient, at: 0)
+//        coverImageView.bringSubviewToFront(gradientView)
     }
-    
+ 
+    //ec
 }

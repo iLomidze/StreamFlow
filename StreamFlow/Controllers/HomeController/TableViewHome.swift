@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellDelegate {
+extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         4
@@ -30,7 +30,8 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
         guard let sectionCell = tableView.dequeueReusableCell(withIdentifier: "SectionCell", for: indexPath) as? SectionCell else {
             fatalError("Cant Generate SectionCell")
         }
-        
+
+        sectionCell.delegate = self
 
         if indexPath.row == 1 {
             sectionCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
@@ -48,15 +49,33 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource, TitleCellD
     }
     
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+            changeTabBar(hidden: true, animated: true)
+        }
+        else {
+            changeTabBar(hidden: false, animated: true)
+        }
+    }
+    
+    
     // MARK: - Functions
     
-    // TitleCell Delegate function - used when movie of the day is clicked
-    func movieOfTheDayClicked() {
-        guard let vc = storyboard?.instantiateViewController(identifier: "PlayerController") as? PlayerController else {
-            print("Cant Instantiate PlayerController")
-            return
-        }
-        vc.videoID = movieOfTheDayData.id
-        navigationController?.pushViewController(vc, animated: true)
+    
+    /// Hides Tab Bar if scrolled down and shows if scrolled up
+    func changeTabBar(hidden:Bool, animated: Bool){
+        guard let tabBar = self.tabBarController?.tabBar else { return; }
+        if tabBar.isHidden == hidden{ return }
+        let frame = tabBar.frame
+        let offset = hidden ? frame.size.height : -frame.size.height
+        let duration:TimeInterval = (animated ? 0.5 : 0.0)
+        tabBar.isHidden = false
+
+        UIView.animate(withDuration: duration, animations: {
+            tabBar.frame = frame.offsetBy(dx: 0, dy: offset)
+        }, completion: { (true) in
+            tabBar.isHidden = hidden
+        })
     }
+    //ec
 }

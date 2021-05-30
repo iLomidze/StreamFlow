@@ -14,16 +14,12 @@ protocol NetworkRequestType {
     var header: [String: String] { get }
 }
 
-class DataRequestManager {
-    
-    /// For singelton patters
-    public static let instance = DataRequestManager()
-    
-    /// private - not to be created from outside
-    private init(){
-    }
-    
-    
+protocol DataFetcherType {
+    func getData<DataType: Codable>(requestType: NetworkRequestType, completion: @escaping (Result<DataType, ErrorRequests>) -> Void)
+    func getImage(urlString: String, completion: @escaping (Result<Data, ErrorRequests>) -> Void)
+}
+
+class DataRequestManager: DataFetcherType {
     /// Generic function for getting data
     func getData<DataType: Codable>(requestType: NetworkRequestType, completion: @escaping (Result<DataType, ErrorRequests>) -> Void) {
         DispatchQueue.global().async {

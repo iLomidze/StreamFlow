@@ -11,8 +11,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
+    //TODO: - პირველი კონტროლერი ჩატვირთე აქედან და არა ავტომატურად სთორიბორდიდან
+    // შექმენი აქ dataRequestManager, გადააწოდე პირველ ტაბ ბარ კონტროლერს, რომელიც შესაბამისად გადააწვდის მის სხვა კონტროლერებს, DataFetcherType ად აღიქვი ყველგან ამ კლასის გარდა
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // let tabbar = CreateTabBar()
+        // tabbar.dataFetcher = DataRequestManager()
         // Override point for customization after application launch.
         return true
     }

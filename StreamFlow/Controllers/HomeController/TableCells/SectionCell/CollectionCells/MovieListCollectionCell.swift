@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 
 class MovieListCollectionCell: UICollectionViewCell {
     
@@ -27,6 +27,8 @@ class MovieListCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        imageView.layer.cornerRadius = 5
+        
         if indicator == nil {
             indicator = UIActivityIndicatorView(style: .large)
 
@@ -45,6 +47,7 @@ class MovieListCollectionCell: UICollectionViewCell {
     
     
     // MARK: - Functions
+    
     
     ///
     func initCell(movieData: MovieData) {

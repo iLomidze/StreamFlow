@@ -15,8 +15,9 @@ enum HomeNetworkRequest: NetworkRequestType {
     case newAddedMovies
     case popularMovies
     case popularSeries
-    case custom(url: String)
     
+    case custom(url: String)
+
 
     var endPoint: String {
         switch self {
@@ -28,6 +29,8 @@ enum HomeNetworkRequest: NetworkRequestType {
             return "https://api.imovies.cc/api/v1/movies/top"
         case .popularSeries:
             return "https://api.imovies.cc/api/v1/movies/top"
+
+            
         case .custom(let url):
             return url
         }
