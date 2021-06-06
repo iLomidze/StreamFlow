@@ -66,6 +66,8 @@ class HomeController: UIViewController {
         
         title = "Home"
         
+        dataFetcher = DataRequestManager()
+        
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "TitleCell")
         tableView.register(UINib(nibName: "SectionCell", bundle: nil), forCellReuseIdentifier: "SectionCell")
         
@@ -132,6 +134,7 @@ class HomeController: UIViewController {
             }
         }
     }
+    
     
     // MARK: Fetching Images
     
@@ -225,10 +228,4 @@ class HomeController: UIViewController {
 }
 
 
-extension HomeController: MovieSectionCellDelegate {
-    func movieSection(_ cell: SectionCell, didChooseWithIndexPath indexPath: IndexPath, withMoviesData data: MovieData) {
-        guard let storyBoard = self.storyboard,
-              let vc = PlayerController.prepare(withData: data, onStoryboard: storyBoard, dataFetcher: self.dataFetcher) else { return }
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-}
+

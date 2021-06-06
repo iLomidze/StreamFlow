@@ -17,6 +17,8 @@ struct PersonData: Codable {
     var primaryName: String
     var poster: String
     var personRole: PersonalRoleData
+    
+    var imageData: Data?
 }
 
 struct PersonalRoleData: Codable {

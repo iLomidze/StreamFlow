@@ -29,10 +29,12 @@ struct MovieDescrDataInfo: Codable {
     var countries: Countries
     var studios: Studios?
     var seasons: Seasons?
+    
+    var imageData: Data?
 }
 
 
-// MARK: - Rating
+// MARK: Rating
 
 struct Rating: Codable {
     var imovies: ImoviesRating
@@ -53,7 +55,7 @@ struct RottenRating: Codable {
 }
 
 
-// MARK: - Plot
+// MARK: Plot
 
 struct Plot: Codable {
     var data: PlotData
@@ -64,7 +66,7 @@ struct PlotData: Codable {
 }
 
 
-// MARK: - Genres
+// MARK: Genres
 
 struct Genres: Codable {
     var data: [Genre]
@@ -76,7 +78,7 @@ struct Genre: Codable {
 }
 
 
-// MARK: - Trailers
+// MARK: Trailers
 
 struct Trailers: Codable {
     var data: [TrailerData]
@@ -88,7 +90,7 @@ struct TrailerData: Codable {
 }
 
 
-// MARK: - Countries
+// MARK: Countries
 
 struct Countries: Codable {
     var data: [CountryData]
@@ -100,7 +102,7 @@ struct CountryData: Codable {
 }
 
 
-// MARK: - Studios
+// MARK: Studios
 
 struct Studios: Codable {
     var data: [StudioData]
@@ -111,7 +113,7 @@ struct StudioData: Codable {
 }
 
 
-// MARK: - Seasons
+// MARK: Seasons
 
 struct Seasons: Codable {
     var data: [SeasonsData]
@@ -120,4 +122,50 @@ struct Seasons: Codable {
 struct SeasonsData: Codable {
     var name: String
     var episodesCount: Int
+}
+
+
+// MARK: - Geters
+
+extension MovieDescrDataInfo {
+    var anyName: String? {
+        if primaryName != "" {
+            return primaryName
+        } else if secondaryName != "" {
+            return secondaryName
+        } else {
+            return originalName
+        }
+    }
+}
+
+extension CountryData {
+    var anyName: String? {
+        if primaryName != "" {
+            return primaryName
+        } else {
+            return secondaryName
+        }
+    }
+}
+
+extension Trailers {
+    var anyTrailer: String {
+        for trailerData in data {
+            if trailerData.fileUrl != "" {
+                return trailerData.fileUrl
+            }
+        }
+        return ""
+    }
+}
+
+extension Genre {
+    var anyGenre: String {
+        if primaryName == "" {
+            return secondaryName
+        } else {
+            return primaryName
+        }
+    }
 }

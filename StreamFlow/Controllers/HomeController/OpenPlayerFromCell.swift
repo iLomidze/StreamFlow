@@ -12,16 +12,18 @@ import UIKit
 /// When title cell button is pushed
 extension HomeController: TitleCellDelegate {
     /// TitleCell Delegate function - used when movie of the day is clicked
-    func movieOfTheDayClicked() {
-        guard let vc = storyboard?.instantiateViewController(identifier: "TestPlayerController") as? PlayerController else {
-            print("Cant Instantiate PlayerController")
-            return
-        }
-        guard let id = movieOfTheDayData.id else {
-            print("No Movie ID")
-            return
-        }
-        vc.prepVC(videoID: id)
-        navigationController?.pushViewController(vc, animated: true)
+    func movieOfTheDayClicked(data: MovieData) {
+        guard let storyBoard = self.storyboard,
+              let vc = PlayerController.prepare(withData: data, onStoryboard: storyBoard, dataFetcher: self.dataFetcher) else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+/// When Section cell button is pushed
+extension HomeController: MovieSectionCellDelegate {
+    func movieSection(_ cell: SectionCell, didChooseWithIndexPath indexPath: IndexPath, withMoviesData data: MovieData) {
+        guard let storyBoard = self.storyboard,
+              let vc = PlayerController.prepare(withData: data, onStoryboard: storyBoard, dataFetcher: self.dataFetcher) else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -57,7 +57,19 @@ class MovieListCollectionCell: UICollectionViewCell {
         
         updateImage()
     }
-
+    
+    ///
+    func initCellForRelatedMovies(relatedMovisData: MovieDescrDataInfo) {
+        imageView.image = nil
+        titleLabel.text = relatedMovisData.anyName
+        guard let imageData = relatedMovisData.imageData else {
+            imageView.image = UIImage(named: "noMovieCover")
+            return
+        }
+        imageView.image = UIImage(data: imageData)
+        indicator.stopAnimating()
+    }
+    
     /// Updates|Sets image in ImageView
     func updateImage() {
         guard let imageData = movieData.imageData else { return }

@@ -18,19 +18,19 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="RDa-Wa-6bR">
-                        <rect key="frame" x="5" y="164" width="120" height="36"/>
+                        <rect key="frame" x="5" y="156" width="120" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="RDa-Wa-6bR" secondAttribute="height" multiplier="10:3" id="gDP-lc-OOt"/>
-                            <constraint firstAttribute="height" constant="36" id="yae-c9-7bJ"/>
+                            <constraint firstAttribute="width" secondItem="RDa-Wa-6bR" secondAttribute="height" multiplier="30:11" id="uwq-HS-ENS"/>
+                            <constraint firstAttribute="height" constant="44" id="yae-c9-7bJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" name="fontColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qy9-Ok-aZs">
-                        <rect key="frame" x="0.0" y="0.0" width="130" height="159"/>
+                        <rect key="frame" x="0.0" y="0.0" width="130" height="151"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="qy9-Ok-aZs" secondAttribute="height" multiplier="130:159" id="QAa-TY-9t9"/>
+                            <constraint firstAttribute="width" secondItem="qy9-Ok-aZs" secondAttribute="height" multiplier="130:151" id="WPk-tV-h4K"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -59,7 +59,7 @@
             <color red="0.039215686274509803" green="0.019607843137254902" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="movieListCellColor">
-            <color red="1" green="1" blue="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="1" green="1" blue="1" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

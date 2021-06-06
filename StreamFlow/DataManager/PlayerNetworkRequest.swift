@@ -10,7 +10,7 @@ import Foundation
 
 enum PlayerNetworkRequest: NetworkRequestType {
     
-    case videoUrl(credentials: (id: String, episode: String))
+    case videoUrl(credentials: (id: String, season: String))
     case movieDesc(id: String)
     case persons(id: String)
     case relatedMovies(id: String)
@@ -19,7 +19,7 @@ enum PlayerNetworkRequest: NetworkRequestType {
         switch self {
         case .videoUrl(let credentials):
             let id = credentials.id as String
-            let episode = credentials.episode as String
+            let episode = credentials.season as String
             return ("https://api.imovies.cc/api/v1/movies/" + id + "/season-files/" + episode)
         case .movieDesc(let id):
             return ("https://api.imovies.cc/api/v1/movies/" + id)

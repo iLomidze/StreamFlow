@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol TitleCellDelegate: AnyObject {
-    func movieOfTheDayClicked()
+    func movieOfTheDayClicked(data: MovieData)
 }
 
 class TitleCell: UITableViewCell {
@@ -27,6 +27,7 @@ class TitleCell: UITableViewCell {
     // MARK: - Properties
     
     let indicator = UIActivityIndicatorView(style: .large)
+    var gradient = CAGradientLayer()
     
     var movieOfTheDayData: MovieData?
     var gradientIsSet = false
@@ -51,11 +52,10 @@ class TitleCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        if !gradientIsSet {
-//            addGradientView()
-//            gradientIsSet = true
-//        }
+
         self.gradientLayer?.frame = coverImageView.frame
+        
+        gradient.colors = [UIColor.clear.cgColor, UIColor(named: "backgroundColor")!.cgColor]
         
         indicator.centerXAnchor.constraint(equalTo: coverImageView.centerXAnchor).isActive = true
         indicator.centerYAnchor.constraint(equalTo: coverImageView.centerYAnchor).isActive = true
@@ -69,7 +69,7 @@ class TitleCell: UITableViewCell {
     // MARK: - OutletActions
     
     @IBAction func coverBtnAction(_ sender: Any) {
-        delegate?.movieOfTheDayClicked()
+        delegate?.movieOfTheDayClicked(data: movieOfTheDayData ?? MovieData())
     }
     
     
@@ -93,12 +93,8 @@ class TitleCell: UITableViewCell {
     
     /// adds gradient to cover image
     func addGradientView() {
-//        let gradientView = UIView(frame: coverImageView.frame)
-
-        let gradient = CAGradientLayer()
-
         
-        gradient.colors = [UIColor.clear.cgColor, UIColor(named: "backgroundColor")!.cgColor]
+//        gradient.colors = [UIColor.clear.cgColor, UIColor(named: "backgroundColor")!.cgColor]
 
         gradient.startPoint = CGPoint(x: 0.0, y: 0.3);
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0);
@@ -109,6 +105,6 @@ class TitleCell: UITableViewCell {
         coverImageView.layer.insertSublayer(gradient, at: 0)
 //        coverImageView.bringSubviewToFront(gradientView)
     }
- 
+    
     //ec
 }
