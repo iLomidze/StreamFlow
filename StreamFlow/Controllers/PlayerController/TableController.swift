@@ -22,7 +22,7 @@ extension PlayerController: UITableViewDelegate, UITableViewDataSource, SeasonCh
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodesCell", for: indexPath) as? EpisodesCell else { fatalError() }
     
         cell.episodeLabel.text = "ეპიზოდი \(indexPath.row + 1)"
-//        cell.titleLabel.text = movieDescDataArr?.data.
+        cell.titleLabel.text = videoUrlDataArr?.data[indexPath.row].title ?? "N/A"
         
         return cell
     }

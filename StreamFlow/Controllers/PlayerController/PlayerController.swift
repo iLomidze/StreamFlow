@@ -47,7 +47,11 @@ class PlayerController: UIViewController {
     // MARK: - DelegateProperties and related properties
     
     weak var seasonDelegate: SeasonChangeDelegate?
-    var seasonPicked = 0
+    var seasonPicked = 0 {
+        didSet {
+            changeSeasonData()
+        }
+    }
     
     // MARK: - Properties
     
@@ -116,9 +120,9 @@ class PlayerController: UIViewController {
         actorsCollection.register(UINib(nibName: "ActorsCell", bundle: nil), forCellWithReuseIdentifier: "ActorsCell")
         relatedMoviesCollection.register(UINib(nibName: "MovieListCollectionCell", bundle: nil), forCellWithReuseIdentifier: "MovieListCollectionCell")
         
-        fetchData(requestType: PlayerNetworkRequest.videoUrl(credentials: (id: videoIDStr, season: "0")), type: VideoUrlDataArr.self) { [weak self] videoArr in
+        fetchData(requestType: PlayerNetworkRequest.videoUrl(credentials: (id: videoIDStr, season: "\(seasonPicked)")), type: VideoUrlDataArr.self) { [weak self] videoArr in
             self?.videoUrlDataArr = videoArr
-        } // TODO: must change episode numb.
+        }
         fetchData(requestType: PlayerNetworkRequest.movieDesc(id: videoIDStr), type: MovieDescrData.self) { [weak self] descData in
             self?.movieDescDataArr = descData
         }
@@ -144,7 +148,10 @@ class PlayerController: UIViewController {
         }
         
         guard let urlString = self.movieData?.covers?.data?.maxSize,
-              let url = URL(string: urlString) else { return }
+              let url = URL(string: urlString) else {
+            movieCoverImage.image = UIImage(named: "noMovieCover")
+            return
+        }
               
         // TODO: Tedo: movieCoverImage-s ratom aq metodad sd_Set image
         self.movieCoverImage.sd_setImage(with: url) { [weak self] image, err, _, _ in
@@ -297,6 +304,14 @@ class PlayerController: UIViewController {
         isRelatedFetchingFinished = true
     }
     
+    func changeSeasonData() {
+        fetchData(requestType: PlayerNetworkRequest.videoUrl(credentials: (id: String(describing: videoID), season: "\(seasonPicked)")), type: VideoUrlDataArr.self) { [weak self] videoArr in
+            self?.videoUrlDataArr = videoArr
+            DispatchQueue.main.async {
+                self?.episodesTableView.reloadData()
+            }
+        }
+    }
     
     // MARK: VideoPlayer Functions
     
