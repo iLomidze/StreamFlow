@@ -18,6 +18,8 @@ class HomeController: UIViewController {
     
     // MARK: General Properties
     
+    var isTabBarMoveFinished = true
+    
     var movieOfTheDayDataIsDownloaded = false
     var newAddedMoviesDataIsDownloaded = false
     var popularMoviesDataIsDownloaded = false

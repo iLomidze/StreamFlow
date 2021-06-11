@@ -24,7 +24,7 @@ class MainTabBarController: UITabBarController, UIScrollViewDelegate {
     }
 
     
-    #warning("tab bar hide - aqedan rom gavaketo...")
+    //TODO: tab bar hide - aqedan rom gavaketo...
 //    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 //        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
 //            changeTabBar(hidden: true, animated: true)

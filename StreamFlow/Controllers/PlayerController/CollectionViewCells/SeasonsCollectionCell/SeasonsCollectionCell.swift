@@ -9,11 +9,12 @@ import UIKit
 
 class SeasonsCollectionCell: UICollectionViewCell {
 
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var seasonLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        button.layer.cornerRadius = 10
+        seasonLabel.layer.cornerRadius = 10
     }
 
     

@@ -43,6 +43,8 @@ class PlayerController: UIViewController {
     internal var seasonsCollectionView: UICollectionView!
     internal var episodesTableView: UITableView!
     
+    internal var closeEpBtn: UIButton!
+    
     
     // MARK: - DelegateProperties and related properties
     
@@ -50,6 +52,7 @@ class PlayerController: UIViewController {
     var seasonPicked = 0 {
         didSet {
             changeSeasonData()
+//            isVideoUrlFetchingFinished = false
         }
     }
     
@@ -63,6 +66,15 @@ class PlayerController: UIViewController {
     private var avPlayerView = AVPlayer()
     
     internal var videoUrlDataArr: VideoUrlDataArr?
+//    {
+//        didSet {
+//            if !isVideoUrlFetchingFinished {
+//                return
+//            }
+//            isVideoUrlFetchingFinished = false
+//        }
+//    }
+    
     internal var movieDescDataArr: MovieDescrData? {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -80,6 +92,14 @@ class PlayerController: UIViewController {
     
     var trailerUrlString = ""
     
+//    var isVideoUrlFetchingFinished = false {
+//        didSet {
+//            if isVideoUrlFetchingFinished == true {
+//                return
+//            }
+//            updateEpisodesPoster()
+//        }
+//    }
     var isPersonsFetchingFinished = false {
         didSet {
            updateActorsCollection()
@@ -110,10 +130,18 @@ class PlayerController: UIViewController {
         
         playBtn.layer.cornerRadius = 7
         
-        guard let videoID = movieData?.id else { return }
-        let videoIDStr = String(videoID)
+//        guard let videoID = movieData?.id else { return }
+        if movieData?.id != nil{
+            videoID = movieData?.id
+        } else{
+            assert(false, "No videoID")
+            return
+        }
+        let videoIDStr = String(videoID!)
         
         setCoverImage()
+        
+        seasonDelegate = self
         
         scrollView.contentInset = UIEdgeInsets(top: movieCoverImage.frame.height, left: 0, bottom: 0, right: 0)
         
@@ -122,6 +150,8 @@ class PlayerController: UIViewController {
         
         fetchData(requestType: PlayerNetworkRequest.videoUrl(credentials: (id: videoIDStr, season: "\(seasonPicked)")), type: VideoUrlDataArr.self) { [weak self] videoArr in
             self?.videoUrlDataArr = videoArr
+//            if self?.videoUrlDataArr.
+//            self?.updateEpisodesPoster()
         }
         fetchData(requestType: PlayerNetworkRequest.movieDesc(id: videoIDStr), type: MovieDescrData.self) { [weak self] descData in
             self?.movieDescDataArr = descData
@@ -277,6 +307,39 @@ class PlayerController: UIViewController {
         downloadRelatedImages()
     }
     
+    ///
+    func updateEpisodesPoster() {
+        guard let videoUrldataArrData = videoUrlDataArr?.data else { return }
+        for i in 0..<videoUrldataArrData.count {
+            let ep = videoUrldataArrData[i]
+            
+            if ep.poster == "" {
+//                assert(false, "No poster data")
+                continue
+            }
+            fetchImage(imageUrlStr: ep.poster) { [weak self] imgData in
+                self?.videoUrlDataArr?.data[i].imgData = imgData
+                
+                if self?.episodesTableView == nil {
+                    return
+                }
+                DispatchQueue.main.async {
+                    let indexPath = IndexPath(item: i, section: 0)
+                    let visibleIndexPaths = self?.episodesTableView.indexPathsForVisibleRows
+                    
+                    guard let visibleCellIndexes = visibleIndexPaths else {
+                        print("No visible cells in episodesTableView")
+                        return
+                    }
+                    if visibleCellIndexes.contains(indexPath) {
+                        self?.episodesTableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            }
+        }
+    }
+    
+    /// Downloads images for relatedMoviesData
     func downloadRelatedImages() {
         for i in 0..<(relatedMoviesData?.data.count ?? 1) {
             let movieID = "\(relatedMoviesData!.data[i].id)"
@@ -304,12 +367,14 @@ class PlayerController: UIViewController {
         isRelatedFetchingFinished = true
     }
     
+    ///
     func changeSeasonData() {
-        fetchData(requestType: PlayerNetworkRequest.videoUrl(credentials: (id: String(describing: videoID), season: "\(seasonPicked)")), type: VideoUrlDataArr.self) { [weak self] videoArr in
+        fetchData(requestType: PlayerNetworkRequest.videoUrl(credentials: (id: String(videoID!), season: String(seasonPicked))), type: VideoUrlDataArr.self) { [weak self] videoArr in
             self?.videoUrlDataArr = videoArr
             DispatchQueue.main.async {
                 self?.episodesTableView.reloadData()
             }
+            self?.updateEpisodesPoster()
         }
     }
     
@@ -343,18 +408,22 @@ class PlayerController: UIViewController {
         }
     }
     
+    
+    // MARK: New View For TVSeries
+    
     ///
-    func chooseEpisode() {
+    func openEpisodePickView() {
         
         let colViewLayout = UICollectionViewFlowLayout()
         colViewLayout.scrollDirection = .horizontal
         
-        let scrollViewHeight = CGFloat(50)
+        let collectionViewHight = CGFloat(50)
         
-        seasonsCollectionView = UICollectionView(frame: CGRect(x: 0, y: view.safeAreaInsets.top, width: view.frame.width, height: scrollViewHeight), collectionViewLayout: colViewLayout)
-        episodesTableView = UITableView(frame: CGRect(x: 0, y: scrollViewHeight + view.safeAreaInsets.top, width: view.frame.width, height: view.frame.height - scrollViewHeight - view.safeAreaInsets.top))
+        seasonsCollectionView = UICollectionView(frame: CGRect(x: 0, y: view.safeAreaInsets.top, width: view.frame.width, height: collectionViewHight), collectionViewLayout: colViewLayout)
+        episodesTableView = UITableView(frame: CGRect(x: 0, y: collectionViewHight + view.safeAreaInsets.top, width: view.frame.width, height: view.frame.height - collectionViewHight - view.safeAreaInsets.top))
         
         seasonsCollectionView.backgroundColor = UIColor(named: "backgroundColor")
+        episodesTableView.backgroundColor =  UIColor(named: "backgroundColor")
         
         view.addSubview(seasonsCollectionView)
         view.addSubview(episodesTableView)
@@ -367,6 +436,26 @@ class PlayerController: UIViewController {
         seasonsCollectionView.register(UINib(nibName: "SeasonsCollectionCell", bundle: nil), forCellWithReuseIdentifier: "SeasonsCollectionCell")
         episodesTableView.register(UINib(nibName: "EpisodesCell", bundle: nil), forCellReuseIdentifier: "EpisodesCell")
         
+//        seasonsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+//        episodesTableView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        seasonsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        seasonsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        seasonsCollectionView.bottomAnchor.constraint(equalTo: episodesTableView.topAnchor).isActive = true
+////        seasonsCollectionView.topAnchor.constraint(equalTo: view.safeAreaInsets.bottom).isActive = true
+//        seasonsCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+//
+//        episodesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        episodesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        episodesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        episodesTableView.topAnchor.constraint(equalTo: seasonsCollectionView.bottomAnchor).isActive = true
+        
+        closeEpBtn = UIButton(frame: CGRect(x: view.frame.width - 50, y: view.safeAreaInsets.top + 50, width: 30, height: 30))
+        closeEpBtn.setBackgroundImage(UIImage(named: "closeIcon"), for: .normal)
+        closeEpBtn.imageView?.sizeToFit()
+        closeEpBtn.addTarget(self, action: #selector(closeEpisodePicker), for: .touchUpInside)
+        view.addSubview(closeEpBtn)
+        
         
 //        episodesTableView.translatesAutoresizingMaskIntoConstraints = false
 //        episodesTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -377,8 +466,8 @@ class PlayerController: UIViewController {
     }
     
     ///
-    func playVideo() {
-        guard let videoUrlFiles = videoUrlDataArr?.data.first?.files else {
+    func playVideo(episode: Int = 0) {
+        guard let videoUrlFiles = videoUrlDataArr?.data[episode].files else {
             let ac = UIAlertController(title: "ლინკი დაზიანებულია", message: nil, preferredStyle: .alert)
             present(ac, animated: true, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -403,6 +492,13 @@ class PlayerController: UIViewController {
     
     // MARK: - Outlet Actions
     
+    ///
+    @objc func closeEpisodePicker() {
+        seasonsCollectionView.removeFromSuperview()
+        episodesTableView.removeFromSuperview()
+        closeEpBtn.removeFromSuperview()
+    }
+    
     /// When trailer button is pushed
     @IBAction func trailerBtnAction(_ sender: Any) {
         if trailerUrlString == "" {
@@ -420,10 +516,11 @@ class PlayerController: UIViewController {
     @IBAction func playBtnAction(_ sender: Any) {
         if !(movieData?.isTvShow ?? false) {
             playVideo()
+        } else {
+            seasonPicked = 1
+//            updateEpisodesPoster()
+            openEpisodePickView()
         }
-        
-        chooseEpisode()
     }
-    
     //ec
 }

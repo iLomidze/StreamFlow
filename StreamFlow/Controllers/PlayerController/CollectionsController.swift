@@ -69,7 +69,8 @@ extension PlayerController: UICollectionViewDelegate, UICollectionViewDataSource
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SeasonsCollectionCell", for: indexPath) as? SeasonsCollectionCell else {
                 fatalError("PlayerController - CollectionView: Cant find SeasonsCollectionCell")
             }
-
+            cell.seasonLabel.text = "სეზონი \(indexPath.row + 1)"
+            
             return cell
         }
         

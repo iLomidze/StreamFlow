@@ -48,8 +48,8 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         return sectionCell
     }
     
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !isTabBarMoveFinished { return }
         if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
             changeTabBar(hidden: true, animated: true)
         }
@@ -66,6 +66,9 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     func changeTabBar(hidden:Bool, animated: Bool){
         guard let tabBar = self.tabBarController?.tabBar else { return; }
         if tabBar.isHidden == hidden{ return }
+        
+        isTabBarMoveFinished = false
+        
         let frame = tabBar.frame
         let offset = hidden ? frame.size.height : -frame.size.height
         let duration:TimeInterval = (animated ? 0.5 : 0.0)
@@ -73,8 +76,9 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
 
         UIView.animate(withDuration: duration, animations: {
             tabBar.frame = frame.offsetBy(dx: 0, dy: offset)
-        }, completion: { (true) in
+        }, completion: { [weak self] (true) in
             tabBar.isHidden = hidden
+            self?.isTabBarMoveFinished = true
         })
     }
     //ec

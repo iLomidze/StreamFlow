@@ -22,6 +22,7 @@ struct VideoUrlData: Codable {
     var files: [FileAllLang]
 //    var covers: CoversData // See MovieData dataModel for CoversData structure definition
     var poster: String
+    var imgData: Data?
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
