@@ -20,7 +20,7 @@ struct VideoUrlData: Codable {
     var rating: Double
     var file_will_be_added_soon: Bool
     var files: [FileAllLang]
-//    var covers: CoversData // See MovieData dataModel for CoversData structure definition
+    var covers: CoversData // See MovieData dataModel for CoversData structure definition
     var poster: String
     var imgData: Data?
     
@@ -34,8 +34,8 @@ struct VideoUrlData: Codable {
         rating = try values.decode(Double.self, forKey: .rating)
         file_will_be_added_soon = try values.decode(Bool.self, forKey: .file_will_be_added_soon)
         files = try values.decode([FileAllLang].self, forKey: .files)
-//        covers = try values.decode(CoversData.self, forKey: .covers)
         poster = try values.decode(String.self, forKey: .poster)
+        covers = try values.decode(CoversData.self, forKey: .covers)
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -46,8 +46,8 @@ struct VideoUrlData: Codable {
         case rating
         case file_will_be_added_soon
         case files
-//        case covers
         case poster
+        case covers
     }
 }
 

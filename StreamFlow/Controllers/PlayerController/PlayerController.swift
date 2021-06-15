@@ -129,6 +129,7 @@ class PlayerController: UIViewController {
         super.viewDidLoad()
         
         playBtn.layer.cornerRadius = 7
+
         
 //        guard let videoID = movieData?.id else { return }
         if movieData?.id != nil{
@@ -435,34 +436,13 @@ class PlayerController: UIViewController {
         
         seasonsCollectionView.register(UINib(nibName: "SeasonsCollectionCell", bundle: nil), forCellWithReuseIdentifier: "SeasonsCollectionCell")
         episodesTableView.register(UINib(nibName: "EpisodesCell", bundle: nil), forCellReuseIdentifier: "EpisodesCell")
+            
         
-//        seasonsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-//        episodesTableView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        seasonsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        seasonsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        seasonsCollectionView.bottomAnchor.constraint(equalTo: episodesTableView.topAnchor).isActive = true
-////        seasonsCollectionView.topAnchor.constraint(equalTo: view.safeAreaInsets.bottom).isActive = true
-//        seasonsCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
-//
-//        episodesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        episodesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        episodesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        episodesTableView.topAnchor.constraint(equalTo: seasonsCollectionView.bottomAnchor).isActive = true
-        
-        closeEpBtn = UIButton(frame: CGRect(x: view.frame.width - 50, y: view.safeAreaInsets.top + 50, width: 30, height: 30))
+        closeEpBtn = UIButton(frame: CGRect(x: view.frame.width - 50, y: view.safeAreaInsets.top + 55, width: 30, height: 30))
         closeEpBtn.setBackgroundImage(UIImage(named: "closeIcon"), for: .normal)
         closeEpBtn.imageView?.sizeToFit()
         closeEpBtn.addTarget(self, action: #selector(closeEpisodePicker), for: .touchUpInside)
         view.addSubview(closeEpBtn)
-        
-        
-//        episodesTableView.translatesAutoresizingMaskIntoConstraints = false
-//        episodesTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        episodesTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        episodesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        episodesTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        present(episodesTableView, animated: true, completion: nil)
     }
     
     ///

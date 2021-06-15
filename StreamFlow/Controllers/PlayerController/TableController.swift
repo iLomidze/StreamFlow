@@ -23,10 +23,9 @@ extension PlayerController: UITableViewDelegate, UITableViewDataSource, SeasonCh
         cell.episodeLabel.text = "ეპიზოდი \(indexPath.row + 1)"
         cell.titleLabel.text = videoUrlDataArr?.data[indexPath.row].title ?? "N/A"
 
-        guard let imageData = videoUrlDataArr?.data[indexPath.row].imgData else { return cell }
-//        cell.imageData = imageData
-        cell.imageView?.image = UIImage(data: imageData)
-        
+        if let imageData = videoUrlDataArr?.data[indexPath.row].imgData {
+            cell.initCell(imageData: imageData)
+        }
         return cell
     }
     
@@ -34,4 +33,5 @@ extension PlayerController: UITableViewDelegate, UITableViewDataSource, SeasonCh
         playVideo(episode: indexPath.row)
     }
     
+// End Class
 }

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "movieIcon.png",
+      "filename" : "catalogIcon@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "catalogIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "catalogIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

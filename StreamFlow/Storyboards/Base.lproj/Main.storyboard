@@ -52,14 +52,34 @@
                     <view key="view" contentMode="scaleToFill" id="0lW-6W-7Ct">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Kk-gd-XaQ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" name="backgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="P0T-Tk-iab" id="wf4-K0-h4X"/>
+                                    <outlet property="delegate" destination="P0T-Tk-iab" id="XCH-bo-Vvr"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Pop-fm-UBR"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7Kk-gd-XaQ" firstAttribute="top" secondItem="Pop-fm-UBR" secondAttribute="top" id="4n7-28-Haw"/>
+                            <constraint firstItem="Pop-fm-UBR" firstAttribute="bottom" secondItem="7Kk-gd-XaQ" secondAttribute="bottom" id="8sw-FC-y5N"/>
+                            <constraint firstItem="7Kk-gd-XaQ" firstAttribute="leading" secondItem="Pop-fm-UBR" secondAttribute="leading" id="Mle-7A-s4t"/>
+                            <constraint firstItem="Pop-fm-UBR" firstAttribute="trailing" secondItem="7Kk-gd-XaQ" secondAttribute="trailing" id="dbs-Wd-84H"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hah-r7-U2K"/>
+                    <connections>
+                        <outlet property="tableView" destination="7Kk-gd-XaQ" id="dSB-56-wJh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFQ-br-b3a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2022" y="76"/>
+            <point key="canvasLocation" x="2021.7391304347827" y="75.669642857142847"/>
         </scene>
         <!--SearchController-->
         <scene sceneID="YBs-nR-kSD">
@@ -68,10 +88,33 @@
                     <view key="view" contentMode="scaleToFill" id="GrT-Hb-xg6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="kd8-L1-HZr">
+                                <rect key="frame" x="5" y="88" width="404" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HkA-Wu-dLD">
+                                <rect key="frame" x="5" y="139" width="404" height="674"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="usO-Rx-IcO"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="usO-Rx-IcO" firstAttribute="trailing" secondItem="HkA-Wu-dLD" secondAttribute="trailing" constant="5" id="507-It-Xnw"/>
+                            <constraint firstItem="HkA-Wu-dLD" firstAttribute="leading" secondItem="usO-Rx-IcO" secondAttribute="leading" constant="5" id="7Y2-AA-DeV"/>
+                            <constraint firstItem="HkA-Wu-dLD" firstAttribute="top" secondItem="kd8-L1-HZr" secondAttribute="bottom" id="JIY-UV-bbr"/>
+                            <constraint firstItem="kd8-L1-HZr" firstAttribute="leading" secondItem="usO-Rx-IcO" secondAttribute="leading" constant="5" id="LD8-1b-2vg"/>
+                            <constraint firstAttribute="trailing" secondItem="kd8-L1-HZr" secondAttribute="trailing" constant="5" id="cIq-Bf-pFY"/>
+                            <constraint firstItem="usO-Rx-IcO" firstAttribute="bottom" secondItem="HkA-Wu-dLD" secondAttribute="bottom" id="mSW-uZ-gpS"/>
+                            <constraint firstItem="kd8-L1-HZr" firstAttribute="top" secondItem="usO-Rx-IcO" secondAttribute="top" id="xOv-8p-Q4N"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uve-P8-8Ji"/>
+                    <connections>
+                        <outlet property="searchBar" destination="kd8-L1-HZr" id="cmV-XN-I3a"/>
+                        <outlet property="tableView" destination="HkA-Wu-dLD" id="cpO-1U-uTg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8uA-Hi-2fr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -120,15 +163,17 @@
             </objects>
             <point key="canvasLocation" x="-159" y="76"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Catalog-->
         <scene sceneID="Yof-qS-Hcx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l9N-jH-wEh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="IYd-sA-3lb"/>
+                    <tabBarItem key="tabBarItem" title="Catalog" image="catalogIcon" selectedImage="catalogIcon" id="IYd-sA-3lb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aie-7I-4Js">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
+                        <color key="barTintColor" name="backgroundColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -148,6 +193,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x9c-RH-X0G">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="backgroundColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -578,6 +624,7 @@
     </scenes>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
+        <image name="catalogIcon" width="25" height="25"/>
         <image name="homeIcon" width="25" height="25"/>
         <image name="imdbIcon" width="512" height="512"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>

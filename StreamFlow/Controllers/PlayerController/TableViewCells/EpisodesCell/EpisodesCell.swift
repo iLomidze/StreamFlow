@@ -22,12 +22,10 @@ class EpisodesCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+//        frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         
         // TODO: loading indicator daamate
-        if imageData != nil {
-            coverImageView.image = UIImage(data: imageData!)
-        }
+        coverImageView.image = UIImage(named: "noMovieCover")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -36,7 +34,10 @@ class EpisodesCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-//    func initCell(movieData: MovieDescrData) {
-//
-//    }
+    func initCell(imageData: Data) {
+        self.imageData = imageData
+        coverImageView.image = UIImage(data: imageData)
+    }
+    
+    
 }
