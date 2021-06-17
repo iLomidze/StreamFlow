@@ -13,6 +13,7 @@ struct TopStudiosDataArr: Codable {
 }
 
 struct TopStudiosData: Codable {
+    var id: Int
     var name: String
     var poster: String
     var imgData: Data?

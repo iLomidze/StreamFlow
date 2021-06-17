@@ -7,15 +7,19 @@
 
 import UIKit
 
+
+protocol TrailerPlayDelegate: AnyObject {
+    func playTrailer(videoStringURL: String)
+}
+
 class CatalogTitleCell: UITableViewCell {
 
+    var trailerPlayerDelegate: TrailerPlayDelegate?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     internal var parent: CatalogController?
-    
     internal var screenSize: CGSize?
-    
     internal var topTrailersDataArr: TopTrailersDataArr?
     
     
@@ -35,11 +39,9 @@ class CatalogTitleCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    #warning("parent may not be needed here")
-    func initCell(topTrailersDataArr: TopTrailersDataArr?, screenSize: CGSize, parent: CatalogController?) {
+    func initCell(topTrailersDataArr: TopTrailersDataArr?, screenSize: CGSize) {
         self.topTrailersDataArr = topTrailersDataArr
         self.screenSize = screenSize
-        self.parent = parent
         addCollectionViewConstrains()
     }
     
@@ -62,8 +64,12 @@ extension CatalogTitleCell: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatalogColTitleCell", for: indexPath) as? CatalogColTitleCell else { fatalError("Cant dequeue CatalogColTitleCell") }
         cell.initCell(topTrailerData: topTrailersDataArr!.data[indexPath.row])
-        cell.trailerPlayerDelegate = CatalogController
+//        cell.trailerPlayerDelegate = self
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        trailerPlayerDelegate?.playTrailer(videoStringURL: topTrailersDataArr?.data[indexPath.row].trailers.anyTrailer ?? "")
     }
     
     
@@ -84,5 +90,14 @@ extension CatalogTitleCell: UICollectionViewDelegate, UICollectionViewDataSource
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    //End Class
+}
+
+
+extension CatalogTitleCell: TrailerPlayDelegate {
+    func playTrailer(videoStringURL: String) {
+        trailerPlayerDelegate?.playTrailer(videoStringURL: videoStringURL)
+    }
+    
     
 }

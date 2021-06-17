@@ -50,12 +50,6 @@
                             <constraint firstAttribute="width" constant="44" id="8gG-IA-0Mc"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9PZ-45-821" userLabel="PlayBtn">
-                        <rect key="frame" x="5" y="5" width="280" height="140"/>
-                        <connections>
-                            <action selector="playBtnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="pJk-l4-DUq"/>
-                        </connections>
-                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -63,17 +57,13 @@
                 <constraint firstItem="LOb-Tu-fUR" firstAttribute="centerY" secondItem="CyG-XC-3vm" secondAttribute="centerY" id="2fR-Cs-Oyp"/>
                 <constraint firstAttribute="trailing" secondItem="FdW-Rk-yLc" secondAttribute="trailing" constant="10" id="77B-F7-eHt"/>
                 <constraint firstAttribute="trailing" secondItem="GHR-ya-WA1" secondAttribute="trailing" constant="13" id="BCc-0m-H1a"/>
-                <constraint firstItem="9PZ-45-821" firstAttribute="centerX" secondItem="CyG-XC-3vm" secondAttribute="centerX" id="GHb-UU-zgp"/>
                 <constraint firstItem="GHR-ya-WA1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="KfW-Qh-ccG"/>
-                <constraint firstItem="9PZ-45-821" firstAttribute="centerY" secondItem="CyG-XC-3vm" secondAttribute="centerY" id="Og6-XA-2QC"/>
                 <constraint firstItem="FdW-Rk-yLc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="7" id="Olk-XS-jl5"/>
                 <constraint firstAttribute="trailing" secondItem="CyG-XC-3vm" secondAttribute="trailing" constant="5" id="ToY-8z-axt"/>
                 <constraint firstItem="LOb-Tu-fUR" firstAttribute="centerX" secondItem="CyG-XC-3vm" secondAttribute="centerX" id="ZeA-Pf-e8d"/>
                 <constraint firstItem="GHR-ya-WA1" firstAttribute="top" secondItem="CyG-XC-3vm" secondAttribute="bottom" constant="3" id="dhn-EQ-Me8"/>
                 <constraint firstItem="CyG-XC-3vm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="ePW-Z3-Ezf"/>
-                <constraint firstItem="9PZ-45-821" firstAttribute="width" secondItem="CyG-XC-3vm" secondAttribute="width" id="pnA-1t-yy3"/>
                 <constraint firstItem="CyG-XC-3vm" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="uOm-eO-nSr"/>
-                <constraint firstItem="9PZ-45-821" firstAttribute="height" secondItem="CyG-XC-3vm" secondAttribute="height" id="zOg-3O-Mac"/>
             </constraints>
             <size key="customSize" width="290" height="189"/>
             <connections>

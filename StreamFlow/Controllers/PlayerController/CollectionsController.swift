@@ -23,16 +23,17 @@ extension PlayerController: UICollectionViewDelegate, UICollectionViewDataSource
     
         // Second collection view
         if collectionView == relatedMoviesCollection {
-            return relatedMoviesData?.data.count ?? 0
-        }
+            let colSize = relatedMoviesData?.data.count ?? 0
+            return colSize
+        } else
 
         // Third collection view
         if collectionView == seasonsCollectionView {
             return movieDescDataArr?.data.seasons?.data.count ?? 0
+        } else {
+            // Default
+            return 0
         }
-        
-        // Default
-        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -73,7 +74,6 @@ extension PlayerController: UICollectionViewDelegate, UICollectionViewDataSource
             
             return cell
         }
-        
         // Default
         return UICollectionViewCell()
     }
@@ -105,8 +105,15 @@ extension PlayerController: UICollectionViewDelegate, UICollectionViewDataSource
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == seasonsCollectionView {
             return CGSize(width: 80, height: 35)
+        } else
+        if collectionView == relatedMoviesCollection {
+            return CGSize(width: 130, height: 200)
+        } else
+        if collectionView == actorsCollection {
+            return CGSize(width: 70, height: 120)
+        } else {
+            return .zero
         }
-        return .zero
     }
 
     func collectionView(_ collectionView: UICollectionView,

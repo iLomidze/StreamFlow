@@ -92,14 +92,6 @@ class PlayerController: UIViewController {
     
     var trailerUrlString = ""
     
-//    var isVideoUrlFetchingFinished = false {
-//        didSet {
-//            if isVideoUrlFetchingFinished == true {
-//                return
-//            }
-//            updateEpisodesPoster()
-//        }
-//    }
     var isPersonsFetchingFinished = false {
         didSet {
            updateActorsCollection()
@@ -130,8 +122,6 @@ class PlayerController: UIViewController {
         
         playBtn.layer.cornerRadius = 7
 
-        
-//        guard let videoID = movieData?.id else { return }
         if movieData?.id != nil{
             videoID = movieData?.id
         } else{
@@ -304,8 +294,8 @@ class PlayerController: UIViewController {
     func initDetailsRelated() {
         DispatchQueue.main.async { [weak self] in
             self?.relatedMoviesCollection.reloadData()
+            self?.downloadRelatedImages()
         }
-        downloadRelatedImages()
     }
     
     ///
@@ -315,7 +305,6 @@ class PlayerController: UIViewController {
             let ep = videoUrldataArrData[i]
             
             if ep.poster == "" {
-//                assert(false, "No poster data")
                 continue
             }
             fetchImage(imageUrlStr: ep.poster) { [weak self] imgData in
@@ -502,5 +491,5 @@ class PlayerController: UIViewController {
             openEpisodePickView()
         }
     }
-    //ec
+    //End Class
 }

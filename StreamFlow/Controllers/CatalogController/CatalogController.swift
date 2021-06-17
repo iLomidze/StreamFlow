@@ -37,6 +37,7 @@ class CatalogController: UIViewController {
     var topStudiosData: TopStudiosDataArr? {
         didSet {
             DispatchQueue.main.async { [weak self] in
+                print("\n", "topStudioData is updated", "\n") // TODO: Remove its for debug
                 self?.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
             }
             
@@ -153,7 +154,7 @@ class CatalogController: UIViewController {
 
 
 
-extension CatalogController: TrailerPlayProt {
+extension CatalogController: TrailerPlayDelegate {
     func playTrailer(videoStringURL: String) {
         runPlayer(videoStringURL: videoStringURL)
     }
@@ -185,4 +186,19 @@ extension CatalogController: TrailerPlayProt {
             self.present(playerController, animated: true, completion: nil)
         }
     }
+}
+
+
+extension CatalogController: StudioFilterDelegate, GenreFilterDelegate {
+    func studioFilter(id: Int) {
+        let secondStoryboard = UIStoryboard(name: "Secondary", bundle: nil)
+        let vc = secondStoryboard.instantiateViewController(identifier: "FilteredCatalog")
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func genreFilter(id: Int) {
+        
+    }
+    
+    
 }

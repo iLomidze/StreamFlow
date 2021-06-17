@@ -30,11 +30,11 @@ enum HomeNetworkRequest: NetworkRequestType {
         case .popularSeries:
             return "https://api.imovies.cc/api/v1/movies/top"
 
-            
         case .custom(let url):
             return url
         }
     }
+
     
     var params: [String : String] {
         switch self {

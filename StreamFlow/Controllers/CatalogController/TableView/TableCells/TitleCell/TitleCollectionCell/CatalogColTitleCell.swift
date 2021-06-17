@@ -8,14 +8,7 @@
 import UIKit
 
 
-protocol TrailerPlayProt: AnyObject {
-    func playTrailer(videoStringURL: String)
-}
-
-
-class CatalogColTitleCell: UICollectionViewCell {
-    
-    var trailerPlayerDelegate: TrailerPlayProt?
+class CatalogColTitleCell: UICollectionViewCell {    
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var trailerLabel: UILabel!
@@ -41,14 +34,6 @@ class CatalogColTitleCell: UICollectionViewCell {
             imageView.image = UIImage(data: imgData)
         }
     }
-    
-    ///
-    @IBAction func playBtnAction(_ sender: Any) {
-        // TODO: Play Video
-        trailerPlayerDelegate?.playTrailer(videoStringURL: topTrailerData?.trailers.anyTrailer ?? "")
-    }
-    
-    
     
 // End Class
 }
