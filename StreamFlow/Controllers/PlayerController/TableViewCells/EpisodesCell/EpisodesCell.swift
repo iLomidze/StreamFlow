@@ -23,8 +23,6 @@ class EpisodesCell: UITableViewCell {
         super.awakeFromNib()
         
 //        frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
-        
-        // TODO: loading indicator daamate
         coverImageView.image = UIImage(named: "noMovieCover")
     }
 

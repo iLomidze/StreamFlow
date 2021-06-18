@@ -37,7 +37,6 @@ class CatalogController: UIViewController {
     var topStudiosData: TopStudiosDataArr? {
         didSet {
             DispatchQueue.main.async { [weak self] in
-                print("\n", "topStudioData is updated", "\n") // TODO: Remove its for debug
                 self?.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
             }
             
@@ -190,15 +189,18 @@ extension CatalogController: TrailerPlayDelegate {
 
 
 extension CatalogController: StudioFilterDelegate, GenreFilterDelegate {
-    func studioFilter(id: Int) {
+    func genreFilter(id: Int, name: String) {
         let secondStoryboard = UIStoryboard(name: "Secondary", bundle: nil)
-        let vc = secondStoryboard.instantiateViewController(identifier: "FilteredCatalog")
+        guard let vc = secondStoryboard.instantiateViewController(identifier: "FilteredCatalogController") as? FilteredCatalogController else { fatalError("cant instantiate FilteredCatalogController") }
+        vc.initVC(name: name, id: id, isGenre: true)
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func genreFilter(id: Int) {
-        
+    func studioFilter(id: Int, name: String) {
+        let secondStoryboard = UIStoryboard(name: "Secondary", bundle: nil)
+        guard let vc = secondStoryboard.instantiateViewController(identifier: "FilteredCatalogController") as? FilteredCatalogController else { fatalError("cant instantiate FilteredCatalogController") }
+        vc.initVC(name: name, id: id, isGenre: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
+    //End Class
 }

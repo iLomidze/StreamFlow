@@ -26,10 +26,9 @@ class DataRequestManager: DataFetcherType {
             // setting up url request with components
             var components = URLComponents(string: requestType.endPoint)
             components?.queryItems = requestType.params.map({ (key, value) in
-                URLQueryItem(name: key, value: value)
+                return URLQueryItem(name: key, value: value)
             })
             var request = URLRequest(url: (components?.url)!)
-            
             if !Array(requestType.header.keys).isEmpty {
                 let headerKey = Array(requestType.header.keys)[0]
                 let headerVal = requestType.header[headerKey]
@@ -87,6 +86,5 @@ class DataRequestManager: DataFetcherType {
             task.resume()
         }
     }
-    
-    //ec
+    //End Class
 }

@@ -204,7 +204,7 @@ class HomeController: UIViewController {
             switch resultData {
             case .failure(let error):
                 print("Error: Cover image download for \(String(describing: movieData.originalName ?? "No Movie Name"))  - \(error)")
-                movieData.imageData = UIImage(named: "noMovieCover")!.pngData() // TODO: aq iqrasheba da dzaxilis nishani moashore
+                movieData.imageData = UIImage(named: "noMovieCover")!.pngData() 
             case .success(let data):
                 movieData.imageData = data
                 

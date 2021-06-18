@@ -13,7 +13,6 @@ enum CatalogNetworkRequest: NetworkRequestType {
     case topTrailers
     case allGenre
     case topStudios
-    case singleStudio(studioId: String)
     
     
     
@@ -25,13 +24,10 @@ enum CatalogNetworkRequest: NetworkRequestType {
             return "https://api.imovies.cc/api/v1/studios"
         case .topTrailers:
             return "https://api.imovies.cc/api/v1/trailers/trailer-day"
-        case .singleStudio(_):
-            return "https://api.imovies.cc/api/v1/movies"
         }
     }
     
-//    https://api.imovies.cc/api/v1/movies?page=1&per_page=6&filters%5Bstudio%5D=192&filters%5Bwith_files%5D=yes&sort=-year
-//    
+
     var params: [String : String] {
         switch self {
         case .allGenre:
@@ -40,8 +36,6 @@ enum CatalogNetworkRequest: NetworkRequestType {
             return ["page": "1", "per_page": "15", "sort": "-rating"]
         case .topTrailers:
             return ["page": "1", "&per_page": "5"]
-        case .singleStudio(let studioId):
-            return ["page": "1", "&per_page": "6", "filters%5Bstudio%5D": studioId, "filters%5Bwith_files%5D": "yes", "sort": "-year"]
         }
     }
     

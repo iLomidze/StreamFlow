@@ -10,10 +10,10 @@ import UIKit
 
 
 protocol GenreFilterDelegate: AnyObject {
-    func genreFilter(id: Int)
+    func genreFilter(id: Int, name: String)
 }
 protocol StudioFilterDelegate: AnyObject {
-    func studioFilter(id: Int)
+    func studioFilter(id: Int, name: String)
 }
 
 
@@ -121,10 +121,10 @@ extension CatalogSectionCell: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if isGenreCellSelected {
             guard let genreData = allGenresData?.data else { assertionFailure("There should be data in allGenresData"); return }
-            genreDelegate?.genreFilter(id: genreData[indexPath.row].id)
+            genreDelegate?.genreFilter(id: genreData[indexPath.row].id, name: genreData[indexPath.row].anyName)
         } else {
             guard let studioData = topStudioData?.data else { assertionFailure("There should be data topStudioData"); return }
-            studioDelegate?.studioFilter(id: studioData[indexPath.row].id)
+            studioDelegate?.studioFilter(id: studioData[indexPath.row].id, name: studioData[indexPath.row].name)
         }
     }
 

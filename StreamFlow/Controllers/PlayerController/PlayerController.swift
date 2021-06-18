@@ -11,9 +11,10 @@ import AVFoundation
 
 class PlayerController: UIViewController {
     
-    // TODO: kargad shexede da gaarchie
+    
     static func prepare(withData data: MovieData, onStoryboard storyBoard: UIStoryboard, dataFetcher: DataFetcherType?) -> Self? {
-        guard let toRet = storyBoard.instantiateViewController(identifier: "PlayerController") as? Self else {
+        let secondaryStoryboard = UIStoryboard(name: "Secondary", bundle: nil)
+        guard let toRet = secondaryStoryboard.instantiateViewController(identifier: "PlayerController") as? Self else {
             return nil
         }
         toRet.movieData = data
@@ -174,7 +175,7 @@ class PlayerController: UIViewController {
             return
         }
               
-        // TODO: Tedo: movieCoverImage-s ratom aq metodad sd_Set image
+        
         self.movieCoverImage.sd_setImage(with: url) { [weak self] image, err, _, _ in
             self?.movieCoverImage.image = image
             if err != nil {
