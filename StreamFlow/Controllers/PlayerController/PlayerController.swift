@@ -53,7 +53,6 @@ class PlayerController: UIViewController {
     var seasonPicked = 0 {
         didSet {
             changeSeasonData()
-//            isVideoUrlFetchingFinished = false
         }
     }
     
@@ -64,17 +63,9 @@ class PlayerController: UIViewController {
     internal var dataFetcher: DataFetcherType?
     
     private var avPlayerViewController = AVPlayerViewController()
-    private var avPlayerView = AVPlayer()
     
     internal var videoUrlDataArr: VideoUrlDataArr?
-//    {
-//        didSet {
-//            if !isVideoUrlFetchingFinished {
-//                return
-//            }
-//            isVideoUrlFetchingFinished = false
-//        }
-//    }
+
     
     internal var movieDescDataArr: MovieDescrData? {
         didSet {
@@ -113,6 +104,9 @@ class PlayerController: UIViewController {
         }
     }
     
+    var isMovieBegan = false
+    
+    
 
     
     
@@ -142,8 +136,6 @@ class PlayerController: UIViewController {
         
         fetchData(requestType: PlayerNetworkRequest.videoUrl(credentials: (id: videoIDStr, season: "\(seasonPicked)")), type: VideoUrlDataArr.self) { [weak self] videoArr in
             self?.videoUrlDataArr = videoArr
-//            if self?.videoUrlDataArr.
-//            self?.updateEpisodesPoster()
         }
         fetchData(requestType: PlayerNetworkRequest.movieDesc(id: videoIDStr), type: MovieDescrData.self) { [weak self] descData in
             self?.movieDescDataArr = descData
@@ -154,6 +146,12 @@ class PlayerController: UIViewController {
         fetchData(requestType: PlayerNetworkRequest.relatedMovies(id: videoIDStr), type: RelatedMoviesData.self) {[weak self] relData in
             self?.relatedMoviesData = relData
             self?.isRelatedDataFetchingFinished = true
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if isMovieBegan {
+            saveVideoTime()
         }
     }
     
@@ -393,10 +391,26 @@ class PlayerController: UIViewController {
             let asset = AVURLAsset(url: videoURL!, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
             let playerItem = AVPlayerItem(asset: asset)
             let player = AVPlayer(playerItem: playerItem)
-            let playerController = AVPlayerViewController()
-            playerController.player = player
-            self.present(playerController, animated: true, completion: nil)
+
+            self.avPlayerViewController.player = player
+            
+            self.present(self.avPlayerViewController, animated: true) {
+                // TODO: External playback for appleTV
+                let vidStartTime = CMTime(value: 10, timescale: 1)
+                self.avPlayerViewController.player?.seek(to: vidStartTime)
+                self.avPlayerViewController.player?.play()
+                
+                DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 5) {
+                    self.isMovieBegan = true
+                }
+                
+            }
         }
+    }
+    
+    func saveVideoTime() {
+        // TODO: save via firebase
+        print("current Time - ", Double(CMTimeGetSeconds(avPlayerViewController.player?.currentTime() ?? CMTime(value: 0, timescale: 1))))
     }
     
     

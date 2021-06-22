@@ -23,6 +23,7 @@
 		B77C245D267C076B009FDA55 /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C245B267C076B009FDA55 /* SearchTableCell.swift */; };
 		B77C245E267C076B009FDA55 /* SearchTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B77C245C267C076B009FDA55 /* SearchTableCell.xib */; };
 		B77C2461267FEE78009FDA55 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C2460267FEE78009FDA55 /* ProfileController.swift */; };
+		B78AFE782682411700AE949F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B78AFE772682411700AE949F /* GoogleService-Info.plist */; };
 		B7EF0993266075A700EBBF04 /* MovieDescrData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0992266075A700EBBF04 /* MovieDescrData.swift */; };
 		B7EF0995266141F100EBBF04 /* PlayerNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0994266141F100EBBF04 /* PlayerNetworkRequest.swift */; };
 		B7EF099726617A4B00EBBF04 /* PersonsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF099626617A4B00EBBF04 /* PersonsData.swift */; };
@@ -92,6 +93,7 @@
 		B77C245B267C076B009FDA55 /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
 		B77C245C267C076B009FDA55 /* SearchTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableCell.xib; sourceTree = "<group>"; };
 		B77C2460267FEE78009FDA55 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		B78AFE772682411700AE949F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7EF0992266075A700EBBF04 /* MovieDescrData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDescrData.swift; sourceTree = "<group>"; };
 		B7EF0994266141F100EBBF04 /* PlayerNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNetworkRequest.swift; sourceTree = "<group>"; };
 		B7EF099626617A4B00EBBF04 /* PersonsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsData.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				E21EA1BC2648798E003A1C5D /* DataManager */,
 				E2262C6D2645FB5D00BAB076 /* Assets.xcassets */,
 				E2262C722645FB5D00BAB076 /* Info.plist */,
+				B78AFE772682411700AE949F /* GoogleService-Info.plist */,
 			);
 			path = StreamFlow;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				B7EF0A3D266C15D500EBBF04 /* SeasonsCollectionCell.xib in Resources */,
 				E2262C6C2645FB5A00BAB076 /* Main.storyboard in Resources */,
 				B7EF0A35266BE3B700EBBF04 /* EpisodesCell.xib in Resources */,
+				B78AFE782682411700AE949F /* GoogleService-Info.plist in Resources */,
 				E21EA1E6264C3907003A1C5D /* MovieListCollectionCell.xib in Resources */,
 				B7EF0A702673E9A000EBBF04 /* CatalogColTitleCell.xib in Resources */,
 				E21EA1B626481780003A1C5D /* TitleCell.xib in Resources */,
