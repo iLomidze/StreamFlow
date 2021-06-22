@@ -50,6 +50,21 @@
             </objects>
             <point key="canvasLocation" x="1920" y="66"/>
         </scene>
+        <!--Profile Controller-->
+        <scene sceneID="jRq-ox-JxM">
+            <objects>
+                <viewController storyboardIdentifier="ProfileController" id="0lg-hS-Dq1" customClass="ProfileController" customModule="StreamFlow" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="itz-Dd-qFy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Ezo-gW-cxX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Do1-Go-bIx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2994" y="66"/>
+        </scene>
         <!--PlayerController-->
         <scene sceneID="6qh-3x-btc">
             <objects>

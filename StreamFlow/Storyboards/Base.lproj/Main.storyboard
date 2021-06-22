@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mM6-FC-Bqk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +18,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3pL-oe-T1p">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="backgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="s28-cP-5M1"/>
@@ -28,7 +27,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3pL-oe-T1p" secondAttribute="trailing" id="2S1-Jw-G25"/>
                             <constraint firstItem="3pL-oe-T1p" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8qH-XK-a64"/>
@@ -36,7 +35,9 @@
                             <constraint firstItem="3pL-oe-T1p" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sgw-D5-IrT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="xQw-eI-D9d"/>
+                    <navigationItem key="navigationItem" id="xQw-eI-D9d">
+                        <barButtonItem key="leftBarButtonItem" image="streamFlowLogo" id="TgW-Kt-FP6"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="3pL-oe-T1p" id="zsd-HR-B6n"/>
                     </connections>
@@ -54,7 +55,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Kk-gd-XaQ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" name="backgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="backgroundColor"/>
                                 <connections>
@@ -72,7 +73,9 @@
                             <constraint firstItem="Pop-fm-UBR" firstAttribute="trailing" secondItem="7Kk-gd-XaQ" secondAttribute="trailing" id="dbs-Wd-84H"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hah-r7-U2K"/>
+                    <navigationItem key="navigationItem" id="hah-r7-U2K">
+                        <barButtonItem key="leftBarButtonItem" image="streamFlowLogo" id="gig-kN-2mf"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="7Kk-gd-XaQ" id="dSB-56-wJh"/>
                     </connections>
@@ -89,16 +92,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="kd8-L1-HZr">
-                                <rect key="frame" x="5" y="88" width="404" height="51"/>
-                                <color key="backgroundColor" name="backgroundColor"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Vsk-Hx-Ova" id="PA8-AV-8PS"/>
-                                </connections>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HkA-Wu-dLD">
-                                <rect key="frame" x="5" y="139" width="404" height="674"/>
+                                <rect key="frame" x="5" y="139" width="404" height="723"/>
                                 <color key="backgroundColor" name="backgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="backgroundColor"/>
                                 <connections>
@@ -106,21 +101,39 @@
                                     <outlet property="delegate" destination="Vsk-Hx-Ova" id="Y35-d0-OjF"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search Movie" translatesAutoresizingMaskIntoConstraints="NO" id="kd8-L1-HZr">
+                                <rect key="frame" x="5" y="88" width="404" height="51"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Vsk-Hx-Ova" id="PA8-AV-8PS"/>
+                                </connections>
+                            </searchBar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imoviesLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ipZ-If-Sqc">
+                                <rect key="frame" x="10" y="98" width="394" height="714"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="usO-Rx-IcO"/>
                         <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
                             <constraint firstItem="usO-Rx-IcO" firstAttribute="trailing" secondItem="HkA-Wu-dLD" secondAttribute="trailing" constant="5" id="507-It-Xnw"/>
                             <constraint firstItem="HkA-Wu-dLD" firstAttribute="leading" secondItem="usO-Rx-IcO" secondAttribute="leading" constant="5" id="7Y2-AA-DeV"/>
+                            <constraint firstItem="usO-Rx-IcO" firstAttribute="trailing" secondItem="ipZ-If-Sqc" secondAttribute="trailing" constant="10" id="DgW-sT-mKO"/>
+                            <constraint firstItem="ipZ-If-Sqc" firstAttribute="leading" secondItem="usO-Rx-IcO" secondAttribute="leading" constant="10" id="J7J-dr-V8p"/>
                             <constraint firstItem="HkA-Wu-dLD" firstAttribute="top" secondItem="kd8-L1-HZr" secondAttribute="bottom" id="JIY-UV-bbr"/>
                             <constraint firstItem="kd8-L1-HZr" firstAttribute="leading" secondItem="usO-Rx-IcO" secondAttribute="leading" constant="5" id="LD8-1b-2vg"/>
                             <constraint firstAttribute="trailing" secondItem="kd8-L1-HZr" secondAttribute="trailing" constant="5" id="cIq-Bf-pFY"/>
+                            <constraint firstItem="usO-Rx-IcO" firstAttribute="bottom" secondItem="ipZ-If-Sqc" secondAttribute="bottom" constant="50" id="cMR-By-1fh"/>
+                            <constraint firstItem="ipZ-If-Sqc" firstAttribute="top" secondItem="usO-Rx-IcO" secondAttribute="top" constant="10" id="lyx-P4-BRX"/>
                             <constraint firstItem="usO-Rx-IcO" firstAttribute="bottom" secondItem="HkA-Wu-dLD" secondAttribute="bottom" id="mSW-uZ-gpS"/>
                             <constraint firstItem="kd8-L1-HZr" firstAttribute="top" secondItem="usO-Rx-IcO" secondAttribute="top" id="xOv-8p-Q4N"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="uve-P8-8Ji"/>
+                    <navigationItem key="navigationItem" id="uve-P8-8Ji">
+                        <barButtonItem key="leftBarButtonItem" image="streamFlowLogo" id="6YC-wD-OUg"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="imoviesLogo" destination="ipZ-If-Sqc" id="cAj-Pz-lCA"/>
                         <outlet property="searchBar" destination="kd8-L1-HZr" id="cmV-XN-I3a"/>
                         <outlet property="tableView" destination="HkA-Wu-dLD" id="cpO-1U-uTg"/>
                     </connections>
@@ -132,7 +145,7 @@
         <!--Navigation Controller-->
         <scene sceneID="VYj-xO-9Cv">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iGX-FN-Gbq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeControllerNav" automaticallyAdjustsScrollViewInsets="NO" id="iGX-FN-Gbq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" image="homeIcon" selectedImage="homeIcon" id="XJc-MG-7Q9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PdW-t4-RwL">
@@ -152,30 +165,10 @@
             </objects>
             <point key="canvasLocation" x="1039" y="-677"/>
         </scene>
-        <!--Main Tab Bar Controller-->
-        <scene sceneID="WlN-by-Fui">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="mM6-FC-Bqk" customClass="MainTabBarController" customModule="StreamFlow" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="68g-Lu-iAY">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="iGX-FN-Gbq" kind="relationship" relationship="viewControllers" id="sNS-2u-Q7b"/>
-                        <segue destination="l9N-jH-wEh" kind="relationship" relationship="viewControllers" id="Wgb-wB-ix9"/>
-                        <segue destination="KjM-Ah-JJk" kind="relationship" relationship="viewControllers" id="JeH-Nf-GQt"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1m6-Jj-z4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-159" y="76"/>
-        </scene>
         <!--Catalog-->
         <scene sceneID="Yof-qS-Hcx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l9N-jH-wEh" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CatalogControllerNav" automaticallyAdjustsScrollViewInsets="NO" id="l9N-jH-wEh" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Catalog" image="catalogIcon" selectedImage="catalogIcon" id="IYd-sA-3lb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aie-7I-4Js">
@@ -196,7 +189,7 @@
         <!--Navigation Controller-->
         <scene sceneID="QmX-EX-UaF">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KjM-Ah-JJk" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SearchControllerNav" automaticallyAdjustsScrollViewInsets="NO" id="KjM-Ah-JJk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="Vlx-zA-2pk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x9c-RH-X0G">
@@ -217,14 +210,13 @@
     <resources>
         <image name="catalogIcon" width="25" height="25"/>
         <image name="homeIcon" width="25" height="25"/>
+        <image name="imoviesLogo" width="512" height="512"/>
+        <image name="streamFlowLogo" width="157" height="25"/>
         <namedColor name="backgroundColor">
             <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="fontColor">
             <color red="0.039215686274509803" green="0.019607843137254902" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

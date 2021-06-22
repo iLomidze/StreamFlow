@@ -50,12 +50,12 @@ class CatalogController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Catalog"
+//        title = "Catalog"
         
         tableView.register(UINib(nibName: "CatalogTitleCell", bundle: nil), forCellReuseIdentifier: "CatalogTitleCell")
         tableView.register(UINib(nibName: "CatalogSectionCell", bundle: nil), forCellReuseIdentifier: "CatalogSectionCell")
 
-        dataFetcher = DataRequestManager()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profileIcon"), style: .plain, target: self, action: #selector(profileBtnAction))
         
         fetchAllGenre()
         fetchTopStudios()
@@ -64,6 +64,13 @@ class CatalogController: UIViewController {
     
     
     // MARK: - Functions
+    
+    ///
+    @objc func profileBtnAction() {
+        let secondaryStoryboard = UIStoryboard(name: "Secondary", bundle: nil)
+        guard let profileVC = secondaryStoryboard.instantiateViewController(identifier: "ProfileController") as? ProfileController else { return }
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
     
     ///
     func fetchAllGenre() {

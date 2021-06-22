@@ -427,6 +427,7 @@ class PlayerController: UIViewController {
         seasonsCollectionView.register(UINib(nibName: "SeasonsCollectionCell", bundle: nil), forCellWithReuseIdentifier: "SeasonsCollectionCell")
         episodesTableView.register(UINib(nibName: "EpisodesCell", bundle: nil), forCellReuseIdentifier: "EpisodesCell")
             
+        episodesTableView.separatorInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         
         closeEpBtn = UIButton(frame: CGRect(x: view.frame.width - 50, y: view.safeAreaInsets.top + 55, width: 30, height: 30))
         closeEpBtn.setBackgroundImage(UIImage(named: "closeIcon"), for: .normal)

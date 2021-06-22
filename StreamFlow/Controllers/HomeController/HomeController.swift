@@ -66,17 +66,19 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Home"
-        
-        dataFetcher = DataRequestManager()
+//        title = "Home"
         
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "TitleCell")
         tableView.register(UINib(nibName: "SectionCell", bundle: nil), forCellReuseIdentifier: "SectionCell")
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profileIcon"), style: .plain, target: self, action: #selector(profileBtnAction))
         
         getMovieOfTheDayData()
         getNewAddedMoviesData()
         getPopularMoviesData()
         getPopularSeriesData()
+        
+        addLogo()
         
         // To hide !Tabbar Space! when Tabbar is hidden and tableview is scrolled in the bottom
         if #available(iOS 11.0, *) {
@@ -86,6 +88,23 @@ class HomeController: UIViewController {
     
     
     // MARK: - Functions
+    
+    // MARK: General Functions
+    
+    ///
+    @objc func profileBtnAction() {
+        let secondaryStoryboard = UIStoryboard(name: "Secondary", bundle: nil)
+        guard let profileVC = secondaryStoryboard.instantiateViewController(identifier: "ProfileController") as? ProfileController else { return }
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
+    ///
+    func addLogo() {
+//        let logoImageView = UIImageView(frame: CGRect(x: 5, y: 5, width: 40, height: 100))
+//        logoImageView.image = UIImage(named: "mainLogo")
+//        view.addSubview(logoImageView)
+    }
+    
     
     // MARK: Fetching Data
     
@@ -136,6 +155,7 @@ class HomeController: UIViewController {
             }
         }
     }
+    
     
     
     // MARK: Fetching Images

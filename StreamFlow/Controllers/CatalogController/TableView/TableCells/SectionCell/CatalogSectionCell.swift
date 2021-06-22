@@ -86,7 +86,7 @@ extension CatalogSectionCell: UICollectionViewDelegate, UICollectionViewDataSour
         if isGenreCellSelected {
             return allGenresData?.data.count ?? 0
         } else {
-            print("\n",topStudioData?.data.count ?? 0, "\n")
+            print("\n", "studioCount - ", topStudioData?.data.count ?? 0, "\n")
             return topStudioData?.data.count ?? 0
         }
     }

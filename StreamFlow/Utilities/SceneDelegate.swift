@@ -13,10 +13,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        // Remark - This change is very important in order to show ViewController
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        self.window = UIWindow(windowScene: windowScene)
+        
+        addTabBar()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -47,6 +55,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    /// Creates Tab Bar Controller, adds viewControllers and makes it to be shown first
+    #warning("scene delegat-ში ამდენის კეთება ok-?")
+    func addTabBar() {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabBarContr = MainTabBarController()
+        guard let homeController = mainStoryboard.instantiateViewController(identifier: "HomeController") as? HomeController,
+            let catalogController = mainStoryboard.instantiateViewController(identifier: "CatalogController") as? CatalogController,
+            let searchController = mainStoryboard.instantiateViewController(identifier: "SearchController") as? SearchController
+        else { print("Cant Initialise Application"); return }
 
+        tabBarContr.viewControllers = [UINavigationController(rootViewController: homeController), UINavigationController(rootViewController: catalogController), UINavigationController(rootViewController: searchController)]
+        homeController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "homeIcon"), selectedImage: UIImage(named: "homeIcon"))
+        catalogController.tabBarItem = UITabBarItem(title: "Catalog", image: UIImage(named: "catalogIcon"), selectedImage: UIImage(named: "catalogIcon"))
+        searchController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+        
+        let vcList = [homeController, catalogController, searchController]
+        
+        let dataFetcher = DataRequestManager()
+        homeController.dataFetcher = dataFetcher
+        catalogController.dataFetcher = dataFetcher
+        searchController.dataFetcher = dataFetcher
+        
+        for vc in vcList {
+            initVC(viewController: vc)
+        }
+        
+        
+        tabBarContr.tabBar.barTintColor = UIColor(named: "movieListCellColor")
+        
+        window?.rootViewController = tabBarContr
+        window?.makeKeyAndVisible()
+    }
+    
+    func initVC(viewController vc: UIViewController) {
+        vc.navigationController?.navigationBar.barTintColor = UIColor(named: "backgroundColor")
+        vc.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "fontColor") ?? .darkGray]
+        vc.navigationController?.navigationBar.isTranslucent = false
+        // No Line bellow navigation bar
+        vc.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        vc.navigationController?.navigationBar.shadowImage = UIImage()
+        vc.navigationController?.navigationBar.layoutIfNeeded()
+        
+        
+    }
+    // End Class
 }
 

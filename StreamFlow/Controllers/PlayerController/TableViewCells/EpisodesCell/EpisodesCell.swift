@@ -32,6 +32,10 @@ class EpisodesCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func layoutSubviews() {
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 1, left: 0, bottom: 1, right: 0))
+    }
+    
     func initCell(imageData: Data) {
         self.imageData = imageData
         coverImageView.image = UIImage(data: imageData)
