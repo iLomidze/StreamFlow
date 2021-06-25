@@ -12,4 +12,7 @@ enum ErrorRequests: Error {
     case noURL
     case urlSessionFailed
     case dataModelFailedForJSONParsing
+    case fireStoreDataDownloadFailed
+    case firesStoreError
+    case firestoreNoUserID
 }

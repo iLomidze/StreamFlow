@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class HomeController: UIViewController {
     
     // MARK: - Outlets
@@ -24,6 +25,7 @@ class HomeController: UIViewController {
     var newAddedMoviesDataIsDownloaded = false
     var popularMoviesDataIsDownloaded = false
     var popularSeriesDataIsDownloaded = false
+    var continueWatchingIsDownloaded = false
     
     var dataFetcher: DataFetcherType?
 
@@ -54,9 +56,10 @@ class HomeController: UIViewController {
         }
     }
     
+    let firestoreManager = FirestoreManager()
+    
     
     // MARK: - Execution
-    
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -65,8 +68,6 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        title = "Home"
         
         tableView.register(UINib(nibName: "TitleCell", bundle: nil), forCellReuseIdentifier: "TitleCell")
         tableView.register(UINib(nibName: "SectionCell", bundle: nil), forCellReuseIdentifier: "SectionCell")
@@ -78,7 +79,7 @@ class HomeController: UIViewController {
         getPopularMoviesData()
         getPopularSeriesData()
         
-        addLogo()
+        updateContinueWatchingData()
         
         // To hide !Tabbar Space! when Tabbar is hidden and tableview is scrolled in the bottom
         if #available(iOS 11.0, *) {
@@ -96,13 +97,6 @@ class HomeController: UIViewController {
         let secondaryStoryboard = UIStoryboard(name: "Secondary", bundle: nil)
         guard let profileVC = secondaryStoryboard.instantiateViewController(identifier: "ProfileController") as? ProfileController else { return }
         navigationController?.pushViewController(profileVC, animated: true)
-    }
-    
-    ///
-    func addLogo() {
-//        let logoImageView = UIImageView(frame: CGRect(x: 5, y: 5, width: 40, height: 100))
-//        logoImageView.image = UIImage(named: "mainLogo")
-//        view.addSubview(logoImageView)
     }
     
     
@@ -190,6 +184,11 @@ class HomeController: UIViewController {
             }
             popularSeriesDataIsDownloaded = true
             editableSectionClass = popularSeriesData
+        case .continueWatching:
+            // TODO: download images for "ganagrdze kureba"
+            print("HomeController: ")
+            continueWatchingIsDownloaded = true // TODO: Temporary - aq unda airches/sheiqmnas data continuewatching tvis
+            editableSectionClass = popularSeriesData
         }
         
         if sectionName != .movieOfTheDay {
@@ -246,7 +245,22 @@ class HomeController: UIViewController {
         }
     }
     
-    // ec
+    
+    // MARK: Firebase | UserDefault functions
+    
+    func updateContinueWatchingData() {
+        firestoreManager.fetchAllDataFirestore { [weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+                ContinueWatchingData.getUserDefaultsData()
+            case .success():
+                ContinueWatchingData.updateData(data: self?.firestoreManager.getData() ?? [:])
+            }
+        }
+    }
+    
+    // End Class
 }
 
 

@@ -6,12 +6,33 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        FirebaseApp.configure()
+        GIDSignIn.sharedInstance()?.clientID = "901587738698-8rem00h09f05qmg3jlbqjhjtjrn1d9sr.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance()?.delegate = self
+        
+        if GIDSignIn.sharedInstance().hasPreviousSignIn() {
+            GIDSignIn.sharedInstance().restorePreviousSignIn()
+        }
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if user != nil {
+            let userID = user.userID!
+            FirestoreManager.setUserID(id: userID)
+        }
     }
 
     // MARK: UISceneSession Lifecycle

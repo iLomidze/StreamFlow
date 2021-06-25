@@ -8,4 +8,4 @@
 import Foundation
 
 
-let movieCellPicked = "co.iLomidze.movieCellPicked"
+//let movieCellPicked = "co.iLomidze.movieCellPicked"

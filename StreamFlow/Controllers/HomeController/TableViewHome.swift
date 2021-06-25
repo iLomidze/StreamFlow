@@ -12,7 +12,11 @@ import UIKit
 extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        if ContinueWatchingData.getData().isEmpty {
+            return 4
+        } else {
+            return 5
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -30,18 +34,34 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         guard let sectionCell = tableView.dequeueReusableCell(withIdentifier: "SectionCell", for: indexPath) as? SectionCell else {
             fatalError("Cant Generate SectionCell")
         }
-
+        
         sectionCell.delegate = self
-
-        if indexPath.row == 1 {
-            sectionCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
+        
+        if tableView.numberOfRows(inSection: 0) == 4 {
+            if indexPath.row == 1 {
+                sectionCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
+            } else
+            if indexPath.row == 2 {
+                sectionCell.initCell(sectionNum: .popularMovies, moviesData: popularMoviesData)
+            } else
+            if indexPath.row == 3 {
+                sectionCell.initCell(sectionNum: .popularSeries, moviesData: popularSeriesData)
+            }
+        } else {
+            if indexPath.row == 1 {
+                sectionCell.initCell(sectionNum: .continueWatching, moviesData: newAddedMoviesData)
+            } else
+            if indexPath.row == 2 {
+                sectionCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
+            } else
+            if indexPath.row == 3 {
+                sectionCell.initCell(sectionNum: .popularMovies, moviesData: popularMoviesData)
+            } else
+            if indexPath.row == 4 {
+                sectionCell.initCell(sectionNum: .popularSeries, moviesData: popularSeriesData)
+            }
         }
-        if indexPath.row == 2 {
-            sectionCell.initCell(sectionNum: .popularMovies, moviesData: popularMoviesData)
-        }
-        if indexPath.row == 3 {
-            sectionCell.initCell(sectionNum: .popularSeries, moviesData: popularSeriesData)
-        }
+        
         
         sectionCell.selectionStyle = .none
         

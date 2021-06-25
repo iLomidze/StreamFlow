@@ -57,13 +57,155 @@
                     <view key="view" contentMode="scaleToFill" id="itz-Dd-qFy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZk-dX-Zsg">
+                                <rect key="frame" x="20" y="94" width="374" height="40"/>
+                                <fontDescription key="fontDescription" name="Kailasa-Bold" family="Kailasa" pointSize="30"/>
+                                <color key="textColor" name="fontColor"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gA-iS-8b1" userLabel="Sign In" customClass="GIDSignInButton">
+                                <rect key="frame" x="20" y="234" width="374" height="60"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="r2K-Wb-Q0z"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="streamFlowLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Wlx-95-cTn">
+                                <rect key="frame" x="128.5" y="787.5" width="157" height="44.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="157" id="CMc-nQ-gbx"/>
+                                    <constraint firstAttribute="width" secondItem="Wlx-95-cTn" secondAttribute="height" multiplier="314:89" id="MXO-am-Juw"/>
+                                    <constraint firstAttribute="height" constant="44.5" id="fwi-gH-qTO"/>
+                                </constraints>
+                            </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PL4-oM-xKh" userLabel="SignOutView">
+                                <rect key="frame" x="117" y="236.5" width="180" height="55"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51h-oZ-6GP" userLabel="Sign Out G">
+                                        <rect key="frame" x="10" y="10" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="8tM-co-0V4"/>
+                                            <constraint firstAttribute="width" constant="35" id="AzA-nw-mhr"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="googleGLogo"/>
+                                        <connections>
+                                            <action selector="signOutBtnAction:" destination="0lg-hS-Dq1" eventType="touchUpInside" id="rIf-KG-M4V"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTh-Ea-tpa" userLabel="Sign Out">
+                                        <rect key="frame" x="55" y="7.5" width="120" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="VCh-Wy-iNf"/>
+                                            <constraint firstAttribute="width" constant="120" id="VfA-0U-c9l"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                        <state key="normal" title="Sign Out">
+                                            <color key="titleColor" systemColor="systemPinkColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signOutBtnAction:" destination="0lg-hS-Dq1" eventType="touchUpInside" id="DdB-sF-YgJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="51h-oZ-6GP" firstAttribute="leading" secondItem="PL4-oM-xKh" secondAttribute="leading" constant="10" id="LuN-fq-fsF"/>
+                                    <constraint firstItem="51h-oZ-6GP" firstAttribute="centerY" secondItem="PL4-oM-xKh" secondAttribute="centerY" id="Oq7-YZ-pmd"/>
+                                    <constraint firstAttribute="height" constant="55" id="Xj7-aj-Cic"/>
+                                    <constraint firstItem="JTh-Ea-tpa" firstAttribute="centerY" secondItem="51h-oZ-6GP" secondAttribute="centerY" id="grh-Pc-d1p"/>
+                                    <constraint firstItem="JTh-Ea-tpa" firstAttribute="leading" secondItem="51h-oZ-6GP" secondAttribute="trailing" constant="10" id="s7p-m2-B2x"/>
+                                    <constraint firstAttribute="width" constant="180" id="zO3-3s-NBO"/>
+                                </constraints>
+                            </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1X-BJ-Ykp" userLabel="UnderLine">
+                                <rect key="frame" x="40" y="137" width="334" height="3"/>
+                                <color key="backgroundColor" name="underlineLabelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="lQq-wX-NcF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="განაგრძეთ ყურების&quot;გასუფთავება" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xs6-02-9ch" userLabel="DeleteContMovLabel1">
+                                <rect key="frame" x="80" y="494" width="314" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="lJE-mR-xwv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="fontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="აღდგენა შეუძლებელია" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lz3-Yd-boR" userLabel="DeleteContMovLabel2">
+                                <rect key="frame" x="80" y="519" width="314" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="DSc-nJ-DKg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" name="fontColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jme-gv-wjh" userLabel="DeleteContMovImg">
+                                <rect key="frame" x="20" y="493" width="50" height="50.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3GG-Fw-sa3"/>
+                                    <constraint firstAttribute="width" constant="50" id="psp-J3-7F5"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WC9-dH-BQM" userLabel="DeleteContMovBtn">
+                                <rect key="frame" x="15" y="489" width="384" height="60"/>
+                                <connections>
+                                    <action selector="deleteContinueMoviesBtnAction:" destination="0lg-hS-Dq1" eventType="touchUpInside" id="IVH-Ah-F4G"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Ezo-gW-cxX"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ezo-gW-cxX" firstAttribute="bottom" secondItem="Wlx-95-cTn" secondAttribute="bottom" constant="30" id="14Z-2J-F1j"/>
+                            <constraint firstItem="WC9-dH-BQM" firstAttribute="leading" secondItem="jme-gv-wjh" secondAttribute="leading" constant="-5" id="4hT-uQ-5og"/>
+                            <constraint firstItem="tZk-dX-Zsg" firstAttribute="top" secondItem="Ezo-gW-cxX" secondAttribute="top" constant="50" id="6ra-vj-4cu"/>
+                            <constraint firstItem="xs6-02-9ch" firstAttribute="leading" secondItem="jme-gv-wjh" secondAttribute="trailing" constant="10" id="7JC-aK-BIr"/>
+                            <constraint firstItem="Ezo-gW-cxX" firstAttribute="trailing" secondItem="4gA-iS-8b1" secondAttribute="trailing" constant="20" id="9uY-jI-lYp"/>
+                            <constraint firstItem="jme-gv-wjh" firstAttribute="leading" secondItem="Ezo-gW-cxX" secondAttribute="leading" constant="20" id="EWp-iz-qSH"/>
+                            <constraint firstItem="4gA-iS-8b1" firstAttribute="top" secondItem="tZk-dX-Zsg" secondAttribute="bottom" constant="100" id="GEH-Dh-8ku"/>
+                            <constraint firstItem="Ezo-gW-cxX" firstAttribute="trailing" secondItem="y1X-BJ-Ykp" secondAttribute="trailing" constant="40" id="IG8-GM-lZJ"/>
+                            <constraint firstItem="y1X-BJ-Ykp" firstAttribute="leading" secondItem="Ezo-gW-cxX" secondAttribute="leading" constant="40" id="NAI-yl-9v3"/>
+                            <constraint firstItem="jme-gv-wjh" firstAttribute="top" secondItem="4gA-iS-8b1" secondAttribute="bottom" priority="900" constant="200" id="SkX-np-VPI"/>
+                            <constraint firstItem="WC9-dH-BQM" firstAttribute="trailing" secondItem="xs6-02-9ch" secondAttribute="trailing" constant="5" id="UJQ-Qe-BTa"/>
+                            <constraint firstItem="lz3-Yd-boR" firstAttribute="trailing" secondItem="xs6-02-9ch" secondAttribute="trailing" id="Vn3-1E-9Jh"/>
+                            <constraint firstItem="lz3-Yd-boR" firstAttribute="firstBaseline" secondItem="xs6-02-9ch" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="X0d-Ap-S3i"/>
+                            <constraint firstItem="4gA-iS-8b1" firstAttribute="leading" secondItem="Ezo-gW-cxX" secondAttribute="leading" constant="20" id="a6N-0S-2sE"/>
+                            <constraint firstItem="WC9-dH-BQM" firstAttribute="bottom" secondItem="jme-gv-wjh" secondAttribute="bottom" constant="5" id="b7q-eI-7jf"/>
+                            <constraint firstItem="WC9-dH-BQM" firstAttribute="top" secondItem="jme-gv-wjh" secondAttribute="top" constant="-5" id="eFB-oy-zwq"/>
+                            <constraint firstItem="y1X-BJ-Ykp" firstAttribute="top" secondItem="tZk-dX-Zsg" secondAttribute="bottom" constant="3" id="eeu-oe-abU"/>
+                            <constraint firstItem="xs6-02-9ch" firstAttribute="top" secondItem="jme-gv-wjh" secondAttribute="top" id="fha-sQ-HVB"/>
+                            <constraint firstItem="Wlx-95-cTn" firstAttribute="centerX" secondItem="itz-Dd-qFy" secondAttribute="centerX" id="hcF-D6-jS1"/>
+                            <constraint firstItem="Wlx-95-cTn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jme-gv-wjh" secondAttribute="bottom" constant="40" id="jHm-w1-ukA"/>
+                            <constraint firstItem="Ezo-gW-cxX" firstAttribute="trailing" secondItem="tZk-dX-Zsg" secondAttribute="trailing" constant="20" id="jbO-XR-EdM"/>
+                            <constraint firstItem="PL4-oM-xKh" firstAttribute="centerX" secondItem="itz-Dd-qFy" secondAttribute="centerX" id="lxH-Zp-2Xc"/>
+                            <constraint firstItem="lz3-Yd-boR" firstAttribute="leading" secondItem="xs6-02-9ch" secondAttribute="leading" id="ppg-ST-sGC"/>
+                            <constraint firstItem="Ezo-gW-cxX" firstAttribute="trailing" secondItem="xs6-02-9ch" secondAttribute="trailing" constant="20" id="qkK-LF-YaE"/>
+                            <constraint firstItem="PL4-oM-xKh" firstAttribute="centerY" secondItem="4gA-iS-8b1" secondAttribute="centerY" id="tVl-YC-DhF"/>
+                            <constraint firstItem="tZk-dX-Zsg" firstAttribute="leading" secondItem="Ezo-gW-cxX" secondAttribute="leading" constant="20" id="vTA-1g-aFB"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="deleteContinueMoviesBtn" destination="WC9-dH-BQM" id="1v6-GT-uqe"/>
+                        <outlet property="signInBtn" destination="4gA-iS-8b1" id="CzA-wW-7Vu"/>
+                        <outlet property="signOutBtn" destination="JTh-Ea-tpa" id="OTo-2f-Yxc"/>
+                        <outlet property="signOutBtnG" destination="51h-oZ-6GP" id="THW-JP-XS4"/>
+                        <outlet property="signOutView" destination="PL4-oM-xKh" id="TOz-Yp-nhS"/>
+                        <outlet property="underlineNameLabel" destination="y1X-BJ-Ykp" id="TsN-Zg-bIz"/>
+                        <outlet property="userNameLabel" destination="tZk-dX-Zsg" id="9HI-7x-s5o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Do1-Go-bIx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2994" y="66"/>
+            <point key="canvasLocation" x="2992.753623188406" y="65.625"/>
         </scene>
         <!--PlayerController-->
         <scene sceneID="6qh-3x-btc">
@@ -488,10 +630,13 @@
     </scenes>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
+        <image name="googleGLogo" width="2048" height="2048"/>
         <image name="imdbIcon" width="512" height="512"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <image name="playIcon" width="420" height="400"/>
+        <image name="streamFlowLogo" width="157" height="25"/>
         <image name="timer" catalog="system" width="128" height="121"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <namedColor name="backgroundColor">
             <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
@@ -503,6 +648,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

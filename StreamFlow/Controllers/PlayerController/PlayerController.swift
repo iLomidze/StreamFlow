@@ -46,6 +46,8 @@ class PlayerController: UIViewController {
     
     internal var closeEpBtn: UIButton!
     
+    internal let firestoreManager = FirestoreManager()
+    
     
     // MARK: - DelegateProperties and related properties
     
@@ -394,14 +396,19 @@ class PlayerController: UIViewController {
 
             self.avPlayerViewController.player = player
             
-            self.present(self.avPlayerViewController, animated: true) {
+            self.present(self.avPlayerViewController, animated: true) { [weak self] in
                 // TODO: External playback for appleTV
-                let vidStartTime = CMTime(value: 10, timescale: 1)
-                self.avPlayerViewController.player?.seek(to: vidStartTime)
-                self.avPlayerViewController.player?.play()
+                
+                let playbackTimeDouble = ContinueWatchingData.getVideoPlaybackTime(id: (self?.videoID)!) ?? 0
+                let PlaybackTimeInt = Int(playbackTimeDouble)
+                let playbackTime = CMTimeValue(PlaybackTimeInt)
+                
+                let vidStartTime = CMTime(value: playbackTime, timescale: 1)
+                self?.avPlayerViewController.player?.seek(to: vidStartTime)
+                self?.avPlayerViewController.player?.play()
                 
                 DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 5) {
-                    self.isMovieBegan = true
+                    self?.isMovieBegan = true
                 }
                 
             }
@@ -409,8 +416,11 @@ class PlayerController: UIViewController {
     }
     
     func saveVideoTime() {
-        // TODO: save via firebase
-        print("current Time - ", Double(CMTimeGetSeconds(avPlayerViewController.player?.currentTime() ?? CMTime(value: 0, timescale: 1))))
+        let timeSec = Double(CMTimeGetSeconds(avPlayerViewController.player?.currentTime() ?? CMTime(value: 0, timescale: 1)))
+        ContinueWatchingData.insertData(id: videoID!, seconds: timeSec)
+        if firestoreManager.isIdSet() {
+            firestoreManager.saveDataFirestore(id: videoID!, seconds: timeSec)
+        }
     }
     
     

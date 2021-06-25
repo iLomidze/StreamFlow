@@ -55,10 +55,12 @@ class SectionCell: UITableViewCell {
             sectionNameLabel.text = "ახალი დამატებული"
         case 2:
             sectionNameLabel.text = "ტოპ ფილმები"
-        default:
+        case 3:
             sectionNameLabel.text = "ტოპ სერიალები"
-        }
+        default:
+            sectionNameLabel.text = "განაგრძე ყურება"
         self.moviesData = moviesData
+        }
     }
     
     

@@ -13,4 +13,5 @@ enum SectionNames: Int {
     case newAdded = 1
     case popularMovies = 2
     case popularSeries = 3
+    case continueWatching = 4
 }

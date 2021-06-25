@@ -24,6 +24,8 @@
 		B77C245E267C076B009FDA55 /* SearchTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B77C245C267C076B009FDA55 /* SearchTableCell.xib */; };
 		B77C2461267FEE78009FDA55 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C2460267FEE78009FDA55 /* ProfileController.swift */; };
 		B78AFE782682411700AE949F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B78AFE772682411700AE949F /* GoogleService-Info.plist */; };
+		B78AFE7B2682C5E100AE949F /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78AFE7A2682C5E100AE949F /* FirestoreManager.swift */; };
+		B78AFE7D2683635100AE949F /* ContinueWatchingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78AFE7C2683635100AE949F /* ContinueWatchingData.swift */; };
 		B7EF0993266075A700EBBF04 /* MovieDescrData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0992266075A700EBBF04 /* MovieDescrData.swift */; };
 		B7EF0995266141F100EBBF04 /* PlayerNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0994266141F100EBBF04 /* PlayerNetworkRequest.swift */; };
 		B7EF099726617A4B00EBBF04 /* PersonsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF099626617A4B00EBBF04 /* PersonsData.swift */; };
@@ -37,7 +39,6 @@
 		B7EF0A38266BE61500EBBF04 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0A37266BE61500EBBF04 /* TableController.swift */; };
 		B7EF0A3C266C15D500EBBF04 /* SeasonsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0A3A266C15D500EBBF04 /* SeasonsCollectionCell.swift */; };
 		B7EF0A3D266C15D500EBBF04 /* SeasonsCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7EF0A3B266C15D500EBBF04 /* SeasonsCollectionCell.xib */; };
-		B7EF0A6326738B5800EBBF04 /* ContinueWatchingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0A6226738B5800EBBF04 /* ContinueWatchingData.swift */; };
 		B7EF0A652673B26F00EBBF04 /* CatalogTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0A642673B26F00EBBF04 /* CatalogTableView.swift */; };
 		B7EF0A6A2673E74200EBBF04 /* CatalogTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF0A682673E74200EBBF04 /* CatalogTitleCell.swift */; };
 		B7EF0A6B2673E74200EBBF04 /* CatalogTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7EF0A692673E74200EBBF04 /* CatalogTitleCell.xib */; };
@@ -94,6 +95,8 @@
 		B77C245C267C076B009FDA55 /* SearchTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableCell.xib; sourceTree = "<group>"; };
 		B77C2460267FEE78009FDA55 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		B78AFE772682411700AE949F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B78AFE7A2682C5E100AE949F /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		B78AFE7C2683635100AE949F /* ContinueWatchingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueWatchingData.swift; sourceTree = "<group>"; };
 		B7EF0992266075A700EBBF04 /* MovieDescrData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDescrData.swift; sourceTree = "<group>"; };
 		B7EF0994266141F100EBBF04 /* PlayerNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNetworkRequest.swift; sourceTree = "<group>"; };
 		B7EF099626617A4B00EBBF04 /* PersonsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsData.swift; sourceTree = "<group>"; };
@@ -107,7 +110,6 @@
 		B7EF0A37266BE61500EBBF04 /* TableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
 		B7EF0A3A266C15D500EBBF04 /* SeasonsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonsCollectionCell.swift; sourceTree = "<group>"; };
 		B7EF0A3B266C15D500EBBF04 /* SeasonsCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeasonsCollectionCell.xib; sourceTree = "<group>"; };
-		B7EF0A6226738B5800EBBF04 /* ContinueWatchingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueWatchingData.swift; sourceTree = "<group>"; };
 		B7EF0A642673B26F00EBBF04 /* CatalogTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTableView.swift; sourceTree = "<group>"; };
 		B7EF0A682673E74200EBBF04 /* CatalogTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTitleCell.swift; sourceTree = "<group>"; };
 		B7EF0A692673E74200EBBF04 /* CatalogTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CatalogTitleCell.xib; sourceTree = "<group>"; };
@@ -226,6 +228,22 @@
 				B77C2460267FEE78009FDA55 /* ProfileController.swift */,
 			);
 			path = ProfileController;
+			sourceTree = "<group>";
+		};
+		B78AFE792682C5C800AE949F /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				B78AFE7A2682C5E100AE949F /* FirestoreManager.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
+		B78AFEA026853A3100AE949F /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				B78AFE7C2683635100AE949F /* ContinueWatchingData.swift */,
+			);
+			path = DataBase;
 			sourceTree = "<group>";
 		};
 		B7EF09BE26624B1100EBBF04 /* PlayerController */ = {
@@ -404,7 +422,6 @@
 				B7EF0992266075A700EBBF04 /* MovieDescrData.swift */,
 				B7EF099626617A4B00EBBF04 /* PersonsData.swift */,
 				B7EF099A266184C900EBBF04 /* RelatedMoviesData.swift */,
-				B7EF0A6226738B5800EBBF04 /* ContinueWatchingData.swift */,
 				B7EF0A802674AA1400EBBF04 /* AllGenresData.swift */,
 				B762B8652674F26F00730D74 /* TopStudiosData.swift */,
 				B77C24392677DAFE009FDA55 /* TopTrailersData.swift */,
@@ -415,6 +432,7 @@
 		E21EA1BC2648798E003A1C5D /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				B78AFE792682C5C800AE949F /* Firestore */,
 				E21EA1BD264879AE003A1C5D /* DataRequestManager.swift */,
 				E21EA26B2655BFA6003A1C5D /* ErrorRequests.swift */,
 				E21EA26926535379003A1C5D /* HomeNewtorkRequest.swift */,
@@ -480,6 +498,7 @@
 				E2262C7A264602E300BAB076 /* Controllers */,
 				E21EA1B926483968003A1C5D /* DataModels */,
 				E21EA1BC2648798E003A1C5D /* DataManager */,
+				B78AFEA026853A3100AE949F /* DataBase */,
 				E2262C6D2645FB5D00BAB076 /* Assets.xcassets */,
 				E2262C722645FB5D00BAB076 /* Info.plist */,
 				B78AFE772682411700AE949F /* GoogleService-Info.plist */,
@@ -533,6 +552,7 @@
 				E2262C5E2645FB5A00BAB076 /* Frameworks */,
 				E2262C5F2645FB5A00BAB076 /* Resources */,
 				6D56CCB65116D13D66B99687 /* [CP] Embed Pods Frameworks */,
+				CEA3E4E0B456A8953C548F68 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -620,6 +640,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StreamFlow/Pods-StreamFlow-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CEA3E4E0B456A8953C548F68 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StreamFlow/Pods-StreamFlow-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StreamFlow/Pods-StreamFlow-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StreamFlow/Pods-StreamFlow-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FFDAFE22975114EBA2BEB20B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -651,13 +688,13 @@
 			files = (
 				B7EF0A38266BE61500EBBF04 /* TableController.swift in Sources */,
 				B7EF0A7A26741CED00EBBF04 /* CatalogSectionCell.swift in Sources */,
-				B7EF0A6326738B5800EBBF04 /* ContinueWatchingData.swift in Sources */,
 				E2262C802646036100BAB076 /* SearchController.swift in Sources */,
 				E26695AA265C0D3400F05FE5 /* NotificationKeys.swift in Sources */,
 				B7EF0A812674AA1400EBBF04 /* AllGenresData.swift in Sources */,
 				E21EA1E9264CA1C3003A1C5D /* SectionNames.swift in Sources */,
 				E2262C7D2646034100BAB076 /* CatalogController.swift in Sources */,
 				E21EA1E0264B23C5003A1C5D /* MainTabBarController.swift in Sources */,
+				B78AFE7D2683635100AE949F /* ContinueWatchingData.swift in Sources */,
 				E21EA1BE264879AE003A1C5D /* DataRequestManager.swift in Sources */,
 				B77C2452267BA0A8009FDA55 /* FilteredCatalCollection.swift in Sources */,
 				E21EA26C2655BFA6003A1C5D /* ErrorRequests.swift in Sources */,
@@ -680,6 +717,7 @@
 				E21EA1E5264C3907003A1C5D /* MovieListCollectionCell.swift in Sources */,
 				B7EF0A2726697E6800EBBF04 /* ActorsCell.swift in Sources */,
 				B7EF0A652673B26F00EBBF04 /* CatalogTableView.swift in Sources */,
+				B78AFE7B2682C5E100AE949F /* FirestoreManager.swift in Sources */,
 				B7EF099B266184C900EBBF04 /* RelatedMoviesData.swift in Sources */,
 				E26695A8265C0AF300F05FE5 /* OpenPlayerFromCell.swift in Sources */,
 				E21EA1B8264837DA003A1C5D /* TableViewHome.swift in Sources */,

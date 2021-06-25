@@ -6,6 +6,10 @@ target 'StreamFlow' do
   use_frameworks!
   
   pod 'SDWebImage'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
 
   # Pods for StreamFlow
 

@@ -21,6 +21,7 @@ extension HomeController: TitleCellDelegate {
 
 /// When Section cell button is pushed
 extension HomeController: MovieSectionCellDelegate {
+    
     func movieSection(_ cell: SectionCell, didChooseWithIndexPath indexPath: IndexPath, withMoviesData data: MovieData) {
         guard let storyBoard = self.storyboard,
               let vc = PlayerController.prepare(withData: data, onStoryboard: storyBoard, dataFetcher: self.dataFetcher) else { return }
