@@ -12,6 +12,8 @@ import GoogleSignIn
 
 class ProfileController: UIViewController, GIDSignInDelegate {
 
+    var playerControllerDelegate: PlayerControllerDelegate?
+    
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var signInBtn: GIDSignInButton! // It is actually in a view
     @IBOutlet weak var signOutBtn: UIButton!
@@ -19,6 +21,8 @@ class ProfileController: UIViewController, GIDSignInDelegate {
     @IBOutlet weak var signOutBtnG: UIButton!
     @IBOutlet weak var underlineNameLabel: UILabel!
     @IBOutlet weak var deleteContinueMoviesBtn: UIButton!
+    @IBOutlet weak var signInNoteLabel: UILabel!
+    
     
     
     
@@ -42,6 +46,7 @@ class ProfileController: UIViewController, GIDSignInDelegate {
             print("ProfileController: ", GIDSignIn.sharedInstance().currentUser.userID!)
             userNameLabel.isHidden = false
             signInBtn.isHidden = true
+            signInNoteLabel.isHidden = true
             signOutView.isHidden = false
             underlineNameLabel.isHidden = false
             userNameLabel.text = GIDSignIn.sharedInstance().currentUser.profile.name
@@ -56,9 +61,11 @@ class ProfileController: UIViewController, GIDSignInDelegate {
         signOutView.isHidden = true
         underlineNameLabel.isHidden = true
         signInBtn.isHidden = false
+        signInNoteLabel.isHidden = false
         FirestoreManager.setUserID(id: "")
         ContinueWatchingData.eraseData()
         GIDSignIn.sharedInstance().signOut()
+        playerControllerDelegate?.continueWatchingUpdated(clearData: true)
     }
     
     
@@ -68,6 +75,7 @@ class ProfileController: UIViewController, GIDSignInDelegate {
             signOutView.isHidden = false
             underlineNameLabel.isHidden = false
             signInBtn.isHidden = true
+            signInNoteLabel.isHidden = true
         
             userNameLabel.text = user.profile.name
             
@@ -75,6 +83,7 @@ class ProfileController: UIViewController, GIDSignInDelegate {
             
             let firestoreManager = FirestoreManager()
             firestoreManager.updateDataFromUserDefaults()
+            playerControllerDelegate?.continueWatchingUpdated(clearData: false)
             
             print("ProfileController: ", "Sign In Success") // TODO: Debug remove
             print("ProfileController: ", user.userID!) // TODO: Debug remove
@@ -85,9 +94,17 @@ class ProfileController: UIViewController, GIDSignInDelegate {
     }
     
     @IBAction func deleteContinueMoviesBtnAction(_ sender: Any) {
-        
+        let ac = UIAlertController(title: "Erase Continue Watching Data?", message: "The Data Will Be Lost", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [weak self] _ in
+            ContinueWatchingData.eraseData()
+            if FirestoreManager().isIdSet() {
+                FirestoreManager().removeDocument()
+            }
+            self?.playerControllerDelegate?.continueWatchingUpdated(clearData: true)
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(ac, animated: true, completion: nil)
     }
-    
     
     // END CLASS
 }

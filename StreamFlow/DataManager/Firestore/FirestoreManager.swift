@@ -81,9 +81,13 @@ class FirestoreManager {
         for id in keys {
             docRef.setData(["\(id)" : FirestoreManager.dataBase![id]! ], merge: true)
         }
-        
     }
     
-//    private func isId
+    
+    func removeDocument() {
+        firestore.document("\(collection)/\(FirestoreManager.document)").delete()
+    }
+    
+    
     // End Class
 }

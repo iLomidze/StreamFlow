@@ -9,8 +9,15 @@ import UIKit
 import AVKit
 import AVFoundation
 
+
+protocol PlayerControllerDelegate: AnyObject {
+    func continueWatchingUpdated(clearData: Bool)
+}
+
+
 class PlayerController: UIViewController {
     
+    var playerControllerDelegate: PlayerControllerDelegate?
     
     static func prepare(withData data: MovieData, onStoryboard storyBoard: UIStoryboard, dataFetcher: DataFetcherType?) -> Self? {
         let secondaryStoryboard = UIStoryboard(name: "Secondary", bundle: nil)
@@ -122,7 +129,7 @@ class PlayerController: UIViewController {
         if movieData?.id != nil{
             videoID = movieData?.id
         } else{
-            assert(false, "No videoID")
+            assertionFailure("No videoID")
             return
         }
         let videoIDStr = String(videoID!)
@@ -154,6 +161,7 @@ class PlayerController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if isMovieBegan {
             saveVideoTime()
+            playerControllerDelegate?.continueWatchingUpdated(clearData: false)
         }
     }
     
@@ -408,9 +416,10 @@ class PlayerController: UIViewController {
                 self?.avPlayerViewController.player?.play()
                 
                 DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 5) {
-                    self?.isMovieBegan = true
+                    if self?.avPlayerViewController.player != nil {
+                        self?.isMovieBegan = true
+                    }
                 }
-                
             }
         }
     }

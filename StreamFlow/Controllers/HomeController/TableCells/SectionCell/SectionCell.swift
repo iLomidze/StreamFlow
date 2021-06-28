@@ -59,8 +59,8 @@ class SectionCell: UITableViewCell {
             sectionNameLabel.text = "ტოპ სერიალები"
         default:
             sectionNameLabel.text = "განაგრძე ყურება"
-        self.moviesData = moviesData
         }
+        self.moviesData = moviesData
     }
     
     

@@ -15,6 +15,7 @@ extension HomeController: TitleCellDelegate {
     func movieOfTheDayClicked(data: MovieData) {
         guard let storyBoard = self.storyboard,
               let vc = PlayerController.prepare(withData: data, onStoryboard: storyBoard, dataFetcher: self.dataFetcher) else { return }
+        vc.playerControllerDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -25,6 +26,14 @@ extension HomeController: MovieSectionCellDelegate {
     func movieSection(_ cell: SectionCell, didChooseWithIndexPath indexPath: IndexPath, withMoviesData data: MovieData) {
         guard let storyBoard = self.storyboard,
               let vc = PlayerController.prepare(withData: data, onStoryboard: storyBoard, dataFetcher: self.dataFetcher) else { return }
+        vc.playerControllerDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension HomeController: PlayerControllerDelegate {
+    /// delegate function
+    func continueWatchingUpdated(clearData: Bool) {
+        updateContinueWatchingData(clearData: clearData)
     }
 }

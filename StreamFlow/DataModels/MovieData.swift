@@ -14,6 +14,10 @@ class MovieDataArr: Codable {
     var data: [MovieData]?
 }
 
+class MovieDataSingle: Codable {
+    var data: MovieData?
+}
+
 class MovieData: Codable {
     var id: Int?
     var primaryName: String?

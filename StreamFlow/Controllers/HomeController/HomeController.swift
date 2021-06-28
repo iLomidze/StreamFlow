@@ -55,8 +55,12 @@ class HomeController: UIViewController {
             downloadSectionMovieImages(on: .popularSeries)
         }
     }
+    ///
+    var continueWatchingMovieData = [MovieData]()
     
     let firestoreManager = FirestoreManager()
+    /// Number of raws in tableview (will change to 5 when "continue watching movies exists/set)
+    var tableNumOfRows = 4
     
     
     // MARK: - Execution
@@ -96,6 +100,7 @@ class HomeController: UIViewController {
     @objc func profileBtnAction() {
         let secondaryStoryboard = UIStoryboard(name: "Secondary", bundle: nil)
         guard let profileVC = secondaryStoryboard.instantiateViewController(identifier: "ProfileController") as? ProfileController else { return }
+        profileVC.playerControllerDelegate = self
         navigationController?.pushViewController(profileVC, animated: true)
     }
     
@@ -235,7 +240,18 @@ class HomeController: UIViewController {
                         self?.tableView.reloadRows(at: [IndexPath(row: sectionName.rawValue, section: 0)], with: .automatic)
                         
                     } else {
-                        if let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: sectionName.rawValue, section: 0)) as? SectionCell {
+                        let rowNum: Int
+                        if self?.tableView.numberOfRows(inSection: 0) == 4 {
+                            rowNum = sectionName.rawValue
+                        } else {
+                            if sectionName.rawValue == 4 {
+                                rowNum = 1
+                            } else {
+                                rowNum = sectionName.rawValue + 1
+                            }
+                        }
+                        
+                        if let sectionCell = self?.tableView.cellForRow(at: IndexPath(row: rowNum, section: 0)) as? SectionCell {
                             
                             sectionCell.updateImageForMovieListCollectionCell(at: itemInSection)
                         }
@@ -245,17 +261,79 @@ class HomeController: UIViewController {
         }
     }
     
+    /// Downloads movie data based on ID's in database Array (storing ID & PlaybackTime)
+    func getContinueWatchingData() {
+        continueWatchingMovieData = [MovieData]()
+        let contWatchData = ContinueWatchingData.getData()
+//        let contWatchData: [String : Double] = [:]
+        
+        let countAllContWatchData = contWatchData.keys.count
+        var countCurContWatchData = 0
+        for id in contWatchData.keys {
+            dataFetcher?.getData(requestType: PlayerNetworkRequest.movieDesc(id: id), completion: { [weak self] (result: Result<MovieDataSingle, ErrorRequests>) in
+                countCurContWatchData += 1
+                switch result {
+                
+                case .failure(let error):
+                    print("HomeController: ", error.localizedDescription)
+                    
+                case .success(let movieDataSingle):
+                    guard let movieData = movieDataSingle.data else { print("HomeController: ", "Data Error"); return }
+                    
+                    guard let imgUrl = movieData.covers?.data?.maxSize else {
+                        print("HomeController: ", "image N/A")
+                        self?.continueWatchingMovieData.append(movieData)
+                        return
+                    }
+                    self?.dataFetcher?.getImage(urlString: imgUrl, completion: { (imgResult: Result<Data, ErrorRequests>) in
+                        switch imgResult{
+                        case .failure(let error):
+                            print("HomeController: ", error.localizedDescription)
+                        case .success(let imgDataRes):
+                            movieData.imageData = imgDataRes
+                            self?.continueWatchingMovieData.append(movieData)
+                            
+                            if countAllContWatchData == countCurContWatchData {
+                                DispatchQueue.main.async {
+                                    if self?.tableNumOfRows == 4 {
+                                        self?.tableNumOfRows = 5
+                                        self?.tableView.reloadData()
+                                    } else {
+                                        self?.tableView.reloadRows(at: [IndexPath(item: 1, section: 0)], with: .automatic)
+                                    }
+                                }
+                            }
+                        }
+                    })
+
+                }
+            })
+        }
+        
+    }
+    
     
     // MARK: Firebase | UserDefault functions
     
-    func updateContinueWatchingData() {
+    /// Updates array - which is storing movie ID & PlaybackTime
+    func updateContinueWatchingData(clearData: Bool = false) {
+        if clearData {
+            continueWatchingMovieData = [MovieData]()
+            tableNumOfRows = 4
+            tableView.reloadData()
+            
+            return
+        }
         firestoreManager.fetchAllDataFirestore { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
                 ContinueWatchingData.getUserDefaultsData()
+                self?.getContinueWatchingData()
+//                continueWatchingMovieData = ContinueWatchingData.getData()
             case .success():
                 ContinueWatchingData.updateData(data: self?.firestoreManager.getData() ?? [:])
+                self?.getContinueWatchingData()
             }
         }
     }

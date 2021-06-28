@@ -36,7 +36,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xQw-eI-D9d">
-                        <barButtonItem key="leftBarButtonItem" image="streamFlowLogo" id="TgW-Kt-FP6"/>
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" image="streamFlowLogo" id="TgW-Kt-FP6"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="3pL-oe-T1p" id="zsd-HR-B6n"/>
@@ -74,7 +74,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hah-r7-U2K">
-                        <barButtonItem key="leftBarButtonItem" image="streamFlowLogo" id="gig-kN-2mf"/>
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" image="streamFlowLogo" id="gig-kN-2mf"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="7Kk-gd-XaQ" id="dSB-56-wJh"/>
@@ -130,7 +130,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uve-P8-8Ji">
-                        <barButtonItem key="leftBarButtonItem" image="streamFlowLogo" id="6YC-wD-OUg"/>
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" image="streamFlowLogo" id="6YC-wD-OUg"/>
                     </navigationItem>
                     <connections>
                         <outlet property="imoviesLogo" destination="ipZ-If-Sqc" id="cAj-Pz-lCA"/>

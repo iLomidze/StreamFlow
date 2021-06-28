@@ -12,11 +12,12 @@ import UIKit
 extension HomeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if ContinueWatchingData.getData().isEmpty {
-            return 4
-        } else {
-            return 5
-        }
+//        if ContinueWatchingData.getData().isEmpty {
+//            return 4
+//        } else {
+//            return 5
+//        }
+        return tableNumOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,7 +50,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if indexPath.row == 1 {
-                sectionCell.initCell(sectionNum: .continueWatching, moviesData: newAddedMoviesData)
+                sectionCell.initCell(sectionNum: .continueWatching, moviesData: continueWatchingMovieData)
             } else
             if indexPath.row == 2 {
                 sectionCell.initCell(sectionNum: .newAdded, moviesData: newAddedMoviesData)
