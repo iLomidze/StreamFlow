@@ -9,7 +9,10 @@ import UIKit
 import AVFoundation
 import AVKit
 
+
+
 class CatalogController: UIViewController {
+    
 
     // MARK: - Outlets
     
@@ -36,7 +39,13 @@ class CatalogController: UIViewController {
     }
     var topStudiosData: TopStudiosDataArr? {
         didSet {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+//                print("CatalogController - topStudios count", "- dispatchQueue -", Int(self?.topStudiosData?.data.count ?? 0))
+//                self?.tableView.reloadData()
+//            }
+            
             DispatchQueue.main.async { [weak self] in
+//            print("CatalogController - topStudios count", "- dispatchQueue -", Int(self?.topStudiosData?.data.count ?? 0))
                 self?.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
             }
             
@@ -89,10 +98,12 @@ class CatalogController: UIViewController {
         dataFetcher?.getData(requestType: CatalogNetworkRequest.topStudios, completion: { [weak self] (result: Result<TopStudiosDataArr, ErrorRequests>) in
             switch result {
             case .failure(let error):
-                print(error)
+                print("CatalogController - topStudios", error)
             case .success(let fetchedStudioData):
                 self?.fetchStudioImages(data: fetchedStudioData) { updatedStudioData in
                     self?.topStudiosData = updatedStudioData
+//                    print("CatalogController - topStudios", "Success")
+//                    print("CatalogController - topStudios count", Int(self?.topStudiosData?.data.count ?? 0))
                 }
             }
         })
@@ -161,6 +172,7 @@ class CatalogController: UIViewController {
 
 
 extension CatalogController: TrailerPlayDelegate {
+    
     func playTrailer(videoStringURL: String) {
         runPlayer(videoStringURL: videoStringURL)
     }

@@ -84,8 +84,8 @@ extension SectionCell: UICollectionViewDelegate, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieListCollectionCell", for: indexPath) as? MovieListCollectionCell else {
             return UICollectionViewCell()
         }
-        
         cell.imageView?.image = nil
+        if moviesData.count == 0 { return cell } // TODO: Maybe this doesn't work! moviesData.count was 0 * indexPath.item was also 0, this prevents from coming here..
         
         let movieData = moviesData[indexPath.row]
         cell.awakeFromNib()

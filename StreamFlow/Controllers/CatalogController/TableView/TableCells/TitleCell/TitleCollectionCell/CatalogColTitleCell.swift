@@ -20,9 +20,10 @@ class CatalogColTitleCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        trailerLabel.clipsToBounds = true
         trailerLabel.layer.cornerRadius = 5
-        imageView.layer.cornerRadius = 10
         
+        imageView.layer.cornerRadius = 10
     }
     
     func initCell(topTrailerData: TopTrailersData) {

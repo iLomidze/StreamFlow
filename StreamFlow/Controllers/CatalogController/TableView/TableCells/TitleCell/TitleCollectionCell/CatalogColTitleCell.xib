@@ -24,7 +24,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ტრეილერი" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="FdW-Rk-yLc">
-                        <rect key="frame" x="210" y="7" width="70" height="15"/>
+                        <rect key="frame" x="210" y="10" width="70" height="15"/>
                         <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="fUA-Qx-G8e"/>
@@ -58,7 +58,7 @@
                 <constraint firstAttribute="trailing" secondItem="FdW-Rk-yLc" secondAttribute="trailing" constant="10" id="77B-F7-eHt"/>
                 <constraint firstAttribute="trailing" secondItem="GHR-ya-WA1" secondAttribute="trailing" constant="13" id="BCc-0m-H1a"/>
                 <constraint firstItem="GHR-ya-WA1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="KfW-Qh-ccG"/>
-                <constraint firstItem="FdW-Rk-yLc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="7" id="Olk-XS-jl5"/>
+                <constraint firstItem="FdW-Rk-yLc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="Olk-XS-jl5"/>
                 <constraint firstAttribute="trailing" secondItem="CyG-XC-3vm" secondAttribute="trailing" constant="5" id="ToY-8z-axt"/>
                 <constraint firstItem="LOb-Tu-fUR" firstAttribute="centerX" secondItem="CyG-XC-3vm" secondAttribute="centerX" id="ZeA-Pf-e8d"/>
                 <constraint firstItem="GHR-ya-WA1" firstAttribute="top" secondItem="CyG-XC-3vm" secondAttribute="bottom" constant="3" id="dhn-EQ-Me8"/>

@@ -32,6 +32,7 @@ class FilteredCatalogController: UIViewController {
             
         }
     }
+    var isCellsLoaded = false
     
     var data: MovieDataArr?  // {
 //        didSet {
@@ -70,22 +71,27 @@ class FilteredCatalogController: UIViewController {
             networkRequestType = FilteredCatalogNetworkRequest.studio(studioId: id, pageNum: pageNum)
         }
         
+        isDataFetched = false
         dataFetcher.getData(requestType: networkRequestType , completion: { [weak self] (result: Result<MovieDataArr, ErrorRequests>) in
             switch result {
             case .failure(let error):
                 print("Error Getting FilteredCatalog Data - \(error.localizedDescription)")
             case .success(let movieDataArr):
                 self?.fetchAllImages(dataArr: movieDataArr) { dataArrWithImage in
-                    self?.isDataFetched = true
+                    
                     if append {
                         self?.data?.data? += dataArrWithImage.data!
                         DispatchQueue.main.async {
-                            self?.collectionView.reloadData()
-//                            self?.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                            self?.collectionView.performBatchUpdates({
+                                self?.isDataFetched = true
+                                self?.collectionView.reloadData()
+                            }, completion: nil)
                         }
+                        
                     } else {
                         self?.data = dataArrWithImage
                         DispatchQueue.main.async {
+                            self?.isDataFetched = true
                             self?.collectionView.reloadData()
                         }
                     }
@@ -117,5 +123,20 @@ class FilteredCatalogController: UIViewController {
             }
         }
     }
+    
+    func fetchDataIfNeeded(indexPath: IndexPath) {
+        guard let dataCount = data?.data?.count else { return }
+        
+        if !isDataFetched { return }
+        
+        let indexPathNumb = indexPath.item
+        
+        if indexPathNumb > (dataCount - 5) {
+            isCellsLoaded = false
+            downloadPage += 1
+            fetchData(id: id!, pageNum: downloadPage, append: true)
+        }
+    }
+    
     // End Class
 }

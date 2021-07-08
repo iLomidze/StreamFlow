@@ -11,6 +11,7 @@ import UIKit
 extension PlayerController: UITableViewDelegate, UITableViewDataSource, SeasonChangeDelegate {
     func changeSeason(season: Int) {
         seasonPicked = season
+        seasonIsPicked = season
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,6 +31,7 @@ extension PlayerController: UITableViewDelegate, UITableViewDataSource, SeasonCh
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        episodeIsPicked = indexPath.row + 1
         playVideo(episode: indexPath.row)
     }
     

@@ -13,9 +13,6 @@ class FirestoreManager {
     
     let firestore = Firestore.firestore()
     
-//    private let collection = "openedMovies"
-//    private let document = "playbackTimes"
-    
     private let collection = "playbackTimes"
     private static var document = ""
     
@@ -35,9 +32,9 @@ class FirestoreManager {
         }
     }
     
-    func saveDataFirestore(id: Int, seconds: Double) {
+    func saveDataFirestore(id: String, seconds: Double) {
         let docRef = firestore.document("\(collection)/\(FirestoreManager.document)")
-        docRef.setData(["\(id)" : seconds], merge: true)
+        docRef.setData([id : seconds], merge: true)
     }
     
     func fetchAllDataFirestore(completion: @escaping(Result<Void,ErrorRequests>)->Void = {result in} ) {
@@ -61,10 +58,9 @@ class FirestoreManager {
         }
     }
     
-    func getVideoPlaybackTime(id: Int) -> Double? {
-        let idStr = String(id)
-        if FirestoreManager.dataBase?.keys.contains(idStr) != nil {
-            return FirestoreManager.dataBase![idStr]
+    func getVideoPlaybackTime(id: String) -> Double? {
+        if FirestoreManager.dataBase?.keys.contains(id) != nil {
+            return FirestoreManager.dataBase![id]
         }
         return nil
     }

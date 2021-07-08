@@ -78,6 +78,9 @@ class HomeController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profileIcon"), style: .plain, target: self, action: #selector(profileBtnAction))
         
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(updateContinueWatching), name: Notification.Name(NotificationCenterKeys.continueWatchingUpdated.rawValue), object: nil)
+        
         getMovieOfTheDayData()
         getNewAddedMoviesData()
         getPopularMoviesData()
@@ -95,6 +98,12 @@ class HomeController: UIViewController {
     // MARK: - Functions
     
     // MARK: General Functions
+    
+    ///
+    @objc func updateContinueWatching() {
+        updateContinueWatchingData()
+        tableView.reloadData()
+    }
     
     ///
     @objc func profileBtnAction() {
@@ -190,9 +199,8 @@ class HomeController: UIViewController {
             popularSeriesDataIsDownloaded = true
             editableSectionClass = popularSeriesData
         case .continueWatching:
-            // TODO: download images for "ganagrdze kureba"
             print("HomeController: ")
-            continueWatchingIsDownloaded = true // TODO: Temporary - aq unda airches/sheiqmnas data continuewatching tvis
+            continueWatchingIsDownloaded = true
             editableSectionClass = popularSeriesData
         }
         
@@ -267,9 +275,12 @@ class HomeController: UIViewController {
         let contWatchData = ContinueWatchingData.getData()
 //        let contWatchData: [String : Double] = [:]
         
-        let countAllContWatchData = contWatchData.keys.count
+        let filteredKeys = getRawMovieIDs(for: Array(contWatchData.keys))
+        
+        let countAllContWatchData = filteredKeys.count
         var countCurContWatchData = 0
-        for id in contWatchData.keys {
+        
+        for id in filteredKeys {
             dataFetcher?.getData(requestType: PlayerNetworkRequest.movieDesc(id: id), completion: { [weak self] (result: Result<MovieDataSingle, ErrorRequests>) in
                 countCurContWatchData += 1
                 switch result {
@@ -283,6 +294,16 @@ class HomeController: UIViewController {
                     guard let imgUrl = movieData.covers?.data?.maxSize else {
                         print("HomeController: ", "image N/A")
                         self?.continueWatchingMovieData.append(movieData)
+                        if countAllContWatchData == countCurContWatchData {
+                            DispatchQueue.main.async {
+                                if self?.tableNumOfRows == 4 {
+                                    self?.tableNumOfRows = 5
+                                    self?.tableView.reloadData()
+                                } else {
+                                    self?.tableView.reloadRows(at: [IndexPath(item: 1, section: 0)], with: .automatic)
+                                }
+                            }
+                        }
                         return
                     }
                     self?.dataFetcher?.getImage(urlString: imgUrl, completion: { (imgResult: Result<Data, ErrorRequests>) in
@@ -309,8 +330,26 @@ class HomeController: UIViewController {
                 }
             })
         }
-        
     }
+    
+    /// Filters  movie id suffix: Separator, Season and  Episode markers && removes similar ID s
+    func getRawMovieIDs(for keys: [String]) -> [String] {
+        var filteredKeys = [String]()
+        let idSuffix = ContinueWatchingData.idSuffix
+        
+        for k in keys {
+            if let endIndex = k.indexOfSubString(of: idSuffix) {
+                let rawId = String(k[..<endIndex])
+                if !filteredKeys.contains(rawId) {
+                    filteredKeys.append(rawId)
+                }
+            } else {
+                filteredKeys.append(k)
+            }
+        }
+        return filteredKeys
+    }
+    
     
     
     // MARK: Firebase | UserDefault functions

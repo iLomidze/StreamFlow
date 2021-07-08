@@ -9,34 +9,33 @@ import Foundation
 import UIKit
 
 extension FilteredCatalogController: UICollectionViewDelegate, UICollectionViewDataSource {
+    ///
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        data?.data?.count ?? 0
+        return data?.data?.count ?? 0
     }
     
+    ///
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieListCollectionCell", for: indexPath) as? MovieListCollectionCell else { fatalError("Cant dequeue MovieListCollectionCell") }
         
-        cell.initCell(movieData: (data?.data![indexPath.row])!)
+        cell.initCell(movieData: (data?.data![indexPath.item])!)
         return cell
     }
     
+    ///
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let dataCount = data?.data?.count {
-            if !isDataFetched {
-                return
-            }
-            if indexPath.item >= dataCount - 10 {
-                #warning("ramdenjerme shemodis - ratom??")
-                print("willdisplay: indexpath >=..  - ", indexPath.item)
-                downloadPage += 1
-                isDataFetched = false
-                fetchData(id: id!, pageNum: downloadPage, append: true)
-            }
+        guard let dataCount = data?.data?.count else { return }
+
+        if isCellsLoaded {
+            fetchDataIfNeeded(indexPath: indexPath)
+        }
+        if dataCount != 0 && dataCount == indexPath.item + 1 && isDataFetched {
+            isCellsLoaded = true
         }
     }
     
-    
+    ///
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let storyboard = self.storyboard else { return }
         guard let data = data?.data?[indexPath.row] else { return }

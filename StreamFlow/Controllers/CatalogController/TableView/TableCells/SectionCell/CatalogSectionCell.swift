@@ -27,11 +27,15 @@ class CatalogSectionCell: UITableViewCell {
     
     var allGenresData: AllGenresData? {
         didSet {
+            isStudioCellSelected = false
             collectionView.reloadData()
         }
     }
     var topStudioData: TopStudiosDataArr? {
         didSet {
+            isGenreCellSelected = false
+            print("CatalogSectionCell - topStudios count", "- didSet reload -", Int(topStudioData?.data.count ?? 0))
+            print("CatalogSectionCell - topStudios isSelected", "- didSet reload -", isStudioCellSelected.description)
             collectionView.reloadData()
         }
     }
@@ -47,9 +51,6 @@ class CatalogSectionCell: UITableViewCell {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -62,19 +63,23 @@ class CatalogSectionCell: UITableViewCell {
         isGenreCellSelected = true
         
         guard let allGenresData = allGenresData else { return }
-        self.allGenresData = allGenresData
-        
         collectionView.register(UINib(nibName: "GenreColCell", bundle: nil), forCellWithReuseIdentifier: "GenreColCell")
+        
+        self.allGenresData = allGenresData
     }
     
     func initStudioSection(topStudioData: TopStudiosDataArr?) {
         sectionNameLabel.text = "სტუდიის მიხედვით"
         isStudioCellSelected = true
         
+        print("CatalogSectionCell - topStudios count", "- init -", Int(topStudioData?.data.count ?? 0))
+        
         guard let topStudioData = topStudioData else { return }
+        collectionView.register(UINib(nibName: "StudioColCell", bundle: nil), forCellWithReuseIdentifier: "StudioColCell")
+        
         self.topStudioData = topStudioData
         
-        collectionView.register(UINib(nibName: "StudioColCell", bundle: nil), forCellWithReuseIdentifier: "StudioColCell")
+        print("CatalogSectionCell - topStudios count", "- init self -", Int(self.topStudioData?.data.count ?? 0))
     }
     //End Class
 }
@@ -83,10 +88,16 @@ class CatalogSectionCell: UITableViewCell {
 
 extension CatalogSectionCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isStudioCellSelected {
+            print("CatalogSectionCell - topStudios count", "- numberOfItemsInSection main -", topStudioData?.data.count ?? 0, "\n")
+        }
         if isGenreCellSelected {
+            if isStudioCellSelected {
+                print("CatalogSectionCell - topStudios Wrong/Genre", "- numberOfItemsInSection -", topStudioData?.data.count ?? 0, "\n")
+            }
             return allGenresData?.data.count ?? 0
         } else {
-            print("\n", "studioCount - ", topStudioData?.data.count ?? 0, "\n")
+            print("CatalogSectionCell - topStudios count", "- numberOfItemsInSection -", topStudioData?.data.count ?? 0, "\n")
             return topStudioData?.data.count ?? 0
         }
     }

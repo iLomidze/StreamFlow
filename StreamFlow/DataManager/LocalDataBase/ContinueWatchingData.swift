@@ -10,14 +10,21 @@
 import Foundation
 
 
+
+
 class ContinueWatchingData {
 
+    /// Suffix after id, which separates movie id with its other indo
+    static let idSuffix = "SFIDSFXFSARD"
+    
     static private var contWatchMovies: [String : Double] = [:]
     
-    static func insertData(id: Int, seconds: Double) {
-        let idStr = String(id)
-        contWatchMovies[idStr] = seconds
+    static func insertData(id: String, seconds: Double) {
+        contWatchMovies[id] = seconds
         setUserDefaultsData()
+        
+        let nc = NotificationCenter.default
+        nc.post(name: Notification.Name(NotificationCenterKeys.continueWatchingUpdated.rawValue), object: nil)
     }
     
     static func updateData(data: [String : Double]) {
@@ -25,10 +32,9 @@ class ContinueWatchingData {
         setUserDefaultsData()
     }
     
-    static func getVideoPlaybackTime(id: Int) -> Double? {
-        let idStr = String(id)
-        if contWatchMovies.keys.contains(idStr) {
-            return contWatchMovies[idStr]
+    static func getVideoPlaybackTime(id: String) -> Double? {
+        if contWatchMovies.keys.contains(id) {
+            return contWatchMovies[id]
         }
         return nil
     }

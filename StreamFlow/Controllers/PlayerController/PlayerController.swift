@@ -114,6 +114,10 @@ class PlayerController: UIViewController {
     }
     
     var isMovieBegan = false
+    var episodeIsPicked: Int?
+    var seasonIsPicked: Int?
+    
+    var isTrailerPicked = false
     
     
 
@@ -159,10 +163,10 @@ class PlayerController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if isMovieBegan {
-            saveVideoTime()
-            playerControllerDelegate?.continueWatchingUpdated(clearData: false)
+        if isMovieBegan && !isTrailerPicked {
+            saveVideoTime(season: seasonIsPicked, episode: episodeIsPicked)
         }
+        isTrailerPicked = false
     }
     
     
@@ -379,7 +383,7 @@ class PlayerController: UIViewController {
     
     // MARK: VideoPlayer Functions
     
-    ///
+    /// Opens Player and runs video
     func runPlayer(videoStringURL: String) {
         
         if videoStringURL == "" {
@@ -407,7 +411,13 @@ class PlayerController: UIViewController {
             self.present(self.avPlayerViewController, animated: true) { [weak self] in
                 // TODO: External playback for appleTV
                 
-                let playbackTimeDouble = ContinueWatchingData.getVideoPlaybackTime(id: (self?.videoID)!) ?? 0
+                let idAttributed = self?.getIdAttributed()
+                
+                var playbackTimeDouble = ContinueWatchingData.getVideoPlaybackTime(id: idAttributed!) ?? 0
+                if (self?.isTrailerPicked ?? true) {
+                    playbackTimeDouble = 0
+                }
+                
                 let PlaybackTimeInt = Int(playbackTimeDouble)
                 let playbackTime = CMTimeValue(PlaybackTimeInt)
                 
@@ -424,11 +434,15 @@ class PlayerController: UIViewController {
         }
     }
     
-    func saveVideoTime() {
+    func saveVideoTime(season: Int? = nil, episode: Int? = nil) {
+        
         let timeSec = Double(CMTimeGetSeconds(avPlayerViewController.player?.currentTime() ?? CMTime(value: 0, timescale: 1)))
-        ContinueWatchingData.insertData(id: videoID!, seconds: timeSec)
+
+        let idAttributed = getIdAttributed()
+        
+        ContinueWatchingData.insertData(id: idAttributed, seconds: timeSec)
         if firestoreManager.isIdSet() {
-            firestoreManager.saveDataFirestore(id: videoID!, seconds: timeSec)
+            firestoreManager.saveDataFirestore(id: idAttributed, seconds: timeSec)
         }
     }
     
@@ -469,7 +483,7 @@ class PlayerController: UIViewController {
         view.addSubview(closeEpBtn)
     }
     
-    ///
+    /// Lets user choose language and after calls runPlayer()
     func playVideo(episode: Int = 0) {
         guard let videoUrlFiles = videoUrlDataArr?.data[episode].files else {
             let ac = UIAlertController(title: "ლინკი დაზიანებულია", message: nil, preferredStyle: .alert)
@@ -493,6 +507,19 @@ class PlayerController: UIViewController {
         present(ac, animated: true)
     }
     
+    /// Returns id with additional suffix if exists(needed)
+    func getIdAttributed() -> String {
+        var idAttributed = "\(videoID!)"
+        if let isTvShow = movieData?.isTvShow {
+            if isTvShow {
+                idAttributed += ContinueWatchingData.idSuffix
+                guard let season = seasonIsPicked, let episode = episodeIsPicked else { return idAttributed }
+                idAttributed += "s\(season)e\(episode)"
+            }
+        }
+        return idAttributed
+    }
+    
     
     // MARK: - Outlet Actions
     
@@ -505,6 +532,7 @@ class PlayerController: UIViewController {
     
     /// When trailer button is pushed
     @IBAction func trailerBtnAction(_ sender: Any) {
+        isTrailerPicked = true
         if trailerUrlString == "" {
             let ac = UIAlertController(title: "No Trailer Available", message: nil, preferredStyle: .alert)
             present(ac, animated: true, completion: nil)
@@ -522,6 +550,7 @@ class PlayerController: UIViewController {
             playVideo()
         } else {
             seasonPicked = 1
+            seasonIsPicked = 1
 //            updateEpisodesPoster()
             openEpisodePickView()
         }

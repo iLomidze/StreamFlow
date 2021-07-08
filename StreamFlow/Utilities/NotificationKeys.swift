@@ -9,3 +9,6 @@ import Foundation
 
 
 //let movieCellPicked = "co.iLomidze.movieCellPicked"
+enum NotificationCenterKeys: String {
+    case continueWatchingUpdated = "continueWatchingUpdated"
+}
